@@ -1,0 +1,89 @@
+\documentclass{acm_proc_article-sp}
+\begin{document}
+
+\title{Punctuation Prediction using Conditional Random Fields}
+
+\numberofauthors{3} %  
+\author{
+\alignauthor
+% 1st. author
+Suvir Jain,\\
+\affaddr{Computer Science Department}\\
+\affaddr{University of California, San Diego}\\
+\email{suj011@cs.ucsd.edu}
+% 2nd. author
+\alignauthor
+Gaurav Saxena\\
+\affaddr{Computer Science Department}\\
+\affaddr{University of California, San Diego}\\
+\email{gsaxena@cs.ucsd.edu}
+%3rd Author%
+\alignauthor
+Kashyap Tumkur\\
+\affaddr{Computer Science Department}\\
+\affaddr{University of California, San Diego}\\
+\email{gsaxena@cs.ucsd.edu}
+}
+
+\maketitle
+\begin{abstract}
+\end{abstract}
+
+\section{Introduction}
+\section{Preliminaries}
+\subsection{Assumptions}
+Tag: SPACE to show No punctuation
+Tag START to mark the beginning of the tag sequence
+Tag: PERIOD, QUESTION MARK to mark the end of the tag sequence
+
+\section{Implementation}
+\subsection{Algorithms for CRF}
+\subsubsection*{Viterbi path algorithm for Inference}
+\paragraph*{Proof of correctness}
+\subsubsection*{Forward and Backward Vectors}
+\paragraph*{Proof of correctness}
+Find Z using both $\alpha$ and $\beta$ vectors
+\subsubsection{Learning using SGD}
+\paragraph{Proof of correctness}
+Prove derivatives are correct
+\subsection{Learning using Collins Perceptron}
+\paragraph{Proof of correctness}
+\subsubsection{Feature Functions}
+\begin{enumerate}
+\item -ing words
+\item interrogative words, subject-verb inversion
+\item connectives like however
+\item conjunctions
+\item Interjections
+\end{enumerate}
+\subsection{Data cleaning}
+\subsection{Overfitting}
+\subsubsection{Validation}
+\subsubsection{Regularization?}
+\subsubsection{Feature Scaling?}
+\subsubsection{Randomization}
+Can we have our feature functions output only values between 0 and 1
+\section{Experiments}
+\subsection{Experiment 1: Learning using SGD}
+Charts proving convergence of SGD
+Charts showing accuracy on training, validation and test set
+\subsection{Experiment 2: Learning using Collins Perceptron}
+Charts proving convergence of CP
+Charts showing accuracy on training, validation and test set
+\section{Optimizations}
+Optimizations done to the algorithm to improve running time like:
+\begin{enumerate}
+\item Run the algorithms on a random smaller subset to speed up implementation
+\item Use MATLAB profiler to find bottlenecks and remove them
+\end{enumerate}
+\section{Conclusion}
+\subsection{Lessons Learnt}
+\subsection{Discussion}
+Comparison of two approaches in terms of time to converge, their accuracies on training, validation and test sets
+%
+% The following two commands are all you need in the
+% initial runs of your .tex file to
+% produce the bibliography for the citations in your paper.
+\bibliographystyle{abbrv}
+\bibliography{Report} 
+\end{document}
