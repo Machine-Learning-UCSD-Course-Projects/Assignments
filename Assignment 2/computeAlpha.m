@@ -1,12 +1,17 @@
-function x=alpha(M,N)
+function alpha=computeAlpha(M,N)
 %M : Size of tag set
 %N : Number of words in a sentence
-x=ones(M,N)
-for i=1:M % COLUMNS
-    for j=1:N %ROWS
-        if j==0 && i==0
-            x(i,j)=1
-        elseif i==0
+%Dummy comment
+alpha=ones(N,M);
+alpha(1,:)=0; % The entire first row of alpha matrix has zeros
+alpha(1,1)=1; % alpha(0,y)=I(y=START)
+
+for v=1:M % COLUMNS
+    for k=1:N %ROWS
+        tempsum=0;
+        for u=1:M %sum over all u
+            tempsum = tempsum + alpha(k,u)*exp(getG(k+1,u,v)); %Assume that g is loaded in memory
         end
+        alpha(k+1,v)=tempsum;
     end
 end
