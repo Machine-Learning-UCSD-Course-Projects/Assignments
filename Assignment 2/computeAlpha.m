@@ -1,6 +1,7 @@
 function x=alpha(M,N)
 %M : Size of tag set
 %N : Number of words in a sentence
+%Dummy comment
 x=ones(M,N)
 for i=1:M % COLUMNS
     for j=1:N %ROWS
