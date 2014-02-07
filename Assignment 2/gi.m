@@ -1,7 +1,8 @@
-function x = gi(yiminus1, yi, xbar, i, ff, w)
+function sum = gi(yiminus1, yi, xbar, i, ff, w)
 %ff : array of feature functions
 %w  : array of weights
+%The equation below equation 4 in the notes
     sum = 0;
-    for i = 0:size(ff)
-        sum = sum + w(i)* ff{1}(yiminus1, yi, xbar, i);
+    for i = 1 : numel(ff)
+        sum = sum + w(i)* ff{i}(yiminus1, yi, xbar, i);
     end
