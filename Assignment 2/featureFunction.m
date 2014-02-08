@@ -11,3 +11,5 @@ function r = ConnectiveWords(yiminus1, yi, xbar, i)
     r = rand();
 function r = ConjunctionWords(yiminus1, yi, xbar, i)
     r = rand();
+	
+	% Added test comment!
