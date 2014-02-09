@@ -25,5 +25,5 @@ z1 = computeZ_usingAlpha(alpha,M,N);
 z2 = computeZ_usingBeta(beta,g,M);
 
 %Calculate E
-ff = featureFunction();
-E = computeE(M,N,ff,g,x,alpha,beta,z1);
+%ff = featureFunction();
+%E = computeE(M,N,ff,g,x,alpha,beta,z1);
