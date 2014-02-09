@@ -4,7 +4,7 @@ function g = computeG(x, allY, w)
     for i = 1:size(x, 2)
         for u = 1:size(allY, 2)
             for v = 1:size(allY, 2)
-                g(i, u, v) = gi(allY(u), allY(v), x, i, featureFunction(), w);
+                g(i, u, v) = gi(allY(u), allY(v), x, i, numFeatureFunctions(), w);
             end
         end
     end
