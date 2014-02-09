@@ -19,8 +19,11 @@ alpha = computeAlpha(M,N,g);
 beta = computeBeta(M,N,g);
 
 %Compute Z using alpha matrix
-z1 = computeZ_usingAlpha(alpha,N);
+z1 = computeZ_usingAlpha(alpha,M,N);
 
 %Compute Z using beta matrix
 z2 = computeZ_usingBeta(beta,g,M);
 
+%Calculate E
+ff = featureFunction();
+E = computeE(M,N,ff,g,x,alpha,beta,z1);
