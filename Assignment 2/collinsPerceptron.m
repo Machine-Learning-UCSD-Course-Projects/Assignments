@@ -11,10 +11,8 @@ function w = collinsPerceptron(x, trueY)
     N = size(x, 2);
     for i = 1:iterations
         disp(i)
-        for j = 1:numFF
-            yhat = Inference(x, w);
-            disp(j)
-       
+        yhat = Inference(x, w);
+        for j = 1:numFF       
             w(j) = w(j) + lambda * (computeF(j, x, trueY) ...
                 - computeF(j, x, yhat));
             disp(j)
