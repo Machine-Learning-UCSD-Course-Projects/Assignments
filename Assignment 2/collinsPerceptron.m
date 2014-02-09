@@ -1,7 +1,7 @@
 function sgd(x, trueY)
    numFF = numFeatureFunctions();
-    w = zeroes(numel(ff));
-    iterations = 10;
+    w = zeroes(numFF);
+    iterations = 1000;
     lambda = 0.1;
     allY = [1, 2, 3, 4, 5, 6, 7, 8];
     if (size(x,2) + 2) ~= size(trueY, 2)
@@ -12,7 +12,7 @@ function sgd(x, trueY)
     for i = 1:iterations
         for j = 1:numFF
             yhat = Inference(x, w);
-            w(j) = w(j) + lambda * (computeF(ff{j}, x, trueY) - computeF(ff{j}, x, yhat));
+            w(j) = w(j) + lambda * (computeF(j, x, trueY) - computeF(j, x, yhat));
         end
     end
 end
