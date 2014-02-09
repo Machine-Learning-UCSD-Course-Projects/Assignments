@@ -3,7 +3,7 @@ function sum = gi(yiminus1, yi, xbar, i, numFF, w)
 %w  : array of weights
 %The equation below equation 4 in the notes
     sum = 0;
-    for j = 1 : numFF % numel()
+    for j = 1 : numFF
         %sum = sum + w(j)* featureFunctions{j}(yiminus1, yi, xbar, i);
         sum = sum + w(j)* computeFeatureFunction(j, yiminus1, yi, xbar, i);
     end
