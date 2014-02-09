@@ -41,5 +41,5 @@ for i=1:size(x,1)
     Z = z1;
 
     %Calculate E
-    E = computeE(M,N,j,g,xbar,alpha,beta,Z)
+    E = computeE(M,N,j,g,xbar,alpha,beta)
 end
