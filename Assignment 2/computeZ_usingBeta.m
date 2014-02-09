@@ -1,4 +1,4 @@
-function x=computeZ_usingBeta(beta)
+function x=computeZ_usingBeta(beta,g,M)
 %M : Size of tag set
 %N : Number of words in a sentence
 %Assume that alpha matrix exists in memory
@@ -7,5 +7,5 @@ function x=computeZ_usingBeta(beta)
 x=0;
 for v=1:M
     % Tag 1 = START
-    x = x + exp(getG(1,1,v))*beta(v,1)
+    x = x + exp(g(1,v,2))*beta(v,2);
 end
