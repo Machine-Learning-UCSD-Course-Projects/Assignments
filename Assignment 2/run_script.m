@@ -1,5 +1,6 @@
 %Input Sentence
 x = [1 2 3 4 8];
+xbar = x;
 N = size(x,2);
 
 %All the 8 tags
@@ -24,6 +25,13 @@ z1 = computeZ_usingAlpha(alpha,M,N);
 %Compute Z using beta matrix
 z2 = computeZ_usingBeta(beta,g,M);
 
+%Sanity Check
+if z1 ~= z2
+    error('Z values are different');
+end
+
+%Initialize the actual Z
+Z = z1;
+
 %Calculate E
-%ff = featureFunction();
-%E = computeE(M,N,ff,g,x,alpha,beta,z1);
+E = computeE(M,N,1,g,xbar,alpha,beta,Z);
