@@ -5,8 +5,8 @@ j = NUM_FEATURE_TAGS * (NUM_LABEL_TAGS ^ 2);
 
 %Input Sentence
 x = ones(2,5);
-x(1,:)=[1 2 3 4 8];
-x(2,:)=[1 3 3 4 8];
+x(1,:)=[1 2 6 7 8];
+x(2,:)=[1 3 6 7 8];
 N = size(x,2);
 
 %All the 8 tags
