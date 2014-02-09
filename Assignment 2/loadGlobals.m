@@ -5,7 +5,7 @@ function loadGlobals()
     
     NUM_FEATURE_TAGS = 36;
     FEATURE_TAGS = 36;
-    LABEL_TAGS = { 'COMMA', 'PERIOD', 'QUESTION_MARK', 'EXCLAMATION_POINT', 'COLON', 'SPACE' };
+    LABEL_TAGS = { 'START', 'COMMA', 'PERIOD', 'QUESTION_MARK', 'EXCLAMATION_POINT', 'COLON', 'SPACE', 'STOP' };
     NUM_LABEL_TAGS = numel(LABEL_TAGS);
     
 end

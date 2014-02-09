@@ -1,7 +1,6 @@
 loadGlobals();
 
-global NUM_FEATURE_TAGS NUM_LABEL_TAGS
-j = NUM_FEATURE_TAGS * (NUM_LABEL_TAGS ^ 2);
+%j = 1296;
 
 %Input Sentence
 x = ones(2,5);
