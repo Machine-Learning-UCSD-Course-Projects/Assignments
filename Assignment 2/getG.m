@@ -1,3 +1,3 @@
-function x=getG(i,tag1,tag2)
+function x=getG(u,v,i)
 %This is a function that returns a 
-    x=g(i,tag1,tag2);
+    x=g(u,v,i);

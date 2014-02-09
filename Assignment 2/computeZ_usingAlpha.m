@@ -1,4 +1,4 @@
-function x=computeZ_usingAlpha(alpha)
+function x=computeZ_usingAlpha(alpha,N)
 %M : Size of tag set
 %N : Number of words in a sentence
 %Assume that alpha matrix exists in memory
