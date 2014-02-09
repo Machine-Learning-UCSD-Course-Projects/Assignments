@@ -1,21 +1,28 @@
-function w = collinsPerceptron(x, trueY)
-   numFF = numFeatureFunctions();
-    w = zeros(numFF);
-    iterations = 10;
+function w = collinsPerceptron(sentences, trueY)
+    numFF = numFeatureFunctions();
+    w = zeros(numFF, 1);
+    epochs = 1;
     lambda = 0.1;
     allY = [1, 2, 3, 4, 5, 6, 7, 8];
-    if (size(x,2) + 2) ~= size(trueY, 2)
+    if (size(sentences,2) + 2) ~= size(trueY, 2)
         error('size(x,2) != size(y, 2)');
     end
     M = size(allY, 2);
-    N = size(x, 2);
-    for i = 1:iterations
-        disp(i)
-        yhat = Inference(x, w);
-        for j = 1:numFF       
-            w(j) = w(j) + lambda * (computeF(j, x, trueY) ...
-                - computeF(j, x, yhat));
-            disp(j)
+    N = size(sentences, 2);
+    for i = 1:epochs
+        yhat = cell(1, size(sentences, 1));
+        for j = 1:numFF
+            for l = 1:size(sentences, 1)
+                x = sentences(l,:);
+                if ifAReturnsNonZero(j, x) == 1 %1 = TRUE
+                    if size(yhat{l}, 1) == 0
+                        disp('Hellow');
+                        yhat{l} = Inference(x, w);
+                    end
+                    w(j) = w(j) + lambda * (computeF(j, x, trueY(l,:)) ...
+                        - computeF(j, x, yhat{l}));
+                end
+            end
         end
     end
 end

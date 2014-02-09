@@ -3,21 +3,29 @@ function w = sgd(sentences, trueY)
         error('size(x,2) + 2 != size(y, 2)');
     end
     numFF = numFeatureFunctions();
-    w = zeros(numFF);
+    w = ones(numFF,1);
     epochs = 1;
     lambda = 0.1;
     allY = [1, 2, 3, 4, 5, 6, 7, 8];
+    M = size(allY, 2);
     for i = 1:epochs
-        for l = 1:size(sentences, 2)
-            x = sentences(l);
-            M = size(allY, 2);
-            N = size(x, 2);
-            g = computeG(x, allY, w);
-            alpha = computeAlpha(M, N, g);
-            beta = computeBeta(M, N, g);
-            for j = 1:numFF
-                w(j) = w(j) + lambda * (computeF(j, x, trueY)...
-                    - computeE(M, N, j, g, x, alpha, beta));
+        g = cell(1, size(sentences, 1));
+        alpha = cell(1, size(sentences, 1));
+        beta = cell(1, size(sentences, 1));
+        for j = 1:numFF
+            for l = 1:size(sentences, 1)
+                x = sentences(l,:);
+                if ifAReturnsNonZero(j, x) == 1 %1 = TRUE
+                    N = size(x, 2);
+                    if size(g{l}, 1) == 0
+                        g{l} = computeG(x, allY, w);
+                        alpha{l} = computeAlpha(M, N, g{l});
+                        beta{l} = computeBeta(M, N, g{l});
+                    end
+                    F = computeF(j, x, trueY(l,:));
+                    E = computeE(M, N, j, g{l}, x, alpha{l}, beta{l});
+                    w(j) = w(j) + lambda * (F - E);
+                end
             end
         end
     end

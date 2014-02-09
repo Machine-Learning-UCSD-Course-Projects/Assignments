@@ -1,6 +1,6 @@
 function yhat = Inference(x, w)
-    if numFeatureFunctions() ~= size(w,2)
-        error(' numfeatureFunctions() ~= size(w,2) Failed');
+    if numFeatureFunctions() ~= size(w,1)
+        error(' numfeatureFunctions() ~= size(w,1) Failed');
     end
     allY = [1, 2, 3, 4, 5, 6, 7, 8];
     g = computeG(x, allY, w);
@@ -13,8 +13,6 @@ function yhat = Inference(x, w)
     for k = size(x, 2) + 1 : -1 : 2
         % on u
         %yhat(1) = START and y(n+2) = STOP
-        yhat;
-        k;
         [z, yhat(k - 1)] = max(U(k - 1,:) + g(k,:,allY(yhat(k))), [], 2);
     end
 end

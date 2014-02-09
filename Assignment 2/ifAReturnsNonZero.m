@@ -11,6 +11,7 @@ function [ result ] = ifAReturnsNonZero(j, xbar)
     for i = 1:size(xbar, 2)
         if current_feature == xbar(i)
             result = 1;
+            return;
         end;
     end;
 end
