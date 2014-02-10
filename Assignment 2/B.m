@@ -1,7 +1,5 @@
 function [ result ] = B(j, yiminus1, yi)
-%UNTITLED3 Summary of this function goes here
-%   Detailed explanation goes here
-    global NUM_FEATURE_TAGS NUM_LABEL_TAGS
+global NUM_LABEL_TAGS
     
     feature = ceil(j / (NUM_LABEL_TAGS ^ 2));
     switch feature
