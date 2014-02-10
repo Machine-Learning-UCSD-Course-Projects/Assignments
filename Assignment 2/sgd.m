@@ -1,6 +1,8 @@
 function w = sgd(sentences, trueY)
-    if (size(sentences, 2) + 2) ~= size(trueY, 2)
-        error('size(x,2) + 2 != size(y, 2)');
+    for l = 1:size(sentences, 1)
+        if (size(sentences{l}, 2) + 2) ~= size(trueY{l}, 2)
+            error('Dimensions of sentence and trueY do not match');
+        end
     end
     numFF = numFeatureFunctions();
     w = zeros(numFF,1);
@@ -14,7 +16,7 @@ function w = sgd(sentences, trueY)
         beta = cell(1, size(sentences, 1));
         for j = 1:numFF
             for l = 1:size(sentences, 1)
-                x = sentences(l,:);
+                x = sentences{l};
                 if ifAReturnsNonZero(j, x) == 1 %1 = TRUE
                     N = size(x, 2);
                     if size(g{l}, 1) == 0
@@ -22,7 +24,7 @@ function w = sgd(sentences, trueY)
                         alpha{l} = computeAlpha(M, N, g{l});
                         beta{l} = computeBeta(M, N, g{l});
                     end
-                    F = computeF(j, x, trueY(l,:));
+                    F = computeF(j, x, trueY{l});
                     E = computeE(M, N, j, g{l}, x, alpha{l}, beta{l});
                     w(j) = w(j) + lambda * (F - E);
                 end
