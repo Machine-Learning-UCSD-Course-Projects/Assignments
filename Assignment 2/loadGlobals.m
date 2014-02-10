@@ -7,8 +7,8 @@ function loadGlobals()
         POS_TEST_SENTENCES POS_TEST_LABELS ...
         AUXILIARY_TRAINING
     
-    NUM_FEATURE_TAGS = 36;
-    FEATURE_TAGS = 36;
+    NUM_FEATURE_TAGS = 4; %Because there are 4 FF templates. Previously 36
+    FEATURE_TAGS = 4; %Because there are 4 FF templates. Previously 36
     LABEL_TAGS = { 'START', 'COMMA', 'PERIOD', 'QUESTION_MARK', 'EXCLAMATION_POINT', 'COLON', 'SPACE', 'STOP' };
     NUM_LABEL_TAGS = numel(LABEL_TAGS);
     POS_TRAINING_SENTENCES = csvread('./CSV/trainingSentences.csv');
