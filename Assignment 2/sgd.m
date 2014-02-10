@@ -1,12 +1,13 @@
 function w = sgd(sentences, trueY)
     for l = 1:size(sentences, 1)
         if (size(sentences{l}, 2) + 2) ~= size(trueY{l}, 2)
+            disp(l)
             error('Dimensions of sentence and trueY do not match');
         end
     end
     numFF = numFeatureFunctions();
     w = zeros(numFF,1);
-    epochs = 1;
+    epochs = 2;
     lambda = 0.1;
     allY = [1, 2, 3, 4, 5, 6, 7, 8];
     M = size(allY, 2);
@@ -16,6 +17,7 @@ function w = sgd(sentences, trueY)
         beta = cell(1, size(sentences, 1));
         for j = 1:numFF
             for l = 1:size(sentences, 1)
+                disp(l)
                 x = sentences{l};
                 if ifAReturnsNonZero(j, x) == 1 %1 = TRUE
                     N = size(x, 2);
@@ -30,6 +32,8 @@ function w = sgd(sentences, trueY)
                 end
             end
         end
+        disp('End of an epoch')
+        disp(nnz(w))
     end
 end
 

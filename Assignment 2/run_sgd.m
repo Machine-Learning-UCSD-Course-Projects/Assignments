@@ -6,15 +6,17 @@ global NUM_FEATURE_TAGS NUM_LABEL_TAGS FEATURE_TAGS LABEL_TAGS ...
         POS_TEST_SENTENCES POS_TEST_LABELS ...
         AUXILIARY_TRAINING
 %Initiate a list of sentences
-sentences = cell(10,1);
+sentences = cell(1000,1);
 
 %Initiate a list of true labels
-trueY = cell(10,1);
+trueY = cell(1000,1);
 
-for i = 1:10
+count = 0;
+index = 1;
+for i = 1:1000
     %Read sentence i from training sentences
     tempSentence = POS_TRAINING_SENTENCES(i,:);
-    tempSentence(tempSentence <= 0) =[];
+    tempSentence(tempSentence == 0) =[];
     %disp('TEMP SENTENCE')
     %disp(tempSentence)
     
@@ -25,15 +27,20 @@ for i = 1:10
     %disp('TEMP LABEL')
     %disp(tempLabel)
     
-    %Append sentence i at end of list of sentences
-    sentences{i} = tempSentence;
-    
-    %Append label i at end of list of labels
-    trueY{i} = tempLabel;
+    if numel(tempSentence)+2 == numel(tempLabel)
+        %Append sentence i at end of list of sentences
+        sentences{index} = tempSentence;
+        %Append label i at end of list of labels
+        trueY{index} = tempLabel;
+        index = index + 1;
+    else
+        count = count + 1;
+    end
     
 end
 
-sgd(sentences,trueY);
+sentences = sentences(1:1000-count,:);
+w=sgd(sentences,trueY);
 
     %disp(sentences)
     %disp(trueY)
