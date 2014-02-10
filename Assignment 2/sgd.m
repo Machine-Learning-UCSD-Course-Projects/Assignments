@@ -3,7 +3,7 @@ function w = sgd(sentences, trueY)
         error('size(x,2) + 2 != size(y, 2)');
     end
     numFF = numFeatureFunctions();
-    w = ones(numFF,1);
+    w = zeros(numFF,1);
     epochs = 1;
     lambda = 0.1;
     allY = [1, 2, 3, 4, 5, 6, 7, 8];

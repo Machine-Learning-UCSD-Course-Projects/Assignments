@@ -16,7 +16,7 @@ function w = collinsPerceptron(sentences, trueY)
                 x = sentences(l,:);
                 if ifAReturnsNonZero(j, x) == 1 %1 = TRUE
                     if size(yhat{l}, 1) == 0
-                        disp('Hellow');
+                        disp(l);
                         yhat{l} = Inference(x, w);
                     end
                     w(j) = w(j) + lambda * (computeF(j, x, trueY(l,:)) ...
