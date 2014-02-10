@@ -1,19 +1,21 @@
 loadGlobals
 
+SAMPLESIZE = 100;
+
 global NUM_FEATURE_TAGS NUM_LABEL_TAGS FEATURE_TAGS LABEL_TAGS ...
         POS_TRAINING_SENTENCES POS_TRAINING_LABELS ...
         POS_VALIDATION_SENTENCES POS_VALIDATION_LABELS ...
         POS_TEST_SENTENCES POS_TEST_LABELS ...
         AUXILIARY_TRAINING
 %Initiate a list of sentences
-sentences = cell(1000,1);
+sentences = cell(SAMPLESIZE,1);
 
 %Initiate a list of true labels
-trueY = cell(1000,1);
+trueY = cell(SAMPLESIZE,1);
 
 count = 0;
 index = 1;
-for i = 1:1000
+for i = 1:SAMPLESIZE
     %Read sentence i from training sentences
     tempSentence = POS_TRAINING_SENTENCES(i,:);
     tempSentence(tempSentence == 0) =[];
@@ -39,7 +41,7 @@ for i = 1:1000
     
 end
 
-sentences = sentences(1:1000-count,:);
+sentences = sentences(1:SAMPLESIZE-count,:);
 w=sgd(sentences,trueY);
 
     %disp(sentences)
