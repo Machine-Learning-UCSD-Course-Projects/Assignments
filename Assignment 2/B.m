@@ -3,6 +3,7 @@ function [ result ] = B(j, yiminus1, yi)
 %   Detailed explanation goes here
     global NUM_FEATURE_TAGS NUM_LABEL_TAGS
     
+<<<<<<< HEAD
     feature = ceil(j / (NUM_LABEL_TAGS ^ 2));
    
          section = mod(j, (NUM_LABEL_TAGS ^ 2));
@@ -24,20 +25,24 @@ function [ result ] = B(j, yiminus1, yi)
             result = 0;
         end;
 end
+=======
+    section = mod(j, (NUM_LABEL_TAGS ^ 2));
+	if section == 0
+		section = (NUM_LABEL_TAGS ^ 2);
+	end;
+>>>>>>> 3482e377fd16902986fb6efe8058dcc4780e5669
 
-function result = checkInterrogative(yiminus1,yi)
-    if yiminus1==7 && yi==4
+    prev_tag = ceil(section / NUM_LABEL_TAGS);
+    current_tag = mod(section, NUM_LABEL_TAGS);
+	if current_tag == 0
+		current_tag = 8;
+	end;
+
+    if yiminus1 == prev_tag && yi == current_tag
         result = 1;
     else
         result = 0;
-    end
-end
-
-function result = checkAdverbs(yiminus1,yi)
-    if yiminus1 == 2 && yi==7
-        result = 1;
-    else
-        result = 0;
+<<<<<<< HEAD
     end
 end
 
@@ -55,5 +60,8 @@ function result = checkPeriod(yiminus1,yi)
     else
         result = 0;
     end
+=======
+    end;
+    
+>>>>>>> 3482e377fd16902986fb6efe8058dcc4780e5669
 end
-
