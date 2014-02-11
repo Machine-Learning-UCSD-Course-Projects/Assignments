@@ -57,8 +57,6 @@ for i=1:SAMPLESIZE
         accuracy = accuracy + 1;
     else
         disp(i);
-        disp(y');
-        disp(yhat);
     end
 end
 disp(accuracy)
