@@ -16,6 +16,7 @@ function w = sgd(sentences, trueY)
         alpha = cell(1, size(sentences, 1));
         beta = cell(1, size(sentences, 1));
         for l = 1:size(sentences, 1)
+            disp(l)
             for j = 1:numFF
                 %disp(l)
                 x = sentences{l};

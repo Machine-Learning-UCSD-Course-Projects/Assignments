@@ -11,9 +11,9 @@ function w = collinsPerceptron(sentences, trueY)
     N = size(sentences, 2);
     for i = 1:epochs
         yhat = cell(1, size(sentences, 1));
-        for j = 1:numFF
-            for l = 1:size(sentences, 1)
-                x = sentences(l,:);
+        for l = 1:size(sentences, 1)
+            for j = 1:numFF
+                x = sentences{l};
                 if ifAReturnsNonZero(j, x) == 1 %1 = TRUE
                     if size(yhat{l}, 1) == 0
                         disp(l);
