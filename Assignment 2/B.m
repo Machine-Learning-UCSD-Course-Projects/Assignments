@@ -1,13 +1,13 @@
 function [ result ] = B(j, yiminus1, yi)
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
-    global NUM_FEATURE_TAGS NUM_LABEL_TAGS
+    global NUM_FEATURE_TAGS NUM_LABEL_TAGS NUM_LABEL_TAGS_SQUARE
     
-    feature = ceil(j / (NUM_LABEL_TAGS ^ 2));
+    %feature = ceil(j / NUM_LABEL_TAGS_SQUARE);
    
-         section = mod(j, (NUM_LABEL_TAGS ^ 2));
+        section = mod(j, NUM_LABEL_TAGS_SQUARE);
         if section == 0
-            section = (NUM_LABEL_TAGS ^ 2);
+            section = (NUM_LABEL_TAGS_SQUARE);
         end;
 
         prev_tag = ceil(section / NUM_LABEL_TAGS);
@@ -15,14 +15,7 @@ function [ result ] = B(j, yiminus1, yi)
         if current_tag == 0
             current_tag = 8;
         end;
-        if yiminus1 == 7 && prev_tag == 7 && yi == 7 && 7 == current_tag
-            yiminus1;
-        end
-        if yiminus1 == prev_tag && yi == current_tag
-            result = 1;
-        else
-            result = 0;
-        end;
+        result = (yiminus1 == prev_tag && yi == current_tag);
 end
 
 function result = checkInterrogative(yiminus1,yi)

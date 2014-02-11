@@ -9,3 +9,4 @@ function sum = gi(yiminus1, yi, xbar, i, numFF, w)
             sum = sum + w(j) * a * B(j, yiminus1, yi);
         end
     end
+end

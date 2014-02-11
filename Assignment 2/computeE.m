@@ -4,18 +4,15 @@ function sum=computeE(M,N,j,g,xbar,alpha,beta, Z)
 %ffj : F_subscript{j}
 sum = 0;
 for i=1:N
-    for yiminus1=1:M
-        for yi=1:M
-            a = A(j, xbar, i);
-            if a ~= 0
-                b = B(j,yiminus1,yi);
-                if b ~= 0
-                    sum = sum + a * b ...
-                    * alpha(i,yiminus1) ...
-                    * exp(g(yiminus1,yi,i)) ...
-                    * beta(yi,i) ...
-                    / Z;
-                end
+    a = A(j, xbar, i);
+    if a ~= 0
+        for yiminus1=1:M
+            prod = a * alpha(i,yiminus1);
+            for yi=1:M
+                sum = sum + prod * B(j,yiminus1,yi) ...
+                * exp(g(yiminus1,yi,i)) ...
+                * beta(yi,i) ...
+                / Z;
             end
         end
     end
