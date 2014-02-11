@@ -13,6 +13,7 @@ function w = sgd(sentences, trueY)
     M = size(allY, 2);
     for i = 1:epochs
         for l = 1:size(sentences, 1)
+<<<<<<< HEAD
             disp(l);
             x = sentences{l};
             N = size(x, 2);
@@ -21,6 +22,9 @@ function w = sgd(sentences, trueY)
             beta = computeBeta(M, N, g);
             Z = computeZ(alpha,M,N);
             
+=======
+            disp(l)
+>>>>>>> ce06cf55077d51370174961b23910aa011826d04
             for j = 1:numFF
                 F = computeF(j, x, trueY{l});
                 E = computeE(M, N, j, g, x, alpha, beta, Z);

@@ -15,12 +15,24 @@ function w = collinsPerceptron(sentences, trueY)
     for i = 1:epochs
         yhat = cell(1, size(sentences, 1));
         for l = 1:size(sentences, 1)
+<<<<<<< HEAD
             disp(l);
             for j = 1:numFF
                 x = sentences{l};
                 if size(yhat{l}, 1) == 0
                     disp(l);
                     yhat{l} = Inference(x, w);
+=======
+            for j = 1:numFF
+                x = sentences{l};
+                if ifAReturnsNonZero(j, x) == 1 %1 = TRUE
+                    if size(yhat{l}, 1) == 0
+                        disp(l);
+                        yhat{l} = Inference(x, w);
+                    end
+                    w(j) = w(j) + lambda * (computeF(j, x, trueY(l,:)) ...
+                        - computeF(j, x, yhat{l}));
+>>>>>>> ce06cf55077d51370174961b23910aa011826d04
                 end
                 w(j) = w(j) + lambda * (computeF(j, x, trueY(l,:)) ...
                     - computeF(j, x, yhat{l}));
