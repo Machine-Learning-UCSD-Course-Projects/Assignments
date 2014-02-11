@@ -14,7 +14,7 @@ function yhat = Inference(x, w)
     for k = size(x, 2) + 1 : -1 : 3
         %yhat(1) = START and y(n+2) = STOP
         m = 0;
-        uMax = 0;
+        uMax = -Inf;
         for u = 1:size(allY, 2)
             currentU = U(k - 1,u) + g(u,yhat(k), k - 1);
             if uMax < currentU

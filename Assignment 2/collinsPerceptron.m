@@ -9,21 +9,14 @@ function w = collinsPerceptron(sentences, trueY)
     w = zeros(numFF, 1);
     epochs = 1;
     lambda = 0.8;
-    allY = [1, 2, 3, 4, 5, 6, 7, 8];
-    M = size(allY, 2);
-    N = size(sentences, 2);
     for i = 1:epochs
-        yhat = cell(1, size(sentences, 1));
         for l = 1:size(sentences, 1)
             disp(l);
+            x = sentences{l};
+            yhat = Inference(x, w);
             for j = 1:numFF
-                x = sentences{l};
-                if size(yhat{l}, 1) == 0
-                    disp(l);
-                    yhat{l} = Inference(x, w);
-                end
-                w(j) = w(j) + lambda * (computeF(j, x, trueY(l,:)) ...
-                    - computeF(j, x, yhat{l}));
+                w(j) = w(j) + lambda * (computeF(j, x, trueY{l}) ...
+                    - computeF(j, x, yhat));
             end
         end
         disp('End of an epoch')
