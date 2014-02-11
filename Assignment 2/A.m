@@ -1,23 +1,13 @@
 function [ result ] = A(j, xbar, i)
     global NUM_LABEL_TAGS   
     feature = ceil(j / (NUM_LABEL_TAGS ^ 2));
-    switch feature
-        case 1
-             % POS tagged sentence starting with Wh-word
-             result = checkInterrogative(xbar);
-        case 2
-             % POS tagged sentence starting with adverbs
-             result = checkAdverbs(xbar);
-        case 3
-             % Sentence starting with auxiliary verb
-             result = checkAuxiliary(xbar);
-        case 4
-            % Return for a period
-            result = checkPeriod(xbar,i);             
-        otherwise
-            % Do something??
+    
+        current_feature = xbar(i); % Need some way of loading tag data for xbar(i)
+        if feature == current_feature
+            result = 1;
+        else
             result = 0;
-    end
+        end;
 end
 
 function result = checkInterrogative(xbar)

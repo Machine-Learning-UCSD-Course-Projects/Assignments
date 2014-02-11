@@ -3,7 +3,7 @@ function [ result ] = ifAReturnsNonZero(j, xbar)
 %   Detailed explanation goes here
     global NUM_LABEL_TAGS
     current_feature = ceil(j / (NUM_LABEL_TAGS ^ 2));
-    result = 0;
+    result = 1;
     if current_feature > 36
         result = 1;
         return;
