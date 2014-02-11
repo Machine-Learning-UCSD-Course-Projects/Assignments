@@ -1,6 +1,6 @@
 loadGlobals
 
-SAMPLESIZE = 3;
+SAMPLESIZE = 100;
 
 global NUM_FEATURE_TAGS NUM_LABEL_TAGS FEATURE_TAGS LABEL_TAGS ...
         POS_TRAINING_SENTENCES POS_TRAINING_LABELS ...
@@ -44,5 +44,21 @@ end
 sentences = sentences(1:SAMPLESIZE-count,:);
 w=sgd(sentences,trueY);
 
-    %disp(sentences)
-    %disp(trueY)
+%Test the Infered values against the real thing
+accuracy = 0;
+for i=1:SAMPLESIZE
+    x=POS_TRAINING_SENTENCES(i,:);
+    y=POS_TRAINING_LABELS(i,:);
+    x(x==0)=[];
+    y(y==0)=[];
+    y=cat(2,1,y+1,8);
+    yhat=Inference(x,w);
+    if yhat == y'
+        accuracy = accuracy + 1;
+    else
+        disp(i);
+        disp(y');
+        disp(yhat);
+    end
+end
+disp(accuracy)
