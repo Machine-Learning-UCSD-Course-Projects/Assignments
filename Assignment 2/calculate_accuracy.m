@@ -1,6 +1,6 @@
 %Test the Infered values against the real thing
 %Assume that a weight vector w exists in memory
-SAMPLESIZE = 100;
+SAMPLESIZE = 500;
 TOTAL_LENGTH = 0;
 TAG_LEVEL_MATCH = 0;
 accuracy = 0;
@@ -11,7 +11,6 @@ for i=1:SAMPLESIZE
     y(y==0)=[];
     y=cat(2,1,y+1,8);
     yhat=Inference(x,w);
-    
     
     if numel(yhat)==numel(y') 
     TAG_LEVEL_MATCH = TAG_LEVEL_MATCH + nnz(yhat == y');
