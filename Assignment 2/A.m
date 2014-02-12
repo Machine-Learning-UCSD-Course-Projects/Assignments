@@ -1,9 +1,9 @@
 function [ result ] = A(j, xbar, i)
-    global NUM_LABEL_TAGS_SQUARE;
-    feature = ceil(j / NUM_LABEL_TAGS_SQUARE);
+    %global NUM_LABEL_TAGS_SQUARE;
+    %feature = j;%ceil(j / NUM_LABEL_TAGS_SQUARE);
     
-    current_feature = xbar(i); % Need some way of loading tag data for xbar(i)
-    result = (feature == current_feature);
+    %current_feature = xbar(i); % Need some way of loading tag data for xbar(i)
+    result = (j == xbar(i));
 end
 
 function result = checkInterrogative(xbar)

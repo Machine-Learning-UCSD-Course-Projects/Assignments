@@ -1,6 +1,6 @@
 loadGlobals
 
-SAMPLESIZE = 1500;
+SAMPLESIZE = 49080
 
 global NUM_FEATURE_TAGS NUM_LABEL_TAGS FEATURE_TAGS LABEL_TAGS ...
         POS_TRAINING_SENTENCES POS_TRAINING_LABELS ...
@@ -42,4 +42,6 @@ for i = 1:SAMPLESIZE
 end
 
 sentences = sentences(1:SAMPLESIZE-count,:);
+a = cputime();
 w=sgd(sentences,trueY);
+a = (cputime() - a)

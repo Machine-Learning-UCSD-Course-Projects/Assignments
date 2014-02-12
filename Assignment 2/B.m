@@ -1,20 +1,19 @@
-function [ result ] = B(j, yiminus1, yi)
+function [ result ] = B(j, prev_tag, current_tag, yiminus1, yi)
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
     global NUM_FEATURE_TAGS NUM_LABEL_TAGS NUM_LABEL_TAGS_SQUARE
     
     %feature = ceil(j / NUM_LABEL_TAGS_SQUARE);
-   
-        section = mod(j, NUM_LABEL_TAGS_SQUARE);
-        if section == 0
-            section = (NUM_LABEL_TAGS_SQUARE);
-        end;
-
-        prev_tag = ceil(section / NUM_LABEL_TAGS);
-        current_tag = mod(section, NUM_LABEL_TAGS);
-        if current_tag == 0
-            current_tag = 8;
-        end;
+%     section = mod(j, NUM_LABEL_TAGS_SQUARE);
+%     if section == 0
+%         section = (NUM_LABEL_TAGS_SQUARE);
+%     end;
+%     prev_tag = ceil(section / NUM_LABEL_TAGS);
+%     current_tag = mod(section, NUM_LABEL_TAGS);
+%     if current_tag == 0
+% 		current_tag = NUM_LABEL_TAGS;
+%     end
+        
         result = (yiminus1 == prev_tag && yi == current_tag);
 end
 
