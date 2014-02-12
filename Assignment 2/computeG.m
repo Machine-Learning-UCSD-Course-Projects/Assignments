@@ -37,8 +37,8 @@ function g = computeG(x, allY, w)
                     end
                 end
             else
-                %j = j + NUM_LABEL_TAGS_SQUARE;
-                j = ja * NUM_LABEL_TAGS_SQUARE + 1;
+                j = j + NUM_LABEL_TAGS_SQUARE;
+                %j = ja * NUM_LABEL_TAGS_SQUARE + 1;
             end
         end
         %if i > 1

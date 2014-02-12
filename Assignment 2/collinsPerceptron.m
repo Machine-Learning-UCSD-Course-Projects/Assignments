@@ -40,8 +40,8 @@ function w = computeFNew(x, y, yhat, w, lambda)
                     end
                 end
             else
-                %j = j + NUM_LABEL_TAGS_SQUARE;
-                j = ja * NUM_LABEL_TAGS_SQUARE + 1;
+                j = j + NUM_LABEL_TAGS_SQUARE;
+                %j = ja * NUM_LABEL_TAGS_SQUARE + 1;
             end
         end
         %if i > 1
