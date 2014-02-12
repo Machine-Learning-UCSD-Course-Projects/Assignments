@@ -1,7 +1,11 @@
 %Test the Inferred values against the real thing
 %Assume that a weight vector w exists in memory
+<<<<<<< HEAD
 
 SAMPLESIZE = 50;
+=======
+SAMPLESIZE = 21035;
+>>>>>>> 8f2b57a22fe652e2fddb6ba093c47744eb6bf0da
 TOTAL_LENGTH = 0;
 TAG_LEVEL_MATCH = 0;
 accuracy = 0;
@@ -13,11 +17,14 @@ for i=1:SAMPLESIZE
     y=cat(2,1,y+1,8);
     yhat=Inference(x,w);
     
+<<<<<<< HEAD
 	%for k = 2:numel(yhat) - 2
 	%	yhat(k) = 7;
 	%end;
     %yhat(numel(yhat) - 1) = 3;
     %disp(yhat)
+=======
+>>>>>>> 8f2b57a22fe652e2fddb6ba093c47744eb6bf0da
     if numel(yhat)==numel(y') 
     TAG_LEVEL_MATCH = TAG_LEVEL_MATCH + nnz(yhat == y');
     TOTAL_LENGTH = TOTAL_LENGTH + numel(y);

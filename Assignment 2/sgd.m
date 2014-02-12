@@ -9,6 +9,7 @@ function w = sgd(sentences, trueY)
     w = zeros(numFF,1);
     epochs = 1;
     lambda = 0.1;
+    mu = 0.00001;
     allY = [1, 2, 3, 4, 5, 6, 7, 8];
     M = size(allY, 2);
     global NUM_FEATURE_TAGS NUM_LABEL_TAGS NUM_LABEL_TAGS_SQUARE CACHED_B;
@@ -32,12 +33,13 @@ function w = sgd(sentences, trueY)
 %                 w(j) = w(j) + lambda * (F1 - E);
 %             end
             j = 1;
+            regularizationTerm = mu * dot(w,w');
             for ja = 1:NUM_FEATURE_TAGS
                 for l2 = 1:NUM_LABEL_TAGS
                     for l3 = 1:NUM_LABEL_TAGS
                         F = computeFNew(cachedA, ja, l2, l3, x, trueY{l});
                         E = computeE(M, N, cachedA, ja, l2, l3, g, x, alpha, beta, Z);
-                        w(j) = w(j) + lambda * (F - E);
+                        w(j) = w(j) + lambda * (F - E) - regularizationTerm;
                         j = j + 1;
                     end
                 end
