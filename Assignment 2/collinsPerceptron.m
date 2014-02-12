@@ -29,7 +29,7 @@ function w = computeFNew(x, y, yhat, w, lambda)
     global NUM_FEATURE_TAGS NUM_LABEL_TAGS NUM_LABEL_TAGS_SQUARE CACHED_B;
     for i = 1:size(x,2)
         j = 1;
-        for ja = 1:44%NUM_FEATURE_TAGS
+        for ja = 1:NUM_FEATURE_TAGS
             a = A(ja, x, i);
             if(a ~= 0)
                 for l2 = 1:NUM_LABEL_TAGS

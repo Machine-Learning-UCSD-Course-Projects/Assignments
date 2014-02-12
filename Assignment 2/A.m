@@ -34,7 +34,7 @@ function [ result ] = A(j, xbar, i)
     end;
     
     if j == 42
-        result = checkStart(xbar,i);
+        result = 0;%checkStart(xbar,i);
         return;
     end;
     
@@ -44,9 +44,19 @@ function [ result ] = A(j, xbar, i)
     end;
     
     if j == 44
-        result = checkEnd(xbar,i);
+        result = 0;%checkEnd(xbar,i);
         return;
     end;
+    
+    if j > 44
+        result = 0;
+        if i == j - 44
+            result = 1;
+        end
+        if i == 1 || i == numel(xbar)
+            result = 2;
+        end
+    end
 end
 
 function result = checkInterrogative(xbar)

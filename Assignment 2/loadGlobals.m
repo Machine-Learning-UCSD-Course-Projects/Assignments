@@ -8,7 +8,7 @@ function loadGlobals()
         POS_TEST_SENTENCES POS_TEST_LABELS ...
         AUXILIARY_TRAINING CACHED_B
     
-    NUM_ACTUAL_FEATURE_TAGS = 44;
+    NUM_ACTUAL_FEATURE_TAGS = 63;
     NUM_POS_TWO_TAGS = 36 * 36;
     NUM_FEATURE_TAGS = NUM_ACTUAL_FEATURE_TAGS; %Because there are 4 FF templates. Previously 36
     FEATURE_TAGS = NUM_ACTUAL_FEATURE_TAGS; %Because there are 4 FF templates. Previously 36
