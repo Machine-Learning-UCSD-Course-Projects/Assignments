@@ -44,15 +44,15 @@ function w = computeFNew(x, y, yhat, w, lambda)
                 j = ja * NUM_LABEL_TAGS_SQUARE + 1;
             end
         end
-        %if i > 1
-        %    j = x(i) * x(i - 1) + 44;
-        %    for l2 = 1:NUM_LABEL_TAGS
-        %        for l3 = 1:NUM_LABEL_TAGS
-        %            w(j) = w(j) + lambda * (CACHED_B(l2, l3, y(i), y(i + 1)) - CACHED_B(l2, l3, yhat(i), yhat(i + 1)));
-        %            %(B(0, l2, l3, y(i), y(i + 1)) - B(0, l2, l3, yhat(i), yhat(i + 1)));
-        %        end
-        %    end
-        %end
+        if i > 1
+            j = x(i) * x(i - 1) + 44;
+            for l2 = 1:NUM_LABEL_TAGS
+                for l3 = 1:NUM_LABEL_TAGS
+                    w(j) = w(j) + lambda * a * (CACHED_B(l2, l3, y(i), y(i + 1)) - CACHED_B(l2, l3, yhat(i), yhat(i + 1)));
+                    %(B(0, l2, l3, y(i), y(i + 1)) - B(0, l2, l3, yhat(i), yhat(i + 1)));
+                end
+            end
+        end
     end
 end
 

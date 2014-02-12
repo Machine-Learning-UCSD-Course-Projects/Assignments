@@ -1,11 +1,12 @@
 function [ result ] = A(j, xbar, i)
     %global NUM_LABEL_TAGS_SQUARE;
     %feature = j;%ceil(j / NUM_LABEL_TAGS_SQUARE);
+    
     %current_feature = xbar(i); % Need some way of loading tag data for xbar(i)
     %result = (j == xbar(i));
     if j < 37
         result = (j == xbar(i));
-        return;
+        return
     end;
     
     if j == 37
@@ -34,12 +35,12 @@ function [ result ] = A(j, xbar, i)
     end;
     
     if j == 42
-        result = checkStart(xbar,i);
+        result = checkEnd(xbar,i);
         return;
     end;
     
     if j == 43
-        result = checkMid(xbar,i);
+        result = checkEnd(xbar,i);
         return;
     end;
     
@@ -47,6 +48,11 @@ function [ result ] = A(j, xbar, i)
         result = checkEnd(xbar,i);
         return;
     end;
+    
+    if j > 44
+        result = (j == (checkTwo(xbar, i) + 44));
+        return;
+    end
 end
 
 function result = checkInterrogative(xbar)

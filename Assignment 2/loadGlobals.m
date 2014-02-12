@@ -8,8 +8,10 @@ function loadGlobals()
         POS_TEST_SENTENCES POS_TEST_LABELS ...
         AUXILIARY_TRAINING CACHED_B
     
-    NUM_FEATURE_TAGS = 36; %Because there are 4 FF templates. Previously 36
-    FEATURE_TAGS = 36; %Because there are 4 FF templates. Previously 36
+    NUM_ACTUAL_FEATURE_TAGS = 44;
+    NUM_POS_TWO_TAGS = 36 * 36;
+    NUM_FEATURE_TAGS = NUM_ACTUAL_FEATURE_TAGS; %Because there are 4 FF templates. Previously 36
+    FEATURE_TAGS = NUM_ACTUAL_FEATURE_TAGS; %Because there are 4 FF templates. Previously 36
     LABEL_TAGS = { 'START', 'COMMA', 'PERIOD', 'QUESTION_MARK', 'EXCLAMATION_POINT', 'COLON', 'SPACE', 'STOP' };
     NUM_LABEL_TAGS = numel(LABEL_TAGS);
     NUM_LABEL_TAGS_SQUARE = NUM_LABEL_TAGS ^ 2;
