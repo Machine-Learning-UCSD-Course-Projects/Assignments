@@ -1,6 +1,6 @@
 loadGlobals
 
-SAMPLESIZE = 49080
+SAMPLESIZE = 2
 
 global NUM_FEATURE_TAGS NUM_LABEL_TAGS FEATURE_TAGS LABEL_TAGS ...
         POS_TRAINING_SENTENCES POS_TRAINING_LABELS ...
@@ -43,5 +43,5 @@ end
 
 sentences = sentences(1:SAMPLESIZE-count,:);
 a = cputime();
-w = collinsPerceptron(sentences,trueY);
+w = sgd(sentences,trueY);
 a = (cputime() - a)

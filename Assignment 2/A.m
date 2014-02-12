@@ -34,11 +34,7 @@ function [ result ] = A(j, xbar, i)
     end;
     
     if j == 42
-<<<<<<< HEAD
-        result = 0;%checkStart(xbar,i);
-=======
         result = checkStart(xbar,i);
->>>>>>> 5c353cad2daf0b13febcb940041c36dd4a30d53d
         return;
     end;
     
@@ -48,11 +44,7 @@ function [ result ] = A(j, xbar, i)
     end;
     
     if j == 44
-<<<<<<< HEAD
-        result = 0;%checkEnd(xbar,i);
-=======
         result = checkEnd(xbar,i);
->>>>>>> 5c353cad2daf0b13febcb940041c36dd4a30d53d
         return;
     end;
     
