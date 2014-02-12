@@ -9,7 +9,10 @@ function w = sgd(sentences, trueY)
     w = zeros(numFF,1);
     epochs = 1;
     lambda = 0.1;
+<<<<<<< HEAD
     mu = 0.00001;
+=======
+>>>>>>> 5c353cad2daf0b13febcb940041c36dd4a30d53d
     allY = [1, 2, 3, 4, 5, 6, 7, 8];
     M = size(allY, 2);
     global NUM_FEATURE_TAGS NUM_LABEL_TAGS NUM_LABEL_TAGS_SQUARE CACHED_B;

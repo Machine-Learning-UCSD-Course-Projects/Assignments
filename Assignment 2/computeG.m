@@ -38,7 +38,20 @@ function g = computeG(x, allY, w)
                 end
             else
                 j = j + NUM_LABEL_TAGS_SQUARE;
+                %j = ja * NUM_LABEL_TAGS_SQUARE + 1;
             end
         end
+        %if i > 1
+        %    j = x(i) * x(i - 1) + 44;
+        %    for l2 = 1:NUM_LABEL_TAGS
+        %        for l3 = 1:NUM_LABEL_TAGS
+        %            for u = 1:size(allY, 2)
+        %                for v = 1:size(allY, 2)
+        %                    g(u, v, i) = g(u, v, i) + w(j) * CACHED_B(l2, l3, u, v);                    
+        %                end
+        %            end
+        %        end
+        %    end
+        %end
     end
 end
