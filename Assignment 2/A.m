@@ -34,7 +34,7 @@ function [ result ] = A(j, xbar, i)
     end;
     
     if j == 42
-        result = 0;%checkStart(xbar,i);
+        result = checkStart(xbar,i);
         return;
     end;
     
@@ -44,7 +44,7 @@ function [ result ] = A(j, xbar, i)
     end;
     
     if j == 44
-        result = 0;%checkEnd(xbar,i);
+        result = checkEnd(xbar,i);
         return;
     end;
     
