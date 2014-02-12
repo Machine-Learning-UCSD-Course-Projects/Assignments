@@ -43,5 +43,5 @@ end
 
 sentences = sentences(1:SAMPLESIZE-count,:);
 a = cputime();
-w=sgd(sentences,trueY);
+w = collinsPerceptron(sentences,trueY);
 a = (cputime() - a)
