@@ -29,7 +29,7 @@ function w = computeFNew(x, y, yhat, w, lambda)
     global NUM_FEATURE_TAGS NUM_LABEL_TAGS NUM_LABEL_TAGS_SQUARE CACHED_B;
     for i = 1:size(x,2)
         j = 1;
-        for ja = 1:NUM_FEATURE_TAGS
+        for ja = 1:44%NUM_FEATURE_TAGS
             a = A(ja, x, i);
             if(a ~= 0)
                 for l2 = 1:NUM_LABEL_TAGS
@@ -40,19 +40,19 @@ function w = computeFNew(x, y, yhat, w, lambda)
                     end
                 end
             else
-                j = j + NUM_LABEL_TAGS_SQUARE;
-                %j = ja * NUM_LABEL_TAGS_SQUARE + 1;
+                %j = j + NUM_LABEL_TAGS_SQUARE;
+                j = ja * NUM_LABEL_TAGS_SQUARE + 1;
             end
         end
-        %if i > 1
-        %    j = x(i) * x(i - 1) + 44;
-        %    for l2 = 1:NUM_LABEL_TAGS
-        %        for l3 = 1:NUM_LABEL_TAGS
-        %            w(j) = w(j) + lambda * (CACHED_B(l2, l3, y(i), y(i + 1)) - CACHED_B(l2, l3, yhat(i), yhat(i + 1)));
-        %            %(B(0, l2, l3, y(i), y(i + 1)) - B(0, l2, l3, yhat(i), yhat(i + 1)));
-        %        end
-        %    end
-        %end
+        if i > 1
+            j = x(i) * x(i - 1) + 44;
+            for l2 = 1:NUM_LABEL_TAGS
+                for l3 = 1:NUM_LABEL_TAGS
+                    w(j) = w(j) + lambda * a * (CACHED_B(l2, l3, y(i), y(i + 1)) - CACHED_B(l2, l3, yhat(i), yhat(i + 1)));
+                    %(B(0, l2, l3, y(i), y(i + 1)) - B(0, l2, l3, yhat(i), yhat(i + 1)));
+                end
+            end
+        end
     end
 end
 
