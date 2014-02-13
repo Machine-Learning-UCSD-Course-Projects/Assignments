@@ -8,8 +8,8 @@ function w = sgd(sentences, trueY)
     numFF = numFeatureFunctions();
     w = zeros(numFF,1);
     epochs = 1;
-    lambda = 0.01;
-    mu = 0.8;
+    lambda = 0.1;
+    mu = 0.00001;
     allY = [1, 2, 3, 4, 5, 6, 7, 8];
     M = size(allY, 2);
     global NUM_FEATURE_TAGS NUM_LABEL_TAGS NUM_LABEL_TAGS_SQUARE CACHED_B;
