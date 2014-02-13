@@ -8,29 +8,39 @@ function w = collinsPerceptron(sentences, trueY)
     numFF = numFeatureFunctions();
     w = zeros(numFF, 1);
     epochs = 1;
-    lambda = 0.8;
+    lambda = 0.0005;
     for i = 1:epochs
         for l = 1:size(sentences, 1)
             disp(l);
             x = sentences{l};
+            cachedA = getA(x);
             yhat = Inference(x, w);
 %             for j = 1:numFF
 %                 w(j) = w(j) + lambda * (computeF(j, x, trueY{l}) ...
 %                     - computeF(j, x, yhat));
 %             end
-            w = computeFNew(x, trueY{l}, yhat, w, lambda);
+            w = computeFNew(cachedA, x, trueY{l}, yhat, w, lambda);
         end
         disp('End of an epoch')
         disp(nnz(w))
     end
 end
-
-function w = computeFNew(x, y, yhat, w, lambda)
+function cachedA = getA(x)
+    global NUM_FEATURE_TAGS;
+    cachedA = zeros(NUM_FEATURE_TAGS, size(x,2));
+    for i = 1:size(x,2)
+        for ja = 1:NUM_FEATURE_TAGS
+            cachedA(ja, i) = A(ja, x, i);
+        end
+    end
+end
+function w = computeFNew(cachedA, x, y, yhat, w, lambda)
     global NUM_FEATURE_TAGS NUM_LABEL_TAGS NUM_LABEL_TAGS_SQUARE CACHED_B;
     for i = 1:size(x,2)
         j = 1;
         for ja = 1:NUM_FEATURE_TAGS
-            a = A(ja, x, i);
+            a = cachedA(ja, i);
+            %a = A(ja, x, i);
             if(a ~= 0)
                 for l2 = 1:NUM_LABEL_TAGS
                     for l3 = 1:NUM_LABEL_TAGS

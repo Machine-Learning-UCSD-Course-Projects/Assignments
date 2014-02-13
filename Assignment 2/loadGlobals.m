@@ -39,4 +39,3 @@ function B = getB(ySize)
         end
     end
 end
-
