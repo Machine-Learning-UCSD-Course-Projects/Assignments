@@ -1,4 +1,6 @@
 function w = sgd(sentences, trueY)
+    CACHED_W=[];
+    checkpoint_count = 0;
     for l = 1:size(sentences, 1)
         if (size(sentences{l}, 2) + 2) ~= size(trueY{l}, 2)
             disp(l)
@@ -8,13 +10,28 @@ function w = sgd(sentences, trueY)
     numFF = numFeatureFunctions();
     w = zeros(numFF,1);
     epochs = 1;
-    lambda = 0.1;
+    lambda = 0.0001;
     %mu = 0.00000001;
     allY = [1, 2, 3, 4, 5, 6, 7, 8];
     M = size(allY, 2);
     global NUM_FEATURE_TAGS NUM_LABEL_TAGS NUM_LABEL_TAGS_SQUARE CACHED_B;
     for i = 1:epochs
         for l = 1:size(sentences, 1)
+            
+            if sum(isnan(w))>0
+                error('Nan in w');
+                disp(l);
+            end
+            
+            if mod(l,3000) == 0
+                checkpoint_count = checkpoint_count + 1;
+                disp('BEGIN CHECKPOINT!');
+                [tag,sentence]=calculate_accuracy(w);
+                disp('END CHECKPOINT!');
+                disp(tag);
+                disp(sentence);
+                CACHED_W(checkpoint_count,:)=w';
+            end
             disp(l);
             x = sentences{l};
             %x(x==-1) = 37;
