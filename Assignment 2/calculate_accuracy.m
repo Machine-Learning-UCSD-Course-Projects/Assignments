@@ -1,6 +1,6 @@
 %Test the Inferred values against the real thing
 %Assume that a weight vector w exists in memory
-SAMPLESIZE = 21035;
+SAMPLESIZE = 100;
 TOTAL_LENGTH = 0;
 TAG_LEVEL_MATCH = 0;
 accuracy = 0;
