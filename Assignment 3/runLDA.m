@@ -7,4 +7,4 @@ K = 3;
 if exist('q') == 0
     [ q, n, z ] = initializeLDA(M, K, V, classic400);
 end
-theta = doGibbsSampling(q, n, M, K, V, classic400, z);
+[theta, n, nsum] = doGibbsSampling(q, n, M, K, V, classic400, z);
