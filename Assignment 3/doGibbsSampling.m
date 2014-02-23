@@ -8,16 +8,16 @@ function [theta, n, nsum] = doGibbsSampling(q, n, M, K, V, classic400, z)
     nsum = zeros(M, 1);
     ITERATIONS = 20;
     
-    for i = 1:V
-        for j = 1:K
-            q(j, i) = q(j, i) + beta(i);
-        end
-    end
-    for m = 1:M
-        for j = 1:K
-            n(m, j) = n(m, j) + alpha(j);
-        end
-    end
+%     for i = 1:V
+%         for j = 1:K
+%             q(j, i) = q(j, i) + beta(i);
+%         end
+%     end
+%     for m = 1:M
+%         for j = 1:K
+%             n(m, j) = n(m, j) + alpha(j);
+%         end
+%     end
 
     doc = cell(M, 1);
     for m = 1:M
@@ -48,10 +48,10 @@ function [theta, n, nsum] = doGibbsSampling(q, n, M, K, V, classic400, z)
                 qsum(topic) = qsum(topic) - 1;
                 nsum(m) = nsum(m) - 1;
                 for j = 1:K
-%                         p(j) = (q(j, doc{m}(i)) + beta(i)) * (n(m, j) + alpha(j)) / ...
-%                             ((qsum(j) + sum(beta)) * (nsum(m) + sum(alpha)));
-                        p(i, j) = (q(j, i)) * n(m, j)/ ...
-                        (qsum(j) * nsum(m));
+                        p(j) = (q(j, doc{m}(i)) + beta(i)) * (n(m, j) + alpha(j)) / ...
+                            ((qsum(j) + sum(beta)) * (nsum(m) + sum(alpha)));
+%                         p(i, j) = (q(j, i)) * n(m, j)/ ...
+%                         (qsum(j) * nsum(m));
                 end
                 topic = randomTopic(p);
                 q(topic, doc{m}(i)) = q(topic, doc{m}(i)) + 1;
@@ -62,14 +62,14 @@ function [theta, n, nsum] = doGibbsSampling(q, n, M, K, V, classic400, z)
             end
         end
     end
-    for m = 1:M
-        for j = 1:K
-            n(m, j) = n(m, j) - alpha(j);
-        end
-    end
-    for m = 1:M
-        nsum(m, 1) = sum(n(m,:));
-    end
+%     for m = 1:M
+%         for j = 1:K
+%             n(m, j) = n(m, j) - alpha(j);
+%         end
+%     end
+%     for m = 1:M
+%         nsum(m, 1) = sum(n(m,:));
+%     end
     theta = getTheta(M, K, n, nsum);
 end
 
