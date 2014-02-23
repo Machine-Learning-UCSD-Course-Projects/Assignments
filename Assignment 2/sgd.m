@@ -1,4 +1,6 @@
 function w = sgd(sentences, trueY)
+    CACHED_W=[];
+    checkpoint_count = 0;
     for l = 1:size(sentences, 1)
         if (size(sentences{l}, 2) + 2) ~= size(trueY{l}, 2)
             disp(l)
@@ -8,22 +10,37 @@ function w = sgd(sentences, trueY)
     numFF = numFeatureFunctions();
     w = zeros(numFF,1);
     epochs = 1;
-    lambda = 0.1;
-    mu = 0.00001;
+    lambda = 0.0001;
+    %mu = 0.00000001;
     allY = [1, 2, 3, 4, 5, 6, 7, 8];
     M = size(allY, 2);
     global NUM_FEATURE_TAGS NUM_LABEL_TAGS NUM_LABEL_TAGS_SQUARE CACHED_B;
-    cachedA = getA(NUM_FEATURE_TAGS);
     for i = 1:epochs
         for l = 1:size(sentences, 1)
+            
+            if sum(isnan(w))>0
+                error('Nan in w');
+                disp(l);
+            end
+            
+            if mod(l,3000) == 0
+                checkpoint_count = checkpoint_count + 1;
+                disp('BEGIN CHECKPOINT!');
+                [tag,sentence]=calculate_accuracy(w);
+                disp('END CHECKPOINT!');
+                disp(tag);
+                disp(sentence);
+                CACHED_W(checkpoint_count,:)=w';
+            end
             disp(l);
             x = sentences{l};
-            x(x==-1) = 37;
+            %x(x==-1) = 37;
             N = size(x, 2);
             g = computeG(x, allY, w);
             alpha = computeAlpha(M, N, g);
             beta = computeBeta(M, N, g);
             Z = computeZ(alpha,M,N);
+            cachedA = getA(NUM_FEATURE_TAGS, x);
 %             for j = 1:numFF
 %                 [ja, jb, prev_tag, current_tag] = featureFunctionVars(j);
 %                 F1 = computeFNew(ja, prev_tag, current_tag, x, trueY{l});
@@ -33,13 +50,13 @@ function w = sgd(sentences, trueY)
 %                 w(j) = w(j) + lambda * (F1 - E);
 %             end
             j = 1;
-            regularizationTerm = mu * dot(w,w');
+            %regularizationTerm = mu * dot(w,w');
             for ja = 1:NUM_FEATURE_TAGS
                 for l2 = 1:NUM_LABEL_TAGS
                     for l3 = 1:NUM_LABEL_TAGS
                         F = computeFNew(cachedA, ja, l2, l3, x, trueY{l});
                         E = computeE(M, N, cachedA, ja, l2, l3, g, x, alpha, beta, Z);
-                        w(j) = w(j) + lambda * (F - E) - regularizationTerm;
+                        w(j) = w(j) + lambda * (F - E);% - regularizationTerm;
                         j = j + 1;
                     end
                 end
@@ -49,15 +66,25 @@ function w = sgd(sentences, trueY)
         disp(nnz(w))
     end
 end
-function a = getA(pos)
-    a = zeros(pos + 1, pos + 1);
-    for i = 1:pos
+% function a = getA(pos, x)
+%     a = zeros(pos, size(x,2));
+%     for i = 1:size(x,2)
+%         for j = 1:pos
+%             a(j,i) = A(j, x, i);
+%         end
+%     end
+%     a(pos + 1, pos + 1) = 0;
+% end
+
+function a = getA(pos, x)
+    a = zeros(pos, size(x,2));
+    for i = 1:size(x,2)
         for j = 1:pos
-            a(i,j) = (i == j);
+            a(j,i) = A(j, x, i);
         end
     end
-    a(pos + 1, pos + 1) = 0;
 end
+
 function sum = computeFNew(cachedA, ja, prev_tag, current_tag, x, trueY)
     sum = 0;
     % Starts from 2 because this contains all the Ys including START and STOP
@@ -65,7 +92,7 @@ function sum = computeFNew(cachedA, ja, prev_tag, current_tag, x, trueY)
     % words of X
     global CACHED_B;
     for i = 1:size(x,2)
-        sum = sum + cachedA(ja, x(i)) * CACHED_B(prev_tag, current_tag, trueY(i), trueY(i + 1));
+        sum = sum + cachedA(ja, i) * CACHED_B(prev_tag, current_tag, trueY(i), trueY(i + 1));
     end
 end
 function sum = computeF(j, x, trueY)

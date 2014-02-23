@@ -6,7 +6,7 @@ sum = 0;
 global CACHED_B;
 for i=1:N
     %a = A(ja, xbar, i);
-    a = cachedA(ja, xbar(i));
+    a = cachedA(ja, i);
     if a ~= 0
         for yiminus1=1:M
             prod = a * alpha(i,yiminus1);
