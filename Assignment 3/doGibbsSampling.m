@@ -3,10 +3,10 @@ function [theta, n, nsum] = doGibbsSampling(q, n, M, K, V, classic400, z)
     alpha = ones(K, 1);
     alpha(:) = 0.1;
     beta = ones(V, 1);
-    beta(:) = 2;
+    beta(:) = 1;
     qsum = zeros(K, 1);
     nsum = zeros(M, 1);
-    ITERATIONS = 10;
+    ITERATIONS = 40;
     
     for i = 1:V
         for j = 1:K
@@ -28,26 +28,24 @@ function [theta, n, nsum] = doGibbsSampling(q, n, M, K, V, classic400, z)
     for it = 1: ITERATIONS
         it
         for m = 1:M
-            for i = 1:V
-                %if classic400(m, i) > 0
-                    topic = z(i);
-                    q(topic, i) = q(topic, i) - 1;
-                    n(m, topic) = n(m, topic) - 1;
-                    qsum(topic) = qsum(topic) - 1;
-                    nsum(m) = nsum(m) - 1;
-                    for j = 1:K
+            for i = 1:size(z{m}, 1)
+                topic = z{m}(i);
+                q(topic, i) = q(topic, i) - 1;
+                n(m, topic) = n(m, topic) - 1;
+                qsum(topic) = qsum(topic) - 1;
+                nsum(m) = nsum(m) - 1;
+                for j = 1:K
 %                         p(i, j) = classic400(m, i) * (q(j, i) + beta(i)) * (n(m, j) + alpha(j)) / ...
 %                             ((qsum(j) + sum(beta)) * (nsum(m) + sum(alpha)));
-                            p(i, j) = q(j, i) * n(m, j)/ ...
-                            (qsum(j) * nsum(m));
-                    end
-                    topic = randomTopic(p(i, :));
-                    q(topic, i) = q(topic, i) + 1;
-                    n(m, topic) = n(m, topic) + 1;
-                    qsum(topic) = qsum(topic) + 1;
-                    nsum(m) = nsum(m) + 1;
-                    z(i) = topic;
-                %end
+                        p(i, j) = q(j, i) * n(m, j)/ ...
+                        (qsum(j) * nsum(m));
+                end
+                topic = randomTopic(p(i, :));
+                q(topic, i) = q(topic, i) + 1;
+                n(m, topic) = n(m, topic) + 1;
+                qsum(topic) = qsum(topic) + 1;
+                nsum(m) = nsum(m) + 1;
+                z{m}(i) = topic;
             end
         end
     end
