@@ -1,0 +1,138 @@
+\documentclass[11pt,a4paper,oneside]{article}
+%\documentclass[a4paper]{scrartcl}
+
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={210mm,297mm},
+ left=20mm,
+ right=20mm,
+ top=20mm,
+ bottom=20mm,
+ }
+ 
+\usepackage{enumitem}
+\usepackage{titling}
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}%
+}
+
+\usepackage{float}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+
+\title{Topic Modelling using Latent Dirichlet Allocation}
+\subtitle{CSE 250B Project 3}
+\author{Suvir Jain, Gaurav Saxena}
+\date{27 February,2014}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Abstract about LDA, our data, brief results.
+\end{abstract}
+
+\section{Introduction}
+
+\section{Framework}
+\label{sec:Framework}
+
+\subsection{Dataset}
+
+\paragraph{Classic 400}
+Describe dataset
+
+\paragraph{Second data set}
+Add more details for the second dataset and how you chose it.
+
+\subsection{Model}
+Basic Theory of LDA
+
+\subsubsection{Inference Algorithm for Linear Chain CRF}
+How do we interpret results - Theta and Phi.
+Mention that theory here.
+
+\subsubsection{Training Methods for LDA}
+
+Theory of Gibbs Sampling and Collapsed Gibbs Sampling
+
+\paragraph*{Gibb's Sampling}
+
+\paragraph*{Collins Perceptron}
+
+\section{Design and Analysis of Algorithms}
+
+\label{sec:Algorithms}
+Mention complexities of algorithms.
+
+\subsection{LDA}
+
+\subsection{Collapsed Gibb's Sampling}
+Cite [Heinrich, 2005]
+
+\section{Design of Experiments}
+
+\subsection{Dataset Preprocessing}
+Cite the link : http://cseweb.ucsd.edu/users/elkan/151/classic400.mat
+
+\subsection{Expt 1}
+
+\subsection{Expt 2}
+
+\subsection{Expt 3}
+Show that the algorithms are actually the complexity that we expect them to be.
+
+\subsection{Implementation}
+Implementation specific notes
+
+\subsection{Code Optimization}
+Describe how inner loop was made fast.
+
+\subsection{Sanity Checks}
+Comparison with true labels. 
+Can make a table here.
+Summation of n should be equal to q vector should be equal to classic400.
+
+\section{Results of Experiments}
+\label{sec:Results}
+
+\subsection{Result 1}
+Describe results of topic modelling in both data sets.
+-Set of words associated with the dominant topics
+-3d graph for both data sets 
+	-- line graph (showing triangle for first one)
+	-- cluster graph
+-Some measure of goodness of fit
+-Give some results related to kappa, alpha and beta
+-Say something about overfitting (if applicable)
+
+Correlate both data sets' result to real-world knowledge of the data.
+
+\paragraph{More details about dataset 1 = classic 400}
+\paragraph{More details about dataset 2 = chosen data set}
+
+\subsection{Accuracy of LDA}
+Include the plot of theta values.
+
+\section{Findings and Lessons Learned}
+
+\subsection{Goodness of Fit}
+ADDRESS THE FOLLOWING
+
+In the report, try to answer the following questions. The questions are related to each other, and do not have definitive answers.
+1. What is a sensible way to define the goodness-of-fit, for the same dataset, of LDA models with different hyperparameters K, ALPHA, and BETA? (Refer to tips in class notes)
+2. Given the definition of goodness-of-fit, is it possible to compute it numerically, either exactly or approximately?
+3. How can we determine whether an LDA model is overfitting its training data?
+For the two datasets with which you do experiments, present and justify good values for K, ALPHA and BETA. You can choose these values informally (you do not need an automated algorithm) but your choices should be sensible and justified.
+
+\bibliographystyle{abbrv}
+\bibliography{Report}
+
+\end{document}
