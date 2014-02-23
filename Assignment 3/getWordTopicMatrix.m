@@ -1,5 +1,5 @@
 function z = getWordTopicMatrix(M, K, V, classic400)
-    z = {};
+    z = cell(M, 1);
     for m = 1:M
         c = 1;
         z{m} = zeros(sum(classic400(m, :)), 1);
