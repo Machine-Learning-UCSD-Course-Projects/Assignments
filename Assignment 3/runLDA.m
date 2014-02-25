@@ -1,9 +1,17 @@
-if (exist('classic400') == 0)
-    load classic400;
-    V = size(classicwordlist, 1);
-    M = size(classic400, 1);
-end
-K = 3;
+% if (exist('classic400') == 0)
+%     load classic400;
+% V = size(classic400, 2);
+% M = size(classic400, 1);
+% end
+clear
+load('hookah10k.mat')
+
+% CAREFUL
+classic400=c;
+
+V = size(c,2);
+M = size(c,1);
+K = 10;
 if exist('q') == 0
     [ q, n, z ] = initializeLDA(M, K, V, classic400);
 end

@@ -6,7 +6,7 @@ function [theta, phi, n, nsum] = doGibbsSampling(q, n, M, K, V, classic400, z)
     beta(:) = 2;
     qsum = zeros(K, 1);
     nsum = zeros(M, 1);
-    ITERATIONS = 1;
+    ITERATIONS = 100;
     
 %     for i = 1:V
 %         for j = 1:K
