@@ -12,6 +12,8 @@
  }
  
 \usepackage{enumitem}
+\usepackage{color}
+\def\red{\textcolor{red}}
 \usepackage{titling}
 \newcommand{\subtitle}[1]{%
   \posttitle{%
@@ -41,19 +43,31 @@ Abstract about LDA, our data, brief results.
 
 \section{Introduction}
 
+The objective of the project is to learn a Latent Dirichlet Allocation (LDA) model to predict dominant topics associated with a collection documents. This process is called topic modelling.
+
+We discuss the LDA framework for topic modelling in section \ref{sec:Framework}. We, then, describe our implementation of algorithm based on the framework in section \ref{sec:Algorithms}. Furthermore, we discuss our experiments and code optimizations in \ref{sec:Experiments} and finally present results in \ref{sec:Results} and lessons learnt in section \ref{Lessons}
+
+We use two data sets classic 400[\red{reference}] and twitter tobacco [\red{reference}] for topic modelling. The first data sets is accompanied with true labels for the topics. We use this data to train the model using Collapsed Gibbs (CGS) Sampling and verify our results.
+
+We use this model to predict the topics for the tobacco data set. We discuss the results and how they relate to real world and our assumptions.
+
 \section{Framework}
 \label{sec:Framework}
 
 \subsection{Dataset}
 
-\paragraph{Classic 400}
-Describe dataset
+\paragraph{Classic400}
+
+This dataset is a part of classic3\cite{banerjee2005clustering} dataset. Classic3 dataset is a collection of 3893 documents, which in turn contains 1400 CRANFIELD documents from aeronautical systems papers, 1033 MEDLINE documents from medical journals and 1460 CISI documents from information retrieval papers. Classic400 is a collection of 400 documents randomly chosen from classic3 dataset by \citep{banerjee2005clustering}. We use the same dataset for our analysis.
+
+This data set contains a total of 6505 words and hence each document is converted to a vector of 6505 integers, each showing the frequency a word in a document. The dataset also contains true labels of the dataset which we use for sanity check of our model. The dataset also contains the vocabulary used in the classic400. We use the vocabulary to find the top words for each topic.
 
 \paragraph{Second data set}
 Add more details for the second dataset and how you chose it.
 
 \subsection{Model}
-Basic Theory of LDA
+\subsubsection{Representation}
+Bag of words represented as vectors containing frequency of words
 
 \subsubsection{Inference Algorithm for Linear Chain CRF}
 How do we interpret results - Theta and Phi.
@@ -65,7 +79,7 @@ Theory of Gibbs Sampling and Collapsed Gibbs Sampling
 
 \paragraph*{Gibb's Sampling}
 
-\paragraph*{Collins Perceptron}
+\paragraph*{Collapsed Gibbs Sampling}
 
 \section{Design and Analysis of Algorithms}
 
@@ -78,6 +92,7 @@ Mention complexities of algorithms.
 Cite [Heinrich, 2005]
 
 \section{Design of Experiments}
+\label{sec:Experiments}
 
 \subsection{Dataset Preprocessing}
 Mention the stopwords used for processing second dataset.
@@ -92,6 +107,10 @@ Show that the algorithms are actually the complexity that we expect them to be.
 
 \subsection{Implementation}
 Implementation specific notes
+
+Z is document specific. Therefore it will have a different length for different document.
+
+Also each word can have a different topic, therefore there will be a different entry for each word in Z. However, this is not true about q and n as they are counts. They will have K * V and K * M sizes
 
 \subsection{Code Optimization}
 Describe how inner loop was made fast.
@@ -123,6 +142,7 @@ Correlate both data sets' result to real-world knowledge of the data.
 Include the plot of theta values.
 
 \section{Findings and Lessons Learned}
+\label{Lessons}
 
 \subsection{Goodness of Fit}
 ADDRESS THE FOLLOWING
