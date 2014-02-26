@@ -114,13 +114,13 @@ function [theta, phi, n, nsum, unchangingZ,dominant_topics] = doGibbsSampling(q,
     end
     
     %Sort the list of tuples in descending order of number of matches
-    topics = sort(topics,'descend');
+    topics = flipdim(sortrows(topics),1);
     
     %Pick the topic number of top 3 topics
     dominant_topics = topics(1:3,2);
     
-    %phi = ones(1,1)
-    phi = getPhi(doc,M,dominant_topics,V,z); 
+    phi = ones(1,1);
+    %phi = getPhi(doc,M,dominant_topics,V,z); 
     theta
     phi
 end
