@@ -58,7 +58,7 @@ We use this model to predict the topics for the tobacco data set. We discuss the
 
 \paragraph{Classic400}
 
-This dataset is a part of classic3\cite{banerjee2005clustering} dataset. Classic3 dataset is a collection of 3893 documents, which in turn contains 1400 CRANFIELD documents from aeronautical systems papers, 1033 MEDLINE documents from medical journals and 1460 CISI documents from information retrieval papers. Classic400 is a collection of 400 documents randomly chosen from classic3 dataset by \citep{banerjee2005clustering}. We use the same dataset for our analysis.
+This dataset is a part of classic3\cite{banerjee2005clustering} dataset. Classic3 dataset is a collection of 3893 documents, which in turn contains 1400 CRANFIELD documents from aeronautical systems papers, 1033 MEDLINE documents from medical journals and 1460 CISI documents from information retrieval papers. Classic400 is a collection of 400 documents randomly chosen from classic3 dataset by \cite{banerjee2005clustering}. We use the same dataset for our analysis.
 
 This data set contains a total of 6505 words and hence each document is converted to a vector of 6505 integers, each showing the frequency a word in a document. The dataset also contains true labels of the dataset which we use for sanity check of our model. The dataset also contains the vocabulary used in the classic400. We use the vocabulary to find the top words for each topic.
 
@@ -67,7 +67,32 @@ Add more details for the second dataset and how you chose it.
 
 \subsection{Model}
 \subsubsection{Representation}
-Bag of words represented as vectors containing frequency of words
+LDA uses a vector of length equal to the vocabulary to represent each document. Each element is represent the frequency of words found in that document. As discussed in class notes, this model is called bag of words. This representation doesn't preserve the word order and consequently loses information. However, as discussed in class notes, this representation may be sufficient to deduce topics from the documents. Therefore, for a document $d$ and a vector $\bar{x}$ then $x_j$ is the number of word $j$ in $d$ and the length of a document n is
+
+\begin{equation}
+	n = \sum^{m}_{j=1}x_j
+\end{equation}
+
+\paragraph{Multinomial Distribution over documents}
+Now, given a set of documents and their representation as vectors, we need a model to represent them. A model is a probability distribution over the set of documents. We calculate the parameters of this model such that the training documents have a higher probability. We can, then, use this model to find the probability of a test document.
+
+LDA uses multinomial distribution. Mathematical expression for a multinomial distribution is given below
+
+\begin{equation}\label{multinomial}
+p(x;\theta) = (\frac{n!}{\prod^m_{j=1}x_j!})(\prod^m_{j=1}\theta^{x_j}_j)
+\end{equation}
+
+where x is is a vector of non-negative integers and parameter $\theta$ are parameters of the model. In this expression, $\theta$ can be argued as a probability of a word $j$ while $x_j$ represents its count.
+
+As discussed in the class notes, the first term in the equation \ref{multinomial}, the first term is the number of sentences which results in the same $x$ vector. The second term is the probability of an equivalence class of $\bar{x}$.
+
+Also, given a set of training documents, the maximum likelihood estimate of the $j_{th}$ parameter is
+
+\begin{equation}
+\theta_j = \frac{1}{T} \sum_x x_j
+\end{equation}
+
+where the sum is over all documents x to the training set and $T = \sum_x{\sum_j{x_j}} $. However, this expression may lead to $0$ probabilities. Therefore, we add a constant to the expression
 
 \subsubsection{Inference Algorithm for Linear Chain CRF}
 How do we interpret results - Theta and Phi.
