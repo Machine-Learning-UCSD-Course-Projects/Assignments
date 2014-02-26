@@ -4,7 +4,7 @@
 % M = size(classic400, 1);
 % end
 clear
-load('hookah10k.mat')
+load('hookah3k.mat')
 
 % CAREFUL
 classic400=c;
