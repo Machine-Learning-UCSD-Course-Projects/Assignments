@@ -1,4 +1,4 @@
-function [theta, phi, n, nsum] = doGibbsSampling(q, n, M, K, V, classic400, z)
+function [theta, phi, n, nsum, unchangingZ,dominant_topics] = doGibbsSampling(q, n, M, K, V, classic400, z)
     p = zeros(K, 1);
     alpha = ones(K, 1);
     alpha(:) = 0.1;
@@ -54,6 +54,8 @@ function [theta, phi, n, nsum] = doGibbsSampling(q, n, M, K, V, classic400, z)
     for col = 1:K
         n(:,col) = n(:,col)+alpha(col);
     end
+    
+    unchangingZ = zeros(ITERATIONS,1);
     for it = 1: ITERATIONS
         it
         for m = 1:M
@@ -77,6 +79,21 @@ function [theta, phi, n, nsum] = doGibbsSampling(q, n, M, K, V, classic400, z)
                 z{m}(i) = topic;
             end
         end
+        
+        if it == 1
+            theta = getTheta(M, K, n, nsum); 
+            oldtheta = theta;
+            [a,newlabels] = max(theta,[],2);
+            [b,oldlabels] = max(oldtheta,[],2);
+            unchangingZ(it,1) = sum(newlabels==oldlabels);
+        else
+            oldtheta = theta;
+            theta = getTheta(M, K, n, nsum); 
+            [a,newlabels] = max(theta,[],2);
+            [b,oldlabels] = max(oldtheta,[],2);
+            unchangingZ(it,1) = sum(newlabels==oldlabels);
+        end
+       
     end
 %     for m = 1:M
 %         for j = 1:K
@@ -87,30 +104,46 @@ function [theta, phi, n, nsum] = doGibbsSampling(q, n, M, K, V, classic400, z)
 %         nsum(m, 1) = sum(n(m,:));
 %     end
     theta = getTheta(M, K, n, nsum);
-    phi = getPhi(doc,M,K,V,z);
+    [a,trueLabelsCalc] = max(theta,[],2);
+    topics = zeros(K,2);
     
+    %Generate a list of tuples = (number of matches,topic number)
+    for topic = 1:K
+        topics(topic,1) = sum(trueLabelsCalc==topic);
+        topics(topic,2) = topic;
+    end
+    
+    %Sort the list of tuples in descending order of number of matches
+    topics = sort(topics,'descend');
+    
+    %Pick the topic number of top 3 topics
+    dominant_topics = topics(1:3,2);
+    
+    %phi = ones(1,1)
+    phi = getPhi(doc,M,dominant_topics,V,z); 
     theta
     phi
 end
 
-function phi = getPhi(doc,M,K,V,z)
-    phi = ones(K,V);
-    for k = 1:K  
-        k
+function phi = getPhi(doc,M,dominant_topics,V,z)
+    phi = ones(numel(dominant_topics),V);
+    for k = 1:numel(dominant_topics) 
+        dominant_topics(k)
         for j=1:V
+            dominant_topics(k)
             j
             num = 0;
             den = 0;
             for m=1:M
                 for i=1:size(doc{m})
-                num = num + (doc{m}(i) == j && z{m}(i) == k);
-                den = den + (z{m}(i) == k);                
+                num = num + (doc{m}(i) == j && z{m}(i) == dominant_topics(k));
+                den = den + (z{m}(i) == dominant_topics(k));                
                 end
             end
             phi(k,j)=num/den;
         end
         %Sort the K rows of phi
-        sort(phi(k,:),'descend');
+        phi = sort(phi(k,:),'descend');
     end
 end
 
