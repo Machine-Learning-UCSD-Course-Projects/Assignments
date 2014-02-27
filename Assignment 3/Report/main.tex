@@ -108,17 +108,43 @@ f(x) = \sum^K_{k=1}f(x;\phi_k)
 
 where $x$ is a document, $\phi_k$ is a parameter value of the $k_{th}$ multinomial and $\alpha_k$ is the proportion of component number k.
 
-\subsubsection{Inference Algorithm for Linear Chain CRF}
+In LDA we use Dirichlet Distribution which acts as a prior for multinomial distribution discussed above. It takes the following form \cite{classNotes}
+
+\begin{equation}
+p(\gamma|\alpha) = \frac{1}{D(\alpha)}\prod^m_{s=1}\gamma^{\alpha_s - 1}_s
+\end{equation}
+
+where ${D(\alpha)} = \int_\gamma \prod^m_{s=1}\gamma^{\alpha_s - 1}_s$
+
+\subsubsection{Inference from LDA}
 How do we interpret results - Theta and Phi.
 Mention that theory here.
 
 \subsubsection{Training Methods for LDA}
 
-Theory of Gibbs Sampling and Collapsed Gibbs Sampling
+We use the words of the documents as our training data. We assume that the number of topics K, $\alpha$ and $\beta$ are fixed. Our aim is to learn $\theta$ values for documents and $\phi$ values topics. We use collapsed Gibbs Sampling for this process.
 
 \paragraph*{Gibb's Sampling}
 
 \paragraph*{Collapsed Gibbs Sampling}
+
+As discussed in the class notes \cite{classNotes}, we use a variant of Gibbs Sampling called collapsed Gibbs Sampling (CGS) for learning the topics from the documents. In this process we do not try to learn $\theta$ and $\phi$ directly, but try to learn the hidden topic label $z$ for each word in each document.
+
+We represent each word by its position in the document vector and its count as the value of the element at the position. However, CGS is based on the occurrence of the words. Therefore, the length of the z is taken as the sum of all the elements of the vector (or the length of the document).
+
+Gibbs Sampling assumes that we know the $z$ value for an occurrence of word $i$. It, then, draws a random value of topic for every word except $i$ according to a distribution. We use the following distribution for Gibb's Sampling
+
+\begin{equation}
+p(z_i|\bar{z}', \bar{w}) = \frac{p(\bar{w} | \bar{z}) p(\bar{z})}{p(w_i|\bar{z}')p(\bar{w}'|\bar{z}')p(\bar{z}')}
+\end{equation}
+
+where $\bar{w}$ is the sequence of words of the vocabulary, $\bar{z}$ is the corresponding sequence of z values, $\bar{w}'$ represents $\bar{w}$ without the word $w_i$ and similarly, $\bar{z}'$ represents $\bar{z}$ without the word $w_i$. This expression can be reduced in terms of the counts of topics as given below
+
+\begin{equation}
+p(z_i = j | \bar{z}', \bar{w}) = \frac{q_{j w_{i}'} + \beta_{w_i}}{\sum_t{q_{jt}' + \beta_t}}\frac{n_{mj'} + \alpha_j}{\sum_k{n_{mk}' + \alpha_k}}
+\end{equation}
+
+where $q_{j w_i}$ is the count of word $w_i$ occurs with topic $j$, $q_{j w_i}'$ is the count of word $w_i$ occurs with topic $j$ except for the word $w_i$, $n_{mk}$ is the count of the number of times topic $z_i = k$ in the document $m$ and $n_{mk}'$ is the count of the number of times topic $z_i = k$ in the document $m$ except for the word $w_i$ 
 
 \section{Design and Analysis of Algorithms}
 
