@@ -17,10 +17,25 @@ C.~Elkan.
 \newblock Lecture notes, cse 250b: Principles of artificial intelligence:
   Learning, 2014.
 
+\bibitem{heinrich}
+G.~Heinrich.
+\newblock Parameter estimation for text analysis.
+\newblock Technical report, Technical report, 2005.
+
 \bibitem{punkt}
 T.~Kiss and J.~Strunk.
 \newblock Unsupervised multilingual sentence boundary detection.
 \newblock {\em Computational Linguistics}, 32(4):485--525, 2006.
+
+\bibitem{JMIR}
+M.~Mysl{\'\i}n, S.-H. Zhu, W.~Chapman, and M.~Conway.
+\newblock Using twitter to examine smoking behavior and perceptions of emerging
+  tobacco products.
+\newblock {\em Journal of medical Internet research}, 15(8), 2013.
+
+\bibitem{nguyen}
+P.~Nguyen.
+\newblock Experiments with latent dirichlet allocation, Mar. 2012.
 
 \bibitem{porter}
 M.~F. Porter.

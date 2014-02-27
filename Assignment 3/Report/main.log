@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  27 FEB 2014 03:30
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  27 FEB 2014 12:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -633,85 +633,364 @@ e
 ABD: EveryShipout initializing macros [1
 
 {/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-
-Overfull \hbox (144.57744pt too wide) in paragraph at lines 176--178
+ [4]
+Overfull \hbox (144.57744pt too wide) in paragraph at lines 218--220
 []\OT1/cmr/m/n/10.95 Mention the stop-words used for pro-cess-ing sec-ond datas
 et. Cite the link : http://cseweb.ucsd.edu/users/elkan/151/classic400.mat 
  []
 
-[4] <classic400_convergence.png, id=32, 667.49374pt x 526.96875pt>
+[5] <classic400_convergence.png, id=36, 667.49374pt x 526.96875pt>
 File: classic400_convergence.png Graphic file (type png)
 
 <use classic400_convergence.png>
-Package pdftex.def Info: classic400_convergence.png used on input line 235.
+Package pdftex.def Info: classic400_convergence.png used on input line 277.
 (pdftex.def)             Requested size: 483.69687pt x 381.87772pt.
- [5]
-<hookah_convergence.png, id=36, 562.1pt x 421.575pt>
+ [6]
+<hookah_convergence.png, id=40, 562.1pt x 421.575pt>
 File: hookah_convergence.png Graphic file (type png)
 
 <use hookah_convergence.png>
-Package pdftex.def Info: hookah_convergence.png used on input line 242.
+Package pdftex.def Info: hookah_convergence.png used on input line 284.
 (pdftex.def)             Requested size: 483.69687pt x 362.77257pt.
- [6 <./classic400_convergence.png>]
-Overfull \hbox (10.82025pt too wide) in paragraph at lines 272--286
+ [7 <./classic400_convergence.png>] [8 <./hookah_convergence.png (PNG copy)>]
+Overfull \hbox (10.82025pt too wide) in paragraph at lines 336--350
 [][] 
  []
 
 
-Overfull \hbox (13.86192pt too wide) in paragraph at lines 291--305
+Overfull \hbox (13.86192pt too wide) in paragraph at lines 355--369
 [][] 
  []
 
 
-Overfull \hbox (2.85107pt too wide) in paragraph at lines 310--324
+Overfull \hbox (2.85107pt too wide) in paragraph at lines 374--388
 [][] 
  []
 
-[7 <./hookah_convergence.png (PNG copy)>] [8]
 <triangle_classic400.png, id=48, 667.49374pt x 577.15625pt>
 File: triangle_classic400.png Graphic file (type png)
 
 <use triangle_classic400.png>
-Package pdftex.def Info: triangle_classic400.png used on input line 418.
+Package pdftex.def Info: triangle_classic400.png used on input line 482.
 (pdftex.def)             Requested size: 483.69687pt x 418.24702pt.
- [9]
-<triangle_hookah.png, id=52, 1284.8pt x 654.445pt>
+ [9] [10]
+<triangle_hookah.png, id=56, 1284.8pt x 654.445pt>
 File: triangle_hookah.png Graphic file (type png)
  <use triangle_hookah.png>
-Package pdftex.def Info: triangle_hookah.png used on input line 425.
+Package pdftex.def Info: triangle_hookah.png used on input line 489.
 (pdftex.def)             Requested size: 483.69687pt x 246.38492pt.
 
-[10 <./triangle_classic400.png>]
-<scatter_classic400.png, id=56, 449.68pt x 337.26pt>
+[11 <./triangle_classic400.png>]
+<scatter_classic400.png, id=60, 449.68pt x 337.26pt>
 File: scatter_classic400.png Graphic file (type png)
 
 <use scatter_classic400.png>
-Package pdftex.def Info: scatter_classic400.png used on input line 432.
+Package pdftex.def Info: scatter_classic400.png used on input line 496.
 (pdftex.def)             Requested size: 483.69687pt x 362.78929pt.
- <scatter_hookah.png, id=57, 562.1pt x 421.575pt>
+ <scatter_hookah.png, id=61, 562.1pt x 421.575pt>
 File: scatter_hookah.png Graphic file (type png)
 
 <use scatter_hookah.png>
-Package pdftex.def Info: scatter_hookah.png used on input line 439.
+Package pdftex.def Info: scatter_hookah.png used on input line 503.
 (pdftex.def)             Requested size: 483.69687pt x 362.77257pt.
- [11 <./triangle_hookah.png (PNG copy)> <./scatter_classic400.png (PNG copy)>] 
-<truelabels.png, id=61, 878.28125pt x 504.88625pt>
+ [12 <./triangle_hookah.png (PNG copy)> <./scatter_classic400.png (PNG copy)>] 
+<truelabels.png, id=65, 878.28125pt x 504.88625pt>
 File: truelabels.png Graphic file (type png)
 
 <use truelabels.png>
-Package pdftex.def Info: truelabels.png used on input line 449.
+Package pdftex.def Info: truelabels.png used on input line 513.
 (pdftex.def)             Requested size: 483.69687pt x 278.06577pt.
- [12 <./scatter_hookah.png (PNG copy)>] (./main.bbl)
-[13 <./truelabels.png>] (./main.aux)
+ [13 <./scatter_hookah.png (PNG copy)>]
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: Citation `perplexity' on page 14 undefined on input line 527.
+
+! Undefined control sequence.
+\macc@adjust ->\dimen@ \macc@kerna 
+                                   \advance \dimen@ \macc@kernb \kern -\dimen@ 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \advance 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \advance 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+! Undefined control sequence.
+\macc@adjust ...erna \advance \dimen@ \macc@kernb 
+                                                  \kern -\dimen@ 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \kern 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \kern 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+! Undefined control sequence.
+\macc@adjust ->\dimen@ \macc@kerna 
+                                   \advance \dimen@ \macc@kernb \kern -\dimen@ 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \advance 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \advance 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+! Undefined control sequence.
+\macc@adjust ...erna \advance \dimen@ \macc@kernb 
+                                                  \kern -\dimen@ 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \kern 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \kern 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+! Undefined control sequence.
+\macc@adjust ->\dimen@ \macc@kerna 
+                                   \advance \dimen@ \macc@kernb \kern -\dimen@ 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \advance 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \advance 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+! Undefined control sequence.
+\macc@adjust ...erna \advance \dimen@ \macc@kernb 
+                                                  \kern -\dimen@ 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \kern 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \kern 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+! Undefined control sequence.
+\macc@adjust ->\dimen@ \macc@kerna 
+                                   \advance \dimen@ \macc@kernb \kern -\dimen@ 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \advance 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \advance 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+! Undefined control sequence.
+\macc@adjust ...erna \advance \dimen@ \macc@kernb 
+                                                  \kern -\dimen@ 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \kern 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \kern 
+l.530 ...M{p(\tilde{\bar{w}_{\tilde{m}} | \alpha)}
+                                                  
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+! You can't use `\eqno' in math mode.
+\endmathdisplay@a ...\df@tag \@empty \else \veqno 
+                                                  \alt@tag \df@tag \fi \ifx ...
+l.531 \end{equation}
+                    
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.531 \end{equation}
+                    
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+(./main.bbl [14 <./truelabels.png>]) [15] (./main.aux)
+
+LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 12470 strings out of 493315
- 229952 string characters out of 6137904
- 313380 words of memory out of 5000000
- 15630 multiletter control sequences out of 15000+600000
+ 12476 strings out of 493315
+ 230003 string characters out of 6137904
+ 314407 words of memory out of 5000000
+ 15636 multiletter control sequences out of 15000+600000
  10664 words of font info for 38 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  63i,8n,57p,604b,287s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -731,10 +1010,10 @@ ive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
 ve/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive
 /2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2
 013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on main.pdf (13 pages, 496272 bytes).
+Output written on main.pdf (15 pages, 511212 bytes).
 PDF statistics:
- 121 PDF objects out of 1000 (max. 8388607)
- 82 compressed objects within 1 object stream
+ 127 PDF objects out of 1000 (max. 8388607)
+ 86 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  48 words of extra memory for PDF output out of 10000 (max. 10000000)
 
