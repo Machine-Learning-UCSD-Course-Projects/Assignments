@@ -47,9 +47,11 @@ The objective of the project is to learn a Latent Dirichlet Allocation (LDA) mod
 
 We discuss the LDA framework for topic modelling in section \ref{sec:Framework}. We, then, describe our implementation of algorithm based on the framework in section \ref{sec:Algorithms}. Furthermore, we discuss our experiments and code optimizations in \ref{sec:Experiments} and finally present results in \ref{sec:Results} and lessons learnt in section \ref{Lessons}
 
-We use two data sets classic 400[\red{reference}] and twitter tobacco [\red{reference}] for topic modelling. The first data sets is accompanied with true labels for the topics. We use this data to train the model using Collapsed Gibbs (CGS) Sampling and verify our results.
+We use two data sets classic 400[\red{reference}] and hookah data set [\red{reference}] for topic modelling. We use Latent Dirichlet Allocation to discover latent topics in these data set. The latent variables are discovered using Collapsed Gibbs (CGS) Sampling.
 
-We use this model to predict the topics for the tobacco data set. We discuss the results and how they relate to real world and our assumptions.
+We found 3 main themes in the classic400 data set. They are about biology, aeronautical science and a collection of research related words. 
+
+In the hookah data set, we discovered that hookah related tweets have a social aspect to them. People commonly used words like 'party','bar','lol','tonight'  in their tweets.
 
 \section{Framework}
 \label{sec:Framework}
@@ -66,6 +68,13 @@ This data set contains a total of 6505 words and hence each document is converte
 This data set consists of a set of tweets about Hookah usage. These tweets are drawn from a larger collection of tweets. The main set of tweets was collected between November 2011 and August 2013 using the Twitter Application Programming Interface (API). These tweets represented 1\% of all tweets on Twitter during this time interval. On average, this data set consisted of 1.3 million tweets per day. Hookah-related tweets were extracted from this set using the keywords: hookah,hooka,waterpipe,shisha,sheesha and water pipe.The hookah data set consisted of 95,738 tweets. 
 
 To allow for experiments to be done in a short amount of time, we could not use all 95,738 tweets. Hence, we extracted 3000 random tweets from this data set and used that for this project. This data set has a vocabulary size of 8021 words.
+
+\paragraph{What did we expect to find?}
+\subparagraph{Classic400 data set}
+Our aim in processing this data set was to discover the dominant topics. Before running LDA, we did not have any idea about the themes and topics that characterize this data set. 
+
+\subparagraph{Hookah data set}
+This data set consists of tweets about hookah usage. We were interested in finding out the context in which people use hookah. Is it something people associate with negative emotions? Is it something that people use socially? Do people perceive hookah positively? Results are presented in section 5.2.2.
 
 \subsection{Model}
 \paragraph{Representation}
@@ -286,9 +295,31 @@ The \ref{fig:classic400_convergence} shows this convergence for classic400 data 
 \end{figure}
 
 \subsection{Topic Models discovered}
+\subsubsection{Classic400 data set}
 The tables \ref{table:k=3_classic400},\ref{table:k=10_classic400},\ref{table:k=50_classic400},\ref{table:k=100_classic400} shows the topic models discovered by LDA for the classic 400 data set with K = 3, 10, 50 and 100, respectively. 
 
+We found 3 dominant topics in the classic400 data set. 
+\begin{enumerate}
+\item The first topic has words related to aviation and aeronautical engineering. For example - mach, supersonic, wings, and velocity.
+\item The second topic has words like scientific, research, language, and methods. These keywords seem to be related to scientific research and pulications.
+\item The third topic has medical terms like ventricular, left, aortic, and septal. All these terms are commonly used in medical science.
+\end{enumerate}
+
+\subsubsection{Hookah data set}
 The tables \ref{table:k=3_hookah},\ref{table:k=10_hookah},\ref{table:k=50_hookah},\ref{table:k=100_hookah} shows the topic models discovered by LDA for the Hookah data set with K = 3, 10, 50 and 100, respectively. 
+
+We found that the hookah tweets were dominated by a words like smoke, bar, 'lol', 'like','tonight'.
+
+This was in line with our hypotheses that Hookah is normally associated with positive emotions and is used in a social context. 
+
+Some interesting points to note about the discovered keywords in this data set :
+\begin{enumerate}
+\item 'http' is a word in the dominant topic. This is used in tweets when people 're-tweet' or RT. RTs typically have a short URL.
+\item Words like 'combinado', 'fumando', 'una' are seen in the keyword list. These are spanish words. The data set has a mixture of english and non-english tweets.
+
+These results reinforce the findings of prior work by Myslin et al \cite{JMIR}. Their work had indicated that some tobacco products are perceived positively. These products provide opportunities for tobacco control education.
+
+\end{enumerate}
 
 \begin{table}
 \begin{tabular}{|c|c|c|c|}
@@ -496,7 +527,19 @@ For the classic400 data set, we have access to the set of true labels based on r
 \label{Lessons}
 
 \subsection{Goodness of Fit}
-ADDRESS THE FOLLOWING
+We did a brief survey of literature about goodness of fit of LDA models. It appears that defining goodness of fit for LDA is a non-trivial and rather tricky task \cite{heinrich},\cite{nguyen}.
+
+\subsubsection{Defining goodness of fit}
+As per \cite{nguyen}, if the topics $\phi_{1}$ to $\phi_{k}$ are given, the goodness-of-fit can be modeled as $p(\bar{w}| \Phi,\alpha )$. If the topics $\phi_{1}$ to $\phi_{k}$ are not available, the author suggests the goodness-of-fit can be modeled as $p(\bar{w}| \alpha,\beta )$, where $\alpha$ and $\beta$ are the hyperparameters of the LDA.
+
+As per the Elkan \cite{perplexity}, perplexity can be used as a measure of goodness of fit. Perplexity is the reciprocal geometric mean of the likelihood of a test corpus :
+
+\begin{equation}
+P( \tilde{W} | Q) = \prod_{i=1}^M{p(\tilde{\bar{w}_{i}_{\tilde{m}} | \alpha)}
+\end{equation}
+
+%\product_{i=1}^M{T}
+%_{\tilde{m}}
 
 In the report, try to answer the following questions. The questions are related to each other, and do not have definitive answers.
 1. What is a sensible way to define the goodness-of-fit, for the same dataset, of LDA models with different hyperparameters K, ALPHA, and BETA? (Refer to tips in class notes)
