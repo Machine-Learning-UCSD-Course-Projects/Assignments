@@ -173,7 +173,7 @@ We also initialized the number of topics $K$, pseudocounts $\alpha$ and $\beta$ 
 \paragraph{Chosing $K$, $\alpha$, $\beta$}
 Choice of $K$, $\alpha$, $\beta$ is critical a directly affects the quality of topics and the words association. High $\beta$ values tend to decrease the number of topics as it reduces the impact of sparsity \cite{griffiths2004finding}. This is a important for our case, in particular, as we are dealing with small number of themes in both classic400 datasets and hookah. Therefore, as advised by \cite{griffiths2004finding} we use $\beta = 0.1$. 
 
-Similarly, $\alpha$ is used to for smoothing the $\theta$ distribution. It adds contribution from each topic to each document. Therefore, high values for $\alpha$ can reduce the separation between different topics and can lead to smudging of boundaries between them. We choose $\alpha = 50/K$ as suggested in the class and in \cite{griffiths2004finding}.
+Similarly, $\alpha$ is used to for smoothing the $\theta$ distribution. It adds contribution from each topic to each document. Therefore, high values for $\alpha$ can reduce the separation between different topics and can lead to smudging of boundaries between them. We chose $\alpha = 50/K$ as suggested in the class and in \cite{griffiths2004finding}.
 
 Although, we assume both $\alpha$ and $\beta$ to be constant but they can be found using EM algorithm. However, this increases the run time of the algorithm and therefore we have not implemented it.
 
@@ -305,22 +305,6 @@ We found 3 dominant topics in the classic400 data set.
 \item The third topic has medical terms like ventricular, left, aortic, and septal. All these terms are commonly used in medical science.
 \end{enumerate}
 
-\subsubsection{Hookah data set}
-The tables \ref{table:k=3_hookah},\ref{table:k=10_hookah},\ref{table:k=50_hookah},\ref{table:k=100_hookah} shows the topic models discovered by LDA for the Hookah data set with K = 3, 10, 50 and 100, respectively. 
-
-We found that the hookah tweets were dominated by a words like smoke, bar, 'lol', 'like','tonight'.
-
-This was in line with our hypotheses that Hookah is normally associated with positive emotions and is used in a social context. 
-
-Some interesting points to note about the discovered keywords in this data set :
-\begin{enumerate}
-\item 'http' is a word in the dominant topic. This is used in tweets when people 're-tweet' or RT. RTs typically have a short URL.
-\item Words like 'combinado', 'fumando', 'una' are seen in the keyword list. These are spanish words. The data set has a mixture of english and non-english tweets.
-
-These results reinforce the findings of prior work by Myslin et al \cite{JMIR}. Their work had indicated that some tobacco products are perceived positively. These products provide opportunities for tobacco control education.
-
-\end{enumerate}
-
 \begin{table}
 \begin{tabular}{|c|c|c|c|}
 \hline 
@@ -396,6 +380,22 @@ Topics & Words & Document Coverage(\%) & Word Coverage(\%) \\
 \caption{Topics Discovered in classic400 data set for K=100}
 \label{table:k=100_classic400}
 \end{table}
+
+\subsubsection{Hookah data set}
+The tables \ref{table:k=3_hookah},\ref{table:k=10_hookah},\ref{table:k=50_hookah},\ref{table:k=100_hookah} shows the topic models discovered by LDA for the Hookah data set with K = 3, 10, 50 and 100, respectively. 
+
+We found that the hookah tweets were dominated by a words like smoke, bar, 'lol', 'like','tonight'.
+
+This was in line with our hypotheses that Hookah is normally associated with positive emotions and is used in a social context. 
+
+Some interesting points to note about the discovered keywords in this data set :
+\begin{enumerate}
+\item 'http' is a word in the dominant topic. This is used in tweets when people 're-tweet' or RT. RTs typically have a short URL.
+\item Words like 'combinado', 'fumando', 'una' are seen in the keyword list. These are spanish words. The data set has a mixture of english and non-english tweets.
+
+These results reinforce the findings of prior work by Myslin et al \cite{JMIR}. Their work had indicated that some tobacco products are perceived positively. These products provide opportunities for tobacco control education.
+
+\end{enumerate}
 
 \begin{table}
 \begin{tabular}{|c|c|c|c|}
@@ -526,11 +526,10 @@ For the classic400 data set, we have access to the set of true labels based on r
 \section{Lessons Learned}
 \label{Lessons}
 \begin{itemize}
-\item Bottlenecks
-\item Tracking Z
-\item Evaluating quality of topic model
-\item dependence of coherence of topic on K
-\item Noise words
+\item The main bottleneck in running the code was its slow speed of Collapsed Gibbs Sampling. We started with a running time of more then 2 hours for 100 iterations on Haskel i5, 4GB machine. After the optimizations done in \ref{Lessons} we could complete 100 iterations in about 30 minutes.
+\item We found that calculation of LCL is computationally expensive. Therefore, as a measure of convergence we tracked change in the distribution during the iterations of CGS. We found that when the number of z values stop changing, there was a good separation in the topics.
+\item Evaluating quality of a topic model is a subjective thing. \cite{chang}
+\item We also found that having less number of topics than the actual gives incoherent word-topic matches. However, as the number of topics increase this incoherence decreases. Even when the number of topics is more than true topics, the dominant topics still emerge and we found that with increasing $K$ the word-topic associations still stay the same.
 \end{itemize}
 
 \subsection{Goodness of Fit}
@@ -547,7 +546,7 @@ P( \tilde{W} | Q) = \prod_{i=1}^M{p(\tilde{\bar{w}}_{\tilde{m}} | \alpha)}
 
 %\product_{i=1}^M{T}
 %_{\tilde{m}}
-
+\red{delete}
 In the report, try to answer the following questions. The questions are related to each other, and do not have definitive answers.
 1. What is a sensible way to define the goodness-of-fit, for the same dataset, of LDA models with different hyperparameters K, ALPHA, and BETA? (Refer to tips in class notes)
 2. Given the definition of goodness-of-fit, is it possible to compute it numerically, either exactly or approximately?
