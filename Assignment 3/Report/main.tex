@@ -164,7 +164,7 @@ We also initialized the number of topics $K$, pseudocounts $\alpha$ and $\beta$ 
 \paragraph{Chosing $K$, $\alpha$, $\beta$}
 Choice of $K$, $\alpha$, $\beta$ is critical a directly affects the quality of topics and the words association. High $\beta$ values tend to decrease the number of topics as it reduces the impact of sparsity \cite{griffiths2004finding}. This is a important for our case, in particular, as we are dealing with small number of themes in both classic400 datasets and hookah. Therefore, as advised by \cite{griffiths2004finding} we use $\beta = 0.1$. 
 
-Similarly, $\aplha$ is used to for smoothing the $\theta$ distribution. It adds contribution from each topic to each document. Therefore, high values for $\aplha$ can reduce the separation between different topics and can lead to smudging of boundaries between them. We choose $\alpha = 50/K$ as suggested in the class and in \cite{griffiths2004finding}.
+Similarly, $\alpha$ is used to for smoothing the $\theta$ distribution. It adds contribution from each topic to each document. Therefore, high values for $\alpha$ can reduce the separation between different topics and can lead to smudging of boundaries between them. We choose $\alpha = 50/K$ as suggested in the class and in \cite{griffiths2004finding}.
 
 Although, we assume both $\alpha$ and $\beta$ to be constant but they can be found using EM algorithm. However, this increases the run time of the algorithm and therefore we have not implemented it.
 
@@ -314,13 +314,13 @@ Topic & Words & Document Coverage (\%) & Word Coverage(\%) \\
 \hline 
 Topics & Words & Document Coverage(\%) & Word Coverage(\%) \\ 
 \hline 
-Topic 1 & boundary,layer,wing,mach,supersonic,ratio & 0.4975 & 56.15 \\ 
+ 1 & boundary,layer,wing,mach,supersonic,ratio & 0.4975 & 56.15 \\ 
 & wings,velocity,effects,shock & & \\
 \hline 
-Topic 2 & system,scientific,retrieval,research,language & 0.2475 & 23.38 \\
+ 2 & system,scientific,retrieval,research,language & 0.2475 & 23.38 \\
 & science,journals,systems,methods,subject & & \\ 
 \hline 
-Topic 3 & patients,ventricular,left,aortic,septal,cases, & 0.1025 & 20.47 \\ 
+ 3 & patients,ventricular,left,aortic,septal,cases, & 0.1025 & 20.47 \\ 
 & defect,regurgitation,ventricle,pulmonary & & \\
 \hline 
 \end{tabular}
@@ -333,13 +333,13 @@ Topic 3 & patients,ventricular,left,aortic,septal,cases, & 0.1025 & 20.47 \\
 \hline 
 Topics & Words & Document Coverage(\%) & Word Coverage(\%) \\ 
 \hline 
-Topic 1 & boundary,layer,wing,mach,supersonic, & 50.00 & 58.97 \\ 
+ 1 & boundary,layer,wing,mach,supersonic, & 50.00 & 58.97 \\ 
 & ratio,wings,effects,velocity,shock & & \\
 \hline 
-Topic 2 & system,scientific,retrieval,research,language, & 23.75 & 19.47 \\ 
+ 2 & system,scientific,retrieval,research,language, & 23.75 & 19.47 \\ 
 & science,systems,journals,subject,requests & & \\
 \hline 
-Topic 3 & patients,ventricular,left,cases,aortic,septal, & 12.75 & 21.56 \\ 
+3 & patients,ventricular,left,cases,aortic,septal, & 12.75 & 21.56 \\ 
 & defect,regurgitation,ventricle,pulmonary & & \\
 \hline 
 \end{tabular}
@@ -492,17 +492,15 @@ For the classic400 data set, we have access to the set of true labels based on r
 \label{fig:truelabels}
 \end{figure}
 
-\section{Findings and Lessons Learned}
+\section{Lessons Learned}
 \label{Lessons}
-
-\subsection{Goodness of Fit}
-ADDRESS THE FOLLOWING
-
-In the report, try to answer the following questions. The questions are related to each other, and do not have definitive answers.
-1. What is a sensible way to define the goodness-of-fit, for the same dataset, of LDA models with different hyperparameters K, ALPHA, and BETA? (Refer to tips in class notes)
-2. Given the definition of goodness-of-fit, is it possible to compute it numerically, either exactly or approximately?
-3. How can we determine whether an LDA model is overfitting its training data?
-For the two datasets with which you do experiments, present and justify good values for K, ALPHA and BETA. You can choose these values informally (you do not need an automated algorithm) but your choices should be sensible and justified.
+\begin{itemize}
+\item Bottlenecks
+\item Tracking Z
+\item Evaluating quality of topic model
+\item dependence of coherence of topic on K
+\item Noise words
+\end{itemize}
 
 \bibliographystyle{abbrv}
 \bibliography{Report}
