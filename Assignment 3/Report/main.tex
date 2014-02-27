@@ -223,23 +223,233 @@ We used the following checks during the development of the code to ensure that o
 \section{Results of Experiments}
 \label{sec:Results}
 
-\subsection{Result 1}
-Describe results of topic modelling in both data sets.
--Set of words associated with the dominant topics
--3d graph for both data sets 
-	-- line graph (showing triangle for first one)
-	-- cluster graph
--Some measure of goodness of fit
--Give some results related to kappa, alpha and beta
--Say something about overfitting (if applicable)
+\subsection{Convergence of LDA}
+In order to measure the convergence of LDA, we tracked the word-topic associations recorded by vector z. After each iteration, we measured the number of z values which had stayed the same. 
 
-Correlate both data sets' result to real-world knowledge of the data.
+This measure($\Delta z$) stabilized after some iterations. This experiment was repeated for number of topics K = 3,10,50,100. 
 
-\paragraph{More details about dataset 1 = classic 400}
-\paragraph{More details about dataset 2 = chosen data set}
+The \ref{fig:classic400_convergence} shows this convergence for classic400 data set. The \ref{fig:hookah_convergence} shows this convergence for hookah data set.
 
-\subsection{Accuracy of LDA}
-Include the plot of theta values.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{classic400_convergence}
+\caption{Tracking the convergence of LDA over 100 iterations for classic400 data set.}
+\label{fig:classic400_convergence}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{hookah_convergence}
+\caption{Tracking the convergence of LDA over 100 iterations for Hookah data set.}
+\label{fig:hookah_convergence}
+\end{figure}
+
+\subsection{Topic Models discovered}
+The tables \ref{table:k=3_classic400},\ref{table:k=10_classic400},\ref{table:k=50_classic400},\ref{table:k=100_classic400} shows the topic models discovered by LDA for the classic 400 data set with K = 3, 10, 50 and 100, respectively. 
+
+The tables \ref{table:k=3_hookah},\ref{table:k=10_hookah},\ref{table:k=50_hookah},\ref{table:k=100_hookah} shows the topic models discovered by LDA for the Hookah data set with K = 3, 10, 50 and 100, respectively. 
+
+\begin{table}
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Topic & Words & Document Coverage (\%) & Word Coverage(\%) \\ 
+\hline 
+1 & boundary,layer,wing,mach,supersonic, & 50.25 & 38.07 \\ 
+  & ratio,wings,velocity,effects,shock & & \\
+\hline 
+2 & patients,ventricular,left,retrieval,cases, & 15.75 & 38.53 \\ 
+  & system,language,aortic,septal,research & & \\
+\hline 
+3 & fatty,acids,glucose,journals,acid & 34 & 23.40 \\ 
+ & ffa,free,blood,nickel,infants & & \\
+\hline
+\end{tabular}
+\caption{Topics Discovered in classic400 data set for K=3}
+\label{table:k=3_classic400}
+\end{table}
+
+\begin{table}
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Topics & Words & Document Coverage(\%) & Word Coverage(\%) \\ 
+\hline 
+Topic 1 & boundary,layer,wing,mach,supersonic,ratio & 0.4975 & 56.15 \\ 
+& wings,velocity,effects,shock & & \\
+\hline 
+Topic 2 & system,scientific,retrieval,research,language & 0.2475 & 23.38 \\
+& science,journals,systems,methods,subject & & \\ 
+\hline 
+Topic 3 & patients,ventricular,left,aortic,septal,cases, & 0.1025 & 20.47 \\ 
+& defect,regurgitation,ventricle,pulmonary & & \\
+\hline 
+\end{tabular}
+\caption{Topics Discovered in classic400 data set for K=10}
+\label{table:k=10_classic400}
+\end{table}
+
+\begin{table}
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Topics & Words & Document Coverage(\%) & Word Coverage(\%) \\ 
+\hline 
+Topic 1 & boundary,layer,wing,mach,supersonic, & 50.00 & 58.97 \\ 
+& ratio,wings,effects,velocity,shock & & \\
+\hline 
+Topic 2 & system,scientific,retrieval,research,language, & 23.75 & 19.47 \\ 
+& science,systems,journals,subject,requests & & \\
+\hline 
+Topic 3 & patients,ventricular,left,cases,aortic,septal, & 12.75 & 21.56 \\ 
+& defect,regurgitation,ventricle,pulmonary & & \\
+\hline 
+\end{tabular}
+\caption{Topics Discovered in classic400 data set for K=50}
+\label{table:k=50_classic400}
+\end{table}
+
+\begin{table}
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Topics & Words & Document Coverage(\%) & Word Coverage(\%) \\ 
+\hline 
+1 & boundary,layer,wing,mach,supersonic,ratio & 56.75 & 68.51 \\ 
+& wings,effects,velocity,shock & & \\
+\hline 
+2 & patients,ventricular,left,cases,aortic,septal, & 14.00 & 20.27 \\ 
+& visual,defect,regurgitation,ventricle & & \\
+\hline 
+3 & retrieval,language,system,subject,systems, & 10.50 & 11.22 \\ 
+& library,requests,descriptor,basic,search & & \\
+\hline 
+\end{tabular}
+\caption{Topics Discovered in classic400 data set for K=100}
+\label{table:k=100_classic400}
+\end{table}
+
+\begin{table}
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Topic & Words & Document Coverage(\%) & Word Coverage(\%) \\ 
+\hline 
+1 & hookah,http,shisha,smoke,bar, & 79.23 & 56.89 \\ 
+& hooka,lol,like,night,tonight & & \\
+\hline 
+2 & shisha,party,que,hookah,con, & 11.77 & 24.21 \\ 
+& http,una,die,fumando,fumar & & \\
+\hline 
+3 & shisha,haha,aku,rokok,tak, & 9.00 & 18.90 \\ 
+& nak,hisap,sheesha,hahaha,yang & & \\
+\hline 
+\end{tabular}
+\caption{Topics Discovered in Hookah data set for K=3}
+\label{table:k=3_hookah}
+\end{table}
+
+\begin{table}
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Topics & Words & Document Coverage(\%) & Word Coverage(\%) \\ 
+\hline 
+1 & hookah,http,shisha,smoke,bar, & 76.57 & 71.41 \\ 
+& hooka,lol,like,night,tonight & & \\
+\hline 
+2 & shisha,haha,aku,tak,rokok, & 10.67 & 0.1905 \\ 
+& hahaha,die,nak,hisap,dia & & \\
+\hline 
+3 & party,que,con,una,vamoc, & 3.90 & 0.954 \\ 
+& party,por,fumando,esta,sheesha & & \\
+\hline 
+\end{tabular}
+\caption{Topics Discovered in Hookah data set for K=10}
+\label{table:k=10_hookah}
+\end{table}
+
+\begin{table}
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Topics & Words & Document Coverage(\%) & Word Coverage(\%) \\ 
+\hline 
+1 & hookah,shisha,http,smoke,bar, & 70.60 & 94.22 \\ 
+& hooka,lol,like,night,tonight & & \\
+\hline 
+2 & party,hooka,thank,para,que, & 1.07 & 3.07 \\ 
+& pra,combinado,right,power,move & & \\
+\hline 
+3 & club,hai,grandma,haram,hahaha, & 0.87 & 2.72 \\ 
+& go,homi,super,till,good & & \\
+\hline 
+\end{tabular}
+\caption{Topics Discovered in Hookah data set for K=50}
+\label{table:k=50_hookah}
+\end{table}
+
+\begin{table}
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Topic & Words & Document Coverage(\%) & Word Coverage(\%) \\ 
+\hline 
+1 & hookah,shisha,http,smoke,bar, & 61.10 & 97.24 \\ 
+& hooka,lol,like,night,loung & & \\
+\hline 
+2 & shisha,hookah,boy,ligero,rene,fri, & 0.73 & 1.45 \\ 
+& offer,time,party,catchaflight & & \\
+\hline 
+3 & hookah,heart,http,talk,hooka,wine, & 0.7 & 1.31 \\ 
+& satelit,dgib,shower,mypoorlung & & \\
+\hline 
+\end{tabular}
+\caption{Topics Discovered in Hookah data set for K=100}
+\label{table:k=100_hookah}
+\end{table}
+
+
+\subsection{Plot of $\theta$ vector}
+We evaluated the theta vector as described in section 2.2.
+
+This was done for both the data sets and visualized in plots. These plots help visualize the documents clustered by their most likely topics. 
+
+It is interesting to see that most documents align themselves in 3 clusters. The topics which dominate have dense clusters and other topics have a sparse cluster.
+
+Fig. \ref{fig:triangle_classic400} and Fig. \ref{fig:triangle_hookah} are plots of the $\theta$ vector for the classic400 and hookah data set, respectively. They helps in visualizing the hyperplane between topics. 
+
+Fig. \ref{fig:scatter_classic400} and Fig. \ref{fig:scatter_hookah} are plots of the $\theta$ vector but in scatter plot form. These plots helps to visualize the documents clustered by topics.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{triangle_classic400}
+\caption{classic400 : Plot of $\theta$ vector helps in visualizing the documents clustered by topics}
+\label{fig:triangle_classic400}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{triangle_hookah}
+\caption{Hookah data set : Plot of $\theta$ vector helps in visualizing the documents clustered by topics}
+\label{fig:triangle_hookah}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{scatter_classic400}
+\caption{Classic400 : Visualizing documents clustered by topics}
+\label{fig:scatter_classic400}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{scatter_hookah}
+\caption{Hookah Data Set : Visualizing documents clustered by topics.}
+\label{fig:scatter_hookah}
+\end{figure}
+
+\subsection{Comparison with true labels in classic400 data set}
+For the classic400 data set, we have access to the set of true labels based on real-world knowledge. Fig. \ref{fig:truelabels} plots the number of documents labelled by each topic. This plot is superimposed over the number of documents labelled by the true labels. We see that discovered topics closely track the true labels.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{truelabels}
+\caption{Classic400 : Topics discovered by LDA vs True Labels}
+\label{fig:truelabels}
+\end{figure}
 
 \section{Findings and Lessons Learned}
 \label{Lessons}
