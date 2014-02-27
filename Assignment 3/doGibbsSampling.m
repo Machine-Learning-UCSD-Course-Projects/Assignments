@@ -30,18 +30,21 @@ function [theta, phi, n, nsum, unchangingZ,dominant_topics] = doGibbsSampling(q,
             end
         end
     end
+    disp('Finished calculuating doc{m}(c)')
     
     for j = 1:K
     %Optimization 3
     %((qsum(j) + sum(beta))
         qsum(j) = sum(q(j, :))+sum(beta);
     end
+    disp('Finished calculating qsum')
     
     for m = 1:M
     %Optimization 4
     %(nsum(m) + sum(alpha))
         nsum(m) = sum(n(m,:))+sum(alpha);
     end
+    disp('Finished calculating nsum')
     
     %Optimization 1
     %(q(j, doc{m}(i)) + beta(i))
@@ -55,6 +58,7 @@ function [theta, phi, n, nsum, unchangingZ,dominant_topics] = doGibbsSampling(q,
         n(:,col) = n(:,col)+alpha(col);
     end
     
+    disp('Starting Iterations')
     unchangingZ = zeros(ITERATIONS,1);
     for it = 1: ITERATIONS
         it
@@ -119,8 +123,8 @@ function [theta, phi, n, nsum, unchangingZ,dominant_topics] = doGibbsSampling(q,
     %Pick the topic number of top 3 topics
     dominant_topics = topics(1:3,2);
     
-    phi = ones(1,1);
-    %phi = getPhi(doc,M,dominant_topics,V,z); 
+    %phi = ones(1,1);
+    phi = getPhi(doc,M,dominant_topics,V,z); 
     theta
     phi
 end
@@ -130,8 +134,8 @@ function phi = getPhi(doc,M,dominant_topics,V,z)
     for k = 1:numel(dominant_topics) 
         dominant_topics(k)
         for j=1:V
-            dominant_topics(k)
-            j
+            %dominant_topics(k)
+            %j
             num = 0;
             den = 0;
             for m=1:M
@@ -140,10 +144,11 @@ function phi = getPhi(doc,M,dominant_topics,V,z)
                 den = den + (z{m}(i) == dominant_topics(k));                
                 end
             end
+            disp([k,j,num/den])
             phi(k,j)=num/den;
         end
         %Sort the K rows of phi
-        phi = sort(phi(k,:),'descend');
+        %phi = sort(phi(k,:),'descend');
     end
 end
 

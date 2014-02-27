@@ -11,7 +11,7 @@ classic400=c;
 
 V = size(c,2);
 M = size(c,1);
-K = 3;
+K = 100;
 if exist('q') == 0
     [ q, n, z ] = initializeLDA(M, K, V, classic400);
 end
@@ -22,4 +22,5 @@ sum(trueLabelsCalc==1)
 sum(trueLabelsCalc==2)
 sum(trueLabelsCalc==3)
 
-save('k=3.mat')
+%NOTE : Value at index i in Phi corresponds to topic at index i in dominant_topics
+save('k=100.mat')
