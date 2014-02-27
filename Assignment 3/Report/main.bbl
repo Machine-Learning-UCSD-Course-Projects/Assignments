@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{banerjee2005clustering}
 A.~Banerjee, I.~S. Dhillon, J.~Ghosh, S.~Sra, and G.~Ridgeway.
@@ -12,10 +12,25 @@ S.~Bird.
 \newblock In {\em Proceedings of the COLING/ACL on Interactive presentation
   sessions}, pages 69--72. Association for Computational Linguistics, 2006.
 
+\bibitem{chang}
+J.~Chang, J.~Boyd-Graber, C.~Wang, S.~Gerrish, and D.~M. Blei.
+\newblock Reading tea leaves: How humans interpret topic models.
+\newblock In {\em Neural Information Processing Systems}, 2009.
+
+\bibitem{perplexity}
+C.~Elkan.
+\newblock Word burstiness, topic models, and perplexity, June 2009.
+
 \bibitem{classNotes}
 C.~Elkan.
 \newblock Lecture notes, cse 250b: Principles of artificial intelligence:
   Learning, 2014.
+
+\bibitem{griffiths2004finding}
+T.~L. Griffiths and M.~Steyvers.
+\newblock Finding scientific topics.
+\newblock {\em Proceedings of the National academy of Sciences of the United
+  States of America}, 101(Suppl 1):5228--5235, 2004.
 
 \bibitem{heinrich}
 G.~Heinrich.
