@@ -38,7 +38,7 @@
 \maketitle
 
 \begin{abstract}
-Abstract about LDA, our data, brief results.
+In this project we try to find topics associated with a corpus of documents using Latent Dirichlet Allocaion(LDA). We use two data sets 1)Classic400, which was given as a part of the project and 2) Hookah dataset, which is a collection of tweets on Hookah. In the first dataset we find 3 dominant topics associated with classic400 namely Aeronautics, Biology and scientific research. In the seond dataset our objective was to find the sentiment people associate with Hookas. We found positive feelings like party, friends etc. associated with Hookah. We were able to fit the labels of classic400 to about 93%.
 \end{abstract}
 
 \section{Introduction}
@@ -163,17 +163,15 @@ Similarly, words with highest $\phi$ values for a topic are expected to be assoc
 \section{Design and Analysis of Algorithms}
 \label{sec:Algorithms}
 
-Mention complexities of algorithms.
-
 \subsection{LDA Initialization}
 We run topic modelling on two aforementioned datasets to find the dominant topics for each. As discussed in the class notes \cite{classNotes}, we initialize $z$ as a $M \times N_m$ array. A $z_i$ represents a position of a word in a sentence. Therefore, each word may occur multiple times in $z$. We assign topics randomly to all $z$ values.  Subsequently, using the corpus we initialize $q$ as a $K \times V$ based on z and the corpus. Similarly, we also initialize $n$ counts as a $K \times M$ using z and the corpus. The complexity of this process is $O(MN_m)$.
 
 We also initialized the number of topics $K$, pseudocounts $\alpha$ and $\beta$ before the modeling.
 
-\paragraph{Chosing $K$, $\alpha$, $\beta$}
-Choice of $K$, $\alpha$, $\beta$ is critical a directly affects the quality of topics and the words association. High $\beta$ values tend to decrease the number of topics as it reduces the impact of sparsity \cite{griffiths2004finding}. This is a important for our case, in particular, as we are dealing with small number of themes in both classic400 datasets and hookah. Therefore, as advised by \cite{griffiths2004finding} we use $\beta = 0.1$. 
+\paragraph{Choosing $K$, $\alpha$, $\beta$}
+Choice of $K$, $\alpha$, $\beta$ is critical a directly affects the quality of topics and the words association. High $\beta$ values tend to decrease the number of topics as it reduces the impact of sparsity \cite{griffiths2004finding}. This is a important for our case, in particular, as we are dealing with small number of themes in both classic400 datasets and hookah. Therefore, as advised by \cite{griffiths2004finding} we use $\beta = 2$. 
 
-Similarly, $\alpha$ is used to for smoothing the $\theta$ distribution. It adds contribution from each topic to each document. Therefore, high values for $\alpha$ can reduce the separation between different topics and can lead to smudging of boundaries between them. We chose $\alpha = 50/K$ as suggested in the class and in \cite{griffiths2004finding}.
+Similarly, $\alpha$ is used to for smoothing the $\theta$ distribution. It adds contribution from each topic to each document. Therefore, high values for $\alpha$ can reduce the separation between different topics and can lead to smudging of boundaries between them. We chose $\alpha = 50/K$ as suggested in the class and in \cite{griffiths2004finding}. However, this did not give us a clear separation of topics. We experimented with smaller values of $\alpha$ and settled on $0.1$.
 
 Although, we assume both $\alpha$ and $\beta$ to be constant but they can be found using EM algorithm. However, this increases the run time of the algorithm and therefore we have not implemented it.
 
@@ -223,13 +221,10 @@ The following steps were taken to pre-process the hookah data set :
   \item All words are mapped to unique integer values and represented in the same format as classic400 i.e. a matrix of dimensions K(number of documents) x V(size of vocabulary).
 \end{enumerate}
 
-Mention the stopwords used for processing second dataset.
-Cite the link : http://cseweb.ucsd.edu/users/elkan/151/classic400.mat
-
 \subsection{Experiments with LDA}
 We ran the LDA implementation on both data sets for different number of topics. Specifically, we experimented with K = 3,10,50,100. 
 
-For each experiment, the $\theta$ vector and $\phi$ vector were recorded. From these, we inferred the top 3 topics for the entire data set. The top 3 topics are the 3 topics with which the highest number of words and documents were labeled.
+For each experiment, the $\theta$ vector and $\phi$ vector were recorded. From these, we inferred the top 3 topics for the entire data set. The top 3 topics are the 3 topics with which the highest number of words and documents were labelled.
 
 We also tracked the number of topic-word associations that remained the same between consecutive iterations of LDA. This measure served as a indicator of convergence of the distribution. Related plot are presented in the results section.
 
@@ -238,12 +233,7 @@ We implement LDA in \textsc{MATLAB}.
 
 The pre-processing code was written in Python. Specifically, the NLTK python library was used for tokenizing, stemming and removing stop words. Details of these procedures are covered in section 4.1.
 
-Some more implementation details that we discovered while developing the code are :
-
-\begin{enumerate}
-  \item \red{Z is specific to a document. Therefore it will have a different length for different document.}
-  \item \red{Also each word can have a different topic, therefore there will be a different entry for each word in Z. However, this is not true about q and n as they are counts. They will have K * V and K * M sizes.}
-\end{enumerate}
+An implementation detail which we discovered and was not adequately covered in lecture was that Z is specific to a document. Therefore it will have a different length for each document. However, this is not true about q and n as they are counts and they are $K \times V$ and $K \times M$ in size respectively.
 
 \subsection{Code Optimization}
 We optimized the following equation in 4 ways :
@@ -272,6 +262,15 @@ We used the following checks during the development of the code to ensure that o
 
 \section{Results of Experiments}
 \label{sec:Results}
+\subsection{Choosing Value of $\alpha$}
+We did not indulge in grid search for $\alpha$ but when the formula discussed in the class ($\alpha = 50/K$) did not yield clear separation we tried some values of alpha and zeroed on 0.1, in the interest of faster convergence and better separation. The difference between the topic distributions is shown in fig \ref{fig:classic400_high_alpha} where we calculated distribution for $\alpha = 10$ as compared to \ref{fig:scatter_classic400} where we used $\alpha = 0.1$
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{high_alpha}
+\caption{Distribution of documents for classic400 dataset when $\alpha = 10$}
+\label{fig:classic400_high_alpha}
+\end{figure}
 
 \subsection{Convergence of LDA}
 In order to measure the convergence of LDA, we tracked the word-topic associations recorded by vector z. After each iteration, we measured the number of z values which had stayed the same. 
@@ -514,7 +513,7 @@ Fig. \ref{fig:scatter_classic400} and Fig. \ref{fig:scatter_hookah} are plots of
 \end{figure}
 
 \subsection{Comparison with true labels in classic400 data set}
-For the classic400 data set, we have access to the set of true labels based on real-world knowledge. Fig. \ref{fig:truelabels} plots the number of documents labelled by each topic. This plot is superimposed over the number of documents labelled by the true labels. We see that discovered topics closely track the true labels.
+For the classic400 data set, we have access to the set of true labels based on real-world knowledge. Fig. \ref{fig:truelabels} plots the number of documents labelled by each topic. This plot is superimposed over the number of documents labelled by the true labels. We see that discovered topics closely track the true labels. As shown in the table \ref{tab:discovered_topics} we get an accuracy of 93%.
 
 \begin{figure}[H]
 \centering
@@ -522,7 +521,21 @@ For the classic400 data set, we have access to the set of true labels based on r
 \caption{Classic400 : Topics discovered by LDA vs True Labels}
 \label{fig:truelabels}
 \end{figure}
-
+\begin{table}
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Topics in training label & Calculated Topics & Number of document for training label & Number of documents for calculated training label \\ 
+\hline 
+Topic 1 & Topic 3 & 200 & 203 \\ 
+\hline 
+Topic 2 & Topic 2 & 100 & 106 \\ 
+\hline 
+Topic 3 & Topic 1 & 100 & 103 \\ 
+\hline 
+\end{tabular} 
+\label{tab:discovered_topics}
+\caption{Mapping of calculated topics against true labels}
+\end{table}
 \section{Lessons Learned}
 \label{Lessons}
 \begin{itemize}
@@ -530,28 +543,38 @@ For the classic400 data set, we have access to the set of true labels based on r
 \item We found that calculation of LCL is computationally expensive. Therefore, as a measure of convergence we tracked change in the distribution during the iterations of CGS. We found that when the number of z values stop changing, there was a good separation in the topics.
 \item Evaluating quality of a topic model is a subjective thing. \cite{chang}
 \item We also found that having less number of topics than the actual gives incoherent word-topic matches. However, as the number of topics increase this incoherence decreases. Even when the number of topics is more than true topics, the dominant topics still emerge and we found that with increasing $K$ the word-topic associations still stay the same.
+\item Choosing hyper parameter $\alpha$ is a non-trivial task as it affects both the quality of the model and the number of iterations it takes for the model to converge. We chose it to be 0.1 based on our experiments.
 \end{itemize}
 
-\subsection{Goodness of Fit}
+\section{Goodness of Fit of LDA}
 We did a brief survey of literature about goodness of fit of LDA models. It appears that defining goodness of fit for LDA is a non-trivial and rather tricky task \cite{heinrich},\cite{nguyen}.
 
-\subsubsection{Defining goodness of fit}
+\subsection{Defining goodness of fit}
 As per \cite{nguyen}, if the topics $\phi_{1}$ to $\phi_{k}$ are given, the goodness-of-fit can be modeled as $p(\bar{w}| \Phi,\alpha )$. If the topics $\phi_{1}$ to $\phi_{k}$ are not available, the author suggests the goodness-of-fit can be modeled as $p(\bar{w}| \alpha,\beta )$, where $\alpha$ and $\beta$ are the hyperparameters of the LDA.
 
-As per the Elkan \cite{perplexity}, perplexity can be used as a measure of goodness of fit. Perplexity is the reciprocal geometric mean of the likelihood of a test corpus :
+As per the Elkan \cite{perplexity}, perplexity can be used as a measure of goodness of fit. As per \cite{heinrich} perplexity is the reciprocal geometric mean of the token likelihoods in the test corpus. It can be calculated as :
 
 \begin{equation}
-P( \tilde{W} | Q) = \prod_{i=1}^M{p(\tilde{\bar{w}}_{\tilde{m}} | \alpha)}
+P( \tilde{W} | M) = exp - \frac{\sum_{m=1}^{M}log p (\tilde{\overrightarrow{w}}_{\tilde{m}} | M)}{\sum_{m=1}^{M} N_m}
 \end{equation}
 
-%\product_{i=1}^M{T}
-%_{\tilde{m}}
-\red{delete}
-In the report, try to answer the following questions. The questions are related to each other, and do not have definitive answers.
-1. What is a sensible way to define the goodness-of-fit, for the same dataset, of LDA models with different hyperparameters K, ALPHA, and BETA? (Refer to tips in class notes)
-2. Given the definition of goodness-of-fit, is it possible to compute it numerically, either exactly or approximately?
-3. How can we determine whether an LDA model is overfitting its training data?
-For the two datasets with which you do experiments, present and justify good values for K, ALPHA and BETA. You can choose these values informally (you do not need an automated algorithm) but your choices should be sensible and justified.
+As per Heinrich, this measure can be intuitively interpreted as the expected size of a vocabulary with uniform word distribution that the model would need to generate a token of the test data. A model (or parameter set) that better captures co-occurrences in the data requires fewer possibilities to choose tokens given their document context. Thus lower values of perplexity indicate a lower misrepresentation of the words of the test documents by the trained topics.
+
+\subsection{Computing goodness of fit}
+As per \cite{nguyen},\cite{heinrich} and \cite{griffiths2004finding}, only the approximate likelihood of data can be computed. Given this likelihood, we then compute perplexity. As per our understanding, since perplexity is the reciprocal geometric mean of likelihoods, it is also only an approximation.
+
+\subsection{Determining overfitting of LDA}
+As per \cite{heinrich}, perplexity is a measure of clustering quality. Higher value of perplexity indicates higher misrepresentation of the words of the test documents, thus indicating overfitting.
+
+Based on our research, overfitting can be detected as follows :
+\begin{enumerate}
+\item Train LDA for a given number of topics (K) on the training set.
+\item For different values of K, compute perplexity on the validation set.
+\item Pick $\tilde{K}$, for which the perplexity is minimum.
+\item If $\tilde{K} < K$, then the model has likely overfit the training data.
+\end{enumerate}
+
+As per \cite{nguyen}, this approach is justified because larger number of topics will result in a larger parameter space. A larger parameter space has more expressive power and can hence better fit the data. In case of $\tilde{K} < K$, it means that it is possible to get a good fit with lesser topics. Hence, that makes overfitting more likely.
 
 
 \bibliographystyle{abbrv}
