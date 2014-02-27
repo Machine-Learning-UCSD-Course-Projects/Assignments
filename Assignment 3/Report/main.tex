@@ -119,15 +119,9 @@ p(\gamma|\alpha) = \frac{1}{D(\alpha)}\prod^m_{s=1}\gamma^{\alpha_s - 1}_s
 
 where ${D(\alpha)} = \int_\gamma \prod^m_{s=1}\gamma^{\alpha_s - 1}_s$
 
-\subsubsection{Inference from LDA}
-How do we interpret results - Theta and Phi.
-Mention that theory here.
-
 \subsubsection{Training Methods for LDA}
 
 We use the words of the documents as our training data. We assume that the number of topics K, $\alpha$ and $\beta$ are fixed. Our aim is to learn $\theta$ values for documents and $\phi$ values topics. We use collapsed Gibbs Sampling for this process.
-
-\paragraph*{Gibb's Sampling}
 
 \paragraph*{Collapsed Gibbs Sampling}
 
@@ -150,6 +144,13 @@ p(z_i = j | \bar{z}', \bar{w}) = \frac{q_{j w_{i}'} + \beta_{w_i}}{\sum_t{q_{jt}
 
 where $q_{j w_i}$ is the count of word $w_i$ occurs with topic $j$, $q_{j w_i}'$ is the count of word $w_i$ occurs with topic $j$ except for the word $w_i$, $n_{mk}$ is the count of the number of times topic $z_i = k$ in the document $m$ and $n_{mk}'$ is the count of the number of times topic $z_i = k$ in the document $m$ except for the word $w_i$ 
 
+\subsubsection{Topic Metrics from LDA}
+The aim of the CGS is to come up with words which together give shape to a topic. This is done by first finding dominant topics using $\theta$ values and then finding the words which provides context for this topic using $\phi$ values. 
+
+$\theta$ values are a measure of probabilities that a document aligns with a topic. Therefore, dominant topics can be found by finding the topics which have the most documents associated with it. This is done by finding the maximum $\theta$ value for each document. Dominant topics can be found by keeping a count of the documents associating with a topic. This is discussed in detail in section \ref{sec:Algorithms}.
+
+Similarly, words with highest $\phi$ values for a topic are expected to be associated with a topic. We pick top 10 words with the highest $\phi$ values for each topic. The details can be found in \ref{sec:Algorithms}.
+
 \section{Design and Analysis of Algorithms}
 \label{sec:Algorithms}
 
@@ -160,7 +161,14 @@ We run topic modelling on two aforementioned datasets to find the dominant topic
 
 We also initialized the number of topics $K$, pseudocounts $\alpha$ and $\beta$ before the modeling.
 
-\paragraph{Chosing K, $\alpha$, $\beta$}
+\paragraph{Chosing $K$, $\alpha$, $\beta$}
+Choice of $K$, $\alpha$, $\beta$ is critical a directly affects the quality of topics and the words association. High $\beta$ values tend to decrease the number of topics as it reduces the impact of sparsity \cite{griffiths2004finding}. This is a important for our case, in particular, as we are dealing with small number of themes in both classic400 datasets and hookah. Therefore, as advised by \cite{griffiths2004finding} we use $\beta = 0.1$. 
+
+Similarly, $\aplha$ is used to for smoothing the $\theta$ distribution. It adds contribution from each topic to each document. Therefore, high values for $\aplha$ can reduce the separation between different topics and can lead to smudging of boundaries between them. We choose $\alpha = 50/K$ as suggested in the class and in \cite{griffiths2004finding}.
+
+Although, we assume both $\alpha$ and $\beta$ to be constant but they can be found using EM algorithm. However, this increases the run time of the algorithm and therefore we have not implemented it.
+
+Knowing $\alpha$ and $\beta$, the values of $K$ can be found by maximizing the likelihood of data, as suggested by \cite{griffiths2004finding}. In their experiments they found that $K = 300$ to be a value at which likelihood peaks. However, we did not follow this procedure as we are not expecting a large number of topics and calculating likelihood computation is not computationally trivial. We experimented with several value of K and qualitatively found that noise words reduced with increasing K in dominant topics.
 
 \subsection{Collapsed Gibb's Sampling}
 We ran Collapsed Gibbs Sampling to convergence to find the dominant topics of the corpus. To achieve this we used equation \ref{prob} for an estimate of probability \cite{classNotes}. It is reproduced here for clarity.
