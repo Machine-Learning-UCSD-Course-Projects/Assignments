@@ -62,8 +62,10 @@ This dataset is a part of classic3\cite{banerjee2005clustering} dataset. Classic
 
 This data set contains a total of 6505 words and hence each document is converted to a vector of 6505 integers, each showing the frequency a word in a document. The dataset also contains true labels of the dataset which we use for sanity check of our model. The dataset also contains the vocabulary used in the classic400. We use the vocabulary to find the top words for each topic.
 
-\paragraph{Second data set}
-Add more details for the second dataset and how you chose it.
+\paragraph{Hookah data set}
+This data set consists of a set of tweets about Hookah usage. These tweets are drawn from a larger collection of tweets. The main set of tweets was collected between November 2011 and August 2013 using the Twitter Application Programming Interface (API). These tweets represented 1\% of all tweets on Twitter during this time interval. On average, this data set consisted of 1.3 million tweets per day. Hookah-related tweets were extracted from this set using the keywords: hookah,hooka,waterpipe,shisha,sheesha and water pipe.The hookah data set consisted of 95,738 tweets. 
+
+To allow for experiments to be done in a short amount of time, we could not use all 95,738 tweets. Hence, we extracted 3000 random tweets from this data set and used that for this project. This data set has a vocabulary size of 8021 words.
 
 \subsection{Model}
 \paragraph{Representation}
@@ -160,30 +162,63 @@ Cite [Heinrich, 2005]
 \label{sec:Experiments}
 
 \subsection{Dataset Preprocessing}
+Pre-processing was required only for the second data-set. The classic400 dataset was used as provided in the \textsc{Matlab} file format.
+
+The following steps were taken to pre-process the hookah data set : 
+
+\begin{enumerate}
+  \item The text is tokenized using the Punkt Tokenizer \cite{punkt} which is part of the Python NLTK library \cite{nltk}. This process splits the tweets into individual words.
+  \item Then, the tokens are stemmed using the Porter Stemmer \cite{porter}, also part of the Python NLTK library. This helps map similar words to the same stem. Word variations like plurals and tense-based conjugates are replaced by the root word.
+  \item All stopwords were deleted. Stopwords are common words like 'I' ,'me',can' etc. We used a list of 127 stopwords that is provided with NLTK\cite{nltk}.
+  \item All words are mapped to unique integer values and represented in the same format as classic400 i.e. a matrix of dimensions K(number of documents) x V(size of vocabulary).
+\end{enumerate}
+
 Mention the stopwords used for processing second dataset.
 Cite the link : http://cseweb.ucsd.edu/users/elkan/151/classic400.mat
 
-\subsection{Expt 1}
+\subsection{Experiments with LDA}
+We ran the LDA implementation on both data sets for different number of topics. Specifically, we experimented with K = 3,10,50,100. 
 
-\subsection{Expt 2}
+For each experiment, the $\theta$ vector and $\phi$ vector were recorded. From these, we inferred the top 3 topics for the entire data set. The top 3 topics are the 3 topics with which the highest number of words and documents were labeled.
 
-\subsection{Expt 3}
-Show that the algorithms are actually the complexity that we expect them to be.
+We also tracked the number of topic-word associations that remained the same between consecutive iterations of LDA. This measure served as a indicator of convergence of the distribution. Related plot are presented in the results section.
 
 \subsection{Implementation}
-Implementation specific notes
+We implement LDA in \textsc{MATLAB}.
 
-Z is document specific. Therefore it will have a different length for different document.
+The pre-processing code was written in Python. Specifically, the NLTK python library was used for tokenizing, stemming and removing stop words. Details of these procedures are covered in section 4.1.
 
-Also each word can have a different topic, therefore there will be a different entry for each word in Z. However, this is not true about q and n as they are counts. They will have K * V and K * M sizes
+Some more implementation details that we discovered while developing the code are :
+
+\begin{enumerate}
+  \item \red{Z is specific to a document. Therefore it will have a different length for different document.}
+  \item \red{Also each word can have a different topic, therefore there will be a different entry for each word in Z. However, this is not true about q and n as they are counts. They will have K * V and K * M sizes.}
+\end{enumerate}
 
 \subsection{Code Optimization}
-Describe how inner loop was made fast.
+We optimized the following equation in 4 ways :
+
+\begin{equation}
+p(z_i = j | \bar{z}', \bar{w}) = \frac{q_{j w_{i}'} + \beta_{w_i}}{\sum_t{q_{jt}' + \beta_t}}\frac{n_{mj}' + \alpha_j}{\sum_k{n_{mk}' + \alpha_k}}
+\end{equation}
+
+\begin{enumerate}
+\item $q_{j w_{i}'}+\beta_{w_i}$ In this part of the calculation, $\beta_{w_i}$ is constant for any fixed value of j. Therefore, for each j, $\beta_{w_i}$ were added it to all $q_{j w_{i}'}$ outside the loop. 
+\item $n_{mj}' + \alpha_j$ For each value of j, $\alpha_j$ is a constant. Therefore, for each j, $\alpha_j$ was added to all $n_{mj}'$ outside the loop.
+\item $\sum_t{q_{jt}' + \beta_t}$ For any value of t, $\beta_t$ is a constant value. Therefore, for all t, $\beta_t$ was added to $\sum_t{q_{jt}}'$.
+\item $\sum_k{n_{mk}' + \alpha_k}$ For any value of k, $\alpha_k$ is a constant. Therefore, for all k, $\alpha_k$ is added to all $\sum_k{n_{mk}}'$.
+\end{enumerate}
+
+\bigskip
+One more code optimization saved us a lot of time during experiments. This was in the calculation of the $\phi$ vector. Calculating the $\phi$ vector for all topics is an O(K*V*M) operation. V and M cannot really be optimized. However, we did optimize the K value. We calculated $\phi$ vector for only the top 3 topics. These top 3 topics were the topics with which most documents were associated as per the $\theta$ vector.
+
 
 \subsection{Sanity Checks}
-Comparison with true labels. 
-Can make a table here.
-Summation of n should be equal to q vector should be equal to classic400.
+We used the following checks during the development of the code to ensure that our implementation was correct.
+\begin{enumerate}
+\item For the classic400 dataset, we had access to the true labels which were grounded in real-world truth. We compared the topic distribution of our learned model to these true labels. 
+\item After initializing q and n, the sum of these two vectors should be the same and it should equal the total number of words in the corpus.
+\end{enumerate}
 
 \section{Results of Experiments}
 \label{sec:Results}

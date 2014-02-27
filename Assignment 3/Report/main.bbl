@@ -1,0 +1,31 @@
+\begin{thebibliography}{1}
+
+\bibitem{banerjee2005clustering}
+A.~Banerjee, I.~S. Dhillon, J.~Ghosh, S.~Sra, and G.~Ridgeway.
+\newblock Clustering on the unit hypersphere using von mises-fisher
+  distributions.
+\newblock {\em Journal of Machine Learning Research}, 6(9), 2005.
+
+\bibitem{nltk}
+S.~Bird.
+\newblock Nltk: the natural language toolkit.
+\newblock In {\em Proceedings of the COLING/ACL on Interactive presentation
+  sessions}, pages 69--72. Association for Computational Linguistics, 2006.
+
+\bibitem{classNotes}
+C.~Elkan.
+\newblock Lecture notes, cse 250b: Principles of artificial intelligence:
+  Learning, 2014.
+
+\bibitem{punkt}
+T.~Kiss and J.~Strunk.
+\newblock Unsupervised multilingual sentence boundary detection.
+\newblock {\em Computational Linguistics}, 32(4):485--525, 2006.
+
+\bibitem{porter}
+M.~F. Porter.
+\newblock An algorithm for suffix stripping.
+\newblock {\em Program: electronic library and information systems},
+  14(3):130--137, 1980.
+
+\end{thebibliography}
