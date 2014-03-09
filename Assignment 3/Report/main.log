@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  27 FEB 2014 13:32
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  27 FEB 2014 14:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -633,26 +633,27 @@ e
 ABD: EveryShipout initializing macros [1
 
 {/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
- [4]
-Overfull \hbox (144.57744pt too wide) in paragraph at lines 226--228
-[]\OT1/cmr/m/n/10.95 Mention the stop-words used for pro-cess-ing sec-ond datas
-et. Cite the link : http://cseweb.ucsd.edu/users/elkan/151/classic400.mat 
- []
+ [4] [5] [6]
+<high_alpha.png, id=39, 449.68pt x 337.26pt>
+File: high_alpha.png Graphic file (type png)
+ <use high_alpha.png>
+Package pdftex.def Info: high_alpha.png used on input line 271.
+(pdftex.def)             Requested size: 483.69687pt x 362.78929pt.
 
-[5] <classic400_convergence.png, id=36, 667.49374pt x 526.96875pt>
+<classic400_convergence.png, id=40, 667.49374pt x 526.96875pt>
 File: classic400_convergence.png Graphic file (type png)
 
 <use classic400_convergence.png>
 Package pdftex.def Info: classic400_convergence.png used on input line 285.
 (pdftex.def)             Requested size: 483.69687pt x 381.87772pt.
- [6]
-<hookah_convergence.png, id=40, 562.1pt x 421.575pt>
+ [7 <./high_alpha.png (PNG copy)>]
+<hookah_convergence.png, id=46, 562.1pt x 421.575pt>
 File: hookah_convergence.png Graphic file (type png)
 
 <use hookah_convergence.png>
 Package pdftex.def Info: hookah_convergence.png used on input line 292.
 (pdftex.def)             Requested size: 483.69687pt x 362.77257pt.
- [7 <./classic400_convergence.png>]
+ [8 <./classic400_convergence.png>]
 Overfull \hbox (6.01442pt too wide) in paragraph at lines 328--342
 [][] 
  []
@@ -667,58 +668,58 @@ Overfull \hbox (2.85107pt too wide) in paragraph at lines 366--380
 [][] 
  []
 
-[8 <./hookah_convergence.png (PNG copy)>] [9]
-<triangle_classic400.png, id=51, 667.49374pt x 577.15625pt>
+[9 <./hookah_convergence.png (PNG copy)>] [10]
+<triangle_classic400.png, id=56, 667.49374pt x 577.15625pt>
 File: triangle_classic400.png Graphic file (type png)
 
 <use triangle_classic400.png>
 Package pdftex.def Info: triangle_classic400.png used on input line 490.
 (pdftex.def)             Requested size: 483.69687pt x 418.24702pt.
- [10]
-<triangle_hookah.png, id=56, 1284.8pt x 654.445pt>
+ [11]
+<triangle_hookah.png, id=60, 1284.8pt x 654.445pt>
 File: triangle_hookah.png Graphic file (type png)
  <use triangle_hookah.png>
 Package pdftex.def Info: triangle_hookah.png used on input line 497.
 (pdftex.def)             Requested size: 483.69687pt x 246.38492pt.
 
-[11 <./triangle_classic400.png>]
-<scatter_classic400.png, id=60, 449.68pt x 337.26pt>
+[12 <./triangle_classic400.png>]
+<scatter_classic400.png, id=64, 449.68pt x 337.26pt>
 File: scatter_classic400.png Graphic file (type png)
 
 <use scatter_classic400.png>
 Package pdftex.def Info: scatter_classic400.png used on input line 504.
 (pdftex.def)             Requested size: 483.69687pt x 362.78929pt.
- <scatter_hookah.png, id=61, 562.1pt x 421.575pt>
+ <scatter_hookah.png, id=65, 562.1pt x 421.575pt>
 File: scatter_hookah.png Graphic file (type png)
 
 <use scatter_hookah.png>
 Package pdftex.def Info: scatter_hookah.png used on input line 511.
 (pdftex.def)             Requested size: 483.69687pt x 362.77257pt.
- [12 <./triangle_hookah.png (PNG copy)> <./scatter_classic400.png (PNG copy)>] 
-<truelabels.png, id=65, 878.28125pt x 504.88625pt>
+ [13 <./triangle_hookah.png (PNG copy)> <./scatter_classic400.png (PNG copy)>] 
+<truelabels.png, id=70, 878.28125pt x 504.88625pt>
 File: truelabels.png Graphic file (type png)
 
 <use truelabels.png>
 Package pdftex.def Info: truelabels.png used on input line 521.
 (pdftex.def)             Requested size: 483.69687pt x 278.06577pt.
- [13 <./scatter_hookah.png (PNG copy)>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 529.
+ [14 <./scatter_hookah.png (PNG copy)>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 544.
 
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 529.
- [14 <./truelabels.png>] (./main.bbl [15]) [16] (./main.aux) ) 
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 544.
+ [15 <./truelabels.png>] [16] (./main.bbl) [17] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 12498 strings out of 493315
- 230381 string characters out of 6137904
- 305420 words of memory out of 5000000
- 15655 multiletter control sequences out of 15000+600000
+ 12505 strings out of 493315
+ 230520 string characters out of 6137904
+ 305441 words of memory out of 5000000
+ 15661 multiletter control sequences out of 15000+600000
  10664 words of font info for 38 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 63i,16n,57p,604b,287s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 63i,16n,57p,643b,287s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texli
 ve/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texliv
 e/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive
@@ -736,10 +737,10 @@ ist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2013/texmf-dist
 fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2013/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2013/texmf-dist/font
 s/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on main.pdf (16 pages, 516214 bytes).
+Output written on main.pdf (17 pages, 530536 bytes).
 PDF statistics:
- 130 PDF objects out of 1000 (max. 8388607)
- 88 compressed objects within 1 object stream
+ 134 PDF objects out of 1000 (max. 8388607)
+ 90 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 48 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 53 words of extra memory for PDF output out of 10000 (max. 10000000)
 

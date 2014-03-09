@@ -8,10 +8,9 @@
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Framework}{1}}
 \newlabel{sec:Framework}{{2}{1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Dataset}{1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Data set}{1}}
 \@writefile{toc}{\contentsline {paragraph}{Classic400}{1}}
-\@writefile{toc}{\contentsline {paragraph}{Hookah data set}{1}}
-\citation{classNotes}
+\@writefile{toc}{\contentsline {paragraph}{Hookah data set}{2}}
 \@writefile{toc}{\contentsline {paragraph}{What did we expect to find?}{2}}
 \@writefile{toc}{\contentsline {subparagraph}{Classic400 data set}{2}}
 \@writefile{toc}{\contentsline {subparagraph}{Hookah data set}{2}}
@@ -21,10 +20,10 @@
 \newlabel{multinomial}{{2}{2}}
 \citation{classNotes}
 \citation{classNotes}
+\citation{classNotes}
 \@writefile{toc}{\contentsline {paragraph}{Generative Process}{3}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}Training Methods for LDA}{3}}
 \newlabel{prob}{{8}{3}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2}Topic Metrics from LDA}{3}}
 \citation{classNotes}
 \citation{griffiths2004finding}
 \citation{griffiths2004finding}
@@ -32,10 +31,11 @@
 \citation{griffiths2004finding}
 \citation{classNotes}
 \citation{classNotes}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2}Topic Metrics from LDA}{4}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Design and Analysis of Algorithms}{4}}
 \newlabel{sec:Algorithms}{{3}{4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}LDA Initialization}{4}}
-\@writefile{toc}{\contentsline {paragraph}{Chosing $K$, $\alpha $, $\beta $}{4}}
+\@writefile{toc}{\contentsline {paragraph}{Choosing $K$, $\alpha $, $\beta $}{4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Collapsed Gibb's Sampling}{4}}
 \citation{punkt}
 \citation{nltk}
@@ -45,65 +45,72 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Topic Metrics}{5}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Design of Experiments}{5}}
 \newlabel{sec:Experiments}{{4}{5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Dataset Preprocessing}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Data set Preprocessing}{5}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Experiments with LDA}{5}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Implementation}{6}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Code Optimization}{6}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Sanity Checks}{6}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Results of Experiments}{6}}
-\newlabel{sec:Results}{{5}{6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Convergence of LDA}{6}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Tracking the convergence of LDA over 100 iterations for classic400 data set.}}{7}}
-\newlabel{fig:classic400_convergence}{{1}{7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Tracking the convergence of LDA over 100 iterations for Hookah data set.}}{8}}
-\newlabel{fig:hookah_convergence}{{2}{8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Topic Models discovered}{8}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Classic400 data set}{8}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Hookah data set}{8}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Topics Discovered in classic400 data set for K=3}}{9}}
-\newlabel{table:k=3_classic400}{{1}{9}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Topics Discovered in classic400 data set for K=10}}{9}}
-\newlabel{table:k=10_classic400}{{2}{9}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Topics Discovered in classic400 data set for K=50}}{9}}
-\newlabel{table:k=50_classic400}{{3}{9}}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Topics Discovered in classic400 data set for K=100}}{9}}
-\newlabel{table:k=100_classic400}{{4}{9}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Results of Experiments}{7}}
+\newlabel{sec:Results}{{5}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Choosing Value of $\alpha $}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Distribution of documents for classic400 data set when $\alpha = 10$}}{7}}
+\newlabel{fig:classic400_high_alpha}{{1}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Convergence of LDA}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Tracking the convergence of LDA over 100 iterations for classic400 data set.}}{8}}
+\newlabel{fig:classic400_convergence}{{2}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Tracking the convergence of LDA over 100 iterations for Hookah data set.}}{9}}
+\newlabel{fig:hookah_convergence}{{3}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Topic Models discovered}{9}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.1}Classic400 data set}{9}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.2}Hookah data set}{9}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Topics Discovered in classic400 data set for K=3}}{10}}
+\newlabel{table:k=3_classic400}{{1}{10}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Topics Discovered in classic400 data set for K=10}}{10}}
+\newlabel{table:k=10_classic400}{{2}{10}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Topics Discovered in classic400 data set for K=50}}{10}}
+\newlabel{table:k=50_classic400}{{3}{10}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Topics Discovered in classic400 data set for K=100}}{10}}
+\newlabel{table:k=100_classic400}{{4}{10}}
 \citation{JMIR}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Topics Discovered in Hookah data set for K=3}}{10}}
-\newlabel{table:k=3_hookah}{{5}{10}}
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Topics Discovered in Hookah data set for K=10}}{10}}
-\newlabel{table:k=10_hookah}{{6}{10}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Plot of $\theta $ vector}{10}}
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Topics Discovered in Hookah data set for K=50}}{10}}
-\newlabel{table:k=50_hookah}{{7}{10}}
-\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Topics Discovered in Hookah data set for K=100}}{11}}
-\newlabel{table:k=100_hookah}{{8}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces classic400 : Plot of $\theta $ vector helps in visualizing the documents clustered by topics}}{11}}
-\newlabel{fig:triangle_classic400}{{3}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Hookah data set : Plot of $\theta $ vector helps in visualizing the documents clustered by topics}}{12}}
-\newlabel{fig:triangle_hookah}{{4}{12}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Classic400 : Visualizing documents clustered by topics}}{12}}
-\newlabel{fig:scatter_classic400}{{5}{12}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Hookah Data Set : Visualizing documents clustered by topics.}}{13}}
-\newlabel{fig:scatter_hookah}{{6}{13}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Comparison with true labels in classic400 data set}{13}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Topics Discovered in Hookah data set for K=3}}{11}}
+\newlabel{table:k=3_hookah}{{5}{11}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Topics Discovered in Hookah data set for K=10}}{11}}
+\newlabel{table:k=10_hookah}{{6}{11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Plot of $\theta $ vector}{11}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Topics Discovered in Hookah data set for K=50}}{11}}
+\newlabel{table:k=50_hookah}{{7}{11}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Topics Discovered in Hookah data set for K=100}}{12}}
+\newlabel{table:k=100_hookah}{{8}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces classic400 : Plot of $\theta $ vector helps in visualizing the documents clustered by topics}}{12}}
+\newlabel{fig:triangle_classic400}{{4}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Hookah data set : Plot of $\theta $ vector helps in visualizing the documents clustered by topics}}{13}}
+\newlabel{fig:triangle_hookah}{{5}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Classic400 : Visualizing documents clustered by topics}}{13}}
+\newlabel{fig:scatter_classic400}{{6}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Hookah Data Set : Visualizing documents clustered by topics.}}{14}}
+\newlabel{fig:scatter_hookah}{{7}{14}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Comparison with true labels in classic400 data set}{14}}
 \citation{chang}
 \citation{heinrich}
 \citation{nguyen}
+\newlabel{tab:discovered_topics}{{5.5}{15}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Mapping of calculated topics against true labels}}{15}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Classic400 : Topics discovered by LDA vs True Labels}}{15}}
+\newlabel{fig:truelabels}{{8}{15}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Lessons Learned}{15}}
+\newlabel{Lessons}{{6}{15}}
 \citation{nguyen}
 \citation{perplexity}
 \citation{heinrich}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Classic400 : Topics discovered by LDA vs True Labels}}{14}}
-\newlabel{fig:truelabels}{{7}{14}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Lessons Learned}{14}}
-\newlabel{Lessons}{{6}{14}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Goodness of Fit of LDA}{14}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Defining goodness of fit}{14}}
 \citation{nguyen}
 \citation{heinrich}
 \citation{griffiths2004finding}
 \citation{heinrich}
 \citation{nguyen}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Goodness of Fit of LDA}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Defining goodness of fit}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Computing goodness of fit}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Determining overfitting of LDA}{16}}
 \bibstyle{abbrv}
 \bibdata{Report}
 \bibcite{banerjee2005clustering}{1}
@@ -117,5 +124,3 @@
 \bibcite{JMIR}{9}
 \bibcite{nguyen}{10}
 \bibcite{porter}{11}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Computing goodness of fit}{15}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Determining overfitting of LDA}{15}}
