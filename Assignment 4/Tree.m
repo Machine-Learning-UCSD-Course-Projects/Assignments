@@ -1,5 +1,5 @@
 classdef Tree < handle
-    properties (SetAccess = private, GetAccess = private)
+    properties (SetAccess = private)
       tree;
       c;
     end
@@ -41,6 +41,8 @@ classdef Tree < handle
         end
         
         function parent = getParent(obj,p)
+            %TODO:Add the case where p is root node : p will only occur in 2nd
+            %column.
             [i,j] = find(obj.tree == p);
             parent = obj.tree(i(1),j(1)+1);
         end
