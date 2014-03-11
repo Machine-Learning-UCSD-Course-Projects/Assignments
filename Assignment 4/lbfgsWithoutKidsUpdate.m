@@ -12,7 +12,7 @@
 %     end
 % end
 
-function [W1, U1, V1] = lbfgsWithoutKidsUpdate(W, U, V, alpha, lambda, pArray, t)
+function [W1, U1, V1] = lbfgsWithoutKidsUpdate(W, U, V, alpha, lambda, pArray, t, treeArray)
     options.Method = 'lbfgs';
     
     d = size(pArray(1), 1);
@@ -40,7 +40,7 @@ function [W1, U1, V1] = lbfgsWithoutKidsUpdate(W, U, V, alpha, lambda, pArray, t
         end
     end
     
-    val = minFunc(@JForLbfgs, vars, options, alpha, lambda, pArray, t);
+    val = minFunc(@JForLbfgs, vars, options, alpha, lambda, pArray, t, treeArray);
     
     %Reshpaing begins
     s = 1;
@@ -55,7 +55,7 @@ function [W1, U1, V1] = lbfgsWithoutKidsUpdate(W, U, V, alpha, lambda, pArray, t
     e = e + k * (d + 1);
     V1 = reshape(val(s : e), k, d + 1);
 end
-function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t)
+function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t, treeArray)
     d = size(pArray(1), 1);
     k = size(t , 1);
     s = 1;
@@ -72,10 +72,11 @@ function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t)
     
     val = 0;
     for it = 1 : size(pArray, 1)
-        val = val + J(alpha, lambda, pArray(it), t, W, U, V);
+        val = val + J(alpha, lambda, pArray(it), t, W, U, V, treeArray(it));
     end
     for pt = 1 : size(pArray, 1)
         p = pArray(pt);
+        tree = treeArray(pt);
         grad = zeros(e, 1);
         delta = zeros(d - 1, 1);
         ct = 1;
@@ -88,11 +89,11 @@ function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t)
             ai = ai + 1;
             for it = 1 : d
                 for jt = 1: 2 * d + 1
-                    grad(ct) = djByDW(it, jt, curP, W, U, V, t, delta, alpha);
+                    grad(ct) = djByDW(it, jt, curP, W, U, V, t, delta, alpha, tree);
                     ct = ct + 1;
                 end
             end
-            [c1, c2] = getChildren(p);
+            [c1, c2] = tree.getChildren(p);
             if c1 == 0
                 break;
             else
@@ -110,11 +111,11 @@ function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t)
             ai = ai + 1;
             for it = 1 : 2 * d
                 for jt = 1: d + 1
-                    grad(ct) = djByDU(it, jt, curP, alpha);
+                    grad(ct) = djByDU(it, jt, curP, alpha, tree);
                     ct = ct + 1;
                 end
             end
-            [c1, c2] = getChildren(p);
+            [c1, c2] = tree.getChildren(p);
             if c1 == 0
                 break;
             else
@@ -136,7 +137,7 @@ function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t)
                     ct = ct + 1;
                 end
             end
-            [c1, c2] = getChildren(p);
+            [c1, c2] = tree.getChildren(p);
             if c1 == 0
                 break;
             else

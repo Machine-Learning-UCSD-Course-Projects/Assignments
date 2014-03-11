@@ -1,11 +1,10 @@
-function val = dJBydU(i, j, p, alpha)
-    [c1, c2] = getChildren(root);
-    xp = getVector(p);
-    xp = [getVector(p), 1];
-    x1 = getVector(c1);
-    x2 = getVector(c2);
-    n1 = getAllChildren(c1);
-    n2 = getAllChildren(c2);
+function val = dJBydU(i, j, p, alpha, tree)
+    [c1, c2] = tree.getChildren(root);
+    xp = [vocab(p), 1];
+    x1 = vocab(c1);
+    x2 = vocab(c2);
+    n1 = tree.getLeafCount(c1);
+    n2 = tree.getLeafCount(c2);
     ni = n1 / (n1 + n2);
     nj = n2 / (n1 + n2);
     %should we use the norm or the difference?
