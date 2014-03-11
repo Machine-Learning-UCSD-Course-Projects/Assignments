@@ -1,4 +1,4 @@
-function [ X,W,U,d,N,sentence_sizes,positive_sentences,negative_sentences ] = initialize_all()
+function [ X,W,U,d,N,sentence_sizes,positive_sentences,negative_sentences,Vocab ] = initialize_all()
     
     %Load positive sentences
     load('codeDataMoviesEMNLP/data/rt-polaritydata/rt-polarity_pos_binarized.mat','allSNum');
@@ -7,6 +7,11 @@ function [ X,W,U,d,N,sentence_sizes,positive_sentences,negative_sentences ] = in
     %Load negative sentences
     load('codeDataMoviesEMNLP/data/rt-polaritydata/rt-polarity_neg_binarized.mat','allSNum');
     negative_sentences = allSNum;
+    
+    %Deleting sentence numbers 588,1219,4470
+    negative_sentences{1,588}=[];
+    negative_sentences{1,1219}=[];
+    negative_sentences{1,4470}=[];
     
     %As per Elkan, set d to 20
     d=20;
@@ -23,6 +28,43 @@ function [ X,W,U,d,N,sentence_sizes,positive_sentences,negative_sentences ] = in
     U = rand(2*d+1,d);
     
     %----------------------------------------------------------------------
+    %Build a list of word code ---> dx1 vector mapping
+    Vocab = zeros(1,d);
+    
+    %Build dictionary for all positive sentences
+    for i=1:numel(positive_sentences)
+        sentence = positive_sentences{1,i};
+        for j=1:numel(sentence)
+            if sentence(j) <= size(Vocab,1)
+                if sum(Vocab(sentence(j),:))==0
+                    Vocab(sentence(j),:) = random_array(d)';
+                end
+            else
+                Vocab(sentence(j),:) = random_array(d)';
+            end                                      
+        end
+    end
+    
+    %Build dictionary for all negative sentences
+    for i=1:numel(negative_sentences)
+        sentence = negative_sentences{1,i};
+        for j=1:numel(sentence)
+            %i.e. If the array can accommodate the word code
+            if sentence(j) <= size(Vocab,1) 
+                %If the word code's corresponding vector has not yet been
+                %added to the Vocab
+                if sum(Vocab(sentence(j),:))==0
+                    Vocab(sentence(j),:) = random_array(d)';
+                end
+            else
+                Vocab(sentence(j),:) = random_array(d)';
+            end                                      
+        end
+    end
+    %----------------------------------------------------------------------
+    
+    
+    %----------------------------------------------------------------------
     %Initialize the matrix with all the X
     X = cell(N,1);
     
@@ -35,7 +77,8 @@ function [ X,W,U,d,N,sentence_sizes,positive_sentences,negative_sentences ] = in
         sentence_sizes(i)=size_of_ith_sentence;
         for j=1:size_of_ith_sentence
             %X(i,j) is a column vector of 1s and -1s
-            X(i,j)={random_array(d)};
+            wordcode = positive_sentences{1,i}(j);
+            X(i,j) = {Vocab(wordcode,:)'};
         end
     end
     
@@ -44,8 +87,9 @@ function [ X,W,U,d,N,sentence_sizes,positive_sentences,negative_sentences ] = in
         size_of_ith_sentence = numel(cell2mat(negative_sentences(1,i)));
         sentence_sizes(i+numel(positive_sentences))=size_of_ith_sentence;
         for j=1:size_of_ith_sentence
+            wordcode = negative_sentences{1,i}(j);
             %X(i,j) is a column vector of 1s and -1s
-            X(i+numel(positive_sentences),j)={random_array(d)};
+            X(i+numel(positive_sentences),j)={Vocab(wordcode,:)'};
         end
     end
     %----------------------------------------------------------------------
