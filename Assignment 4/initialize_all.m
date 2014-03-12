@@ -28,7 +28,7 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
     negative_sentences{1,4470}=[];
     
     %Train
-    negative_sentences=megative_sentences(1:3200);
+    negative_sentences=negative_sentences(1:3200);
     %Validation
     %negative_sentences=negative_sentences(3201:4800);
     %Test
