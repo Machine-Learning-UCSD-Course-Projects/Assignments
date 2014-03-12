@@ -2,6 +2,7 @@ classdef Tree < handle
     properties (SetAccess = private)
       tree;
       c;
+      s = sparse(1000000, 1);
     end
     methods
         function obj = Tree(n)
@@ -30,13 +31,18 @@ classdef Tree < handle
         end
         
         function val = getLeafCount(obj,p)            
-            [l,r] = obj.getChildren(p);
             val = 0;
-            if l==0 && r==0
-                val = 1;
-            else                
-                val = val + obj.getLeafCount(l);
-                val = val + obj.getLeafCount(r);
+            if obj.s(p) ~= 0
+                val = obj.s(p);
+            else
+                [l,r] = obj.getChildren(p);
+                if l==0 && r==0
+                    val = 1;
+                else
+                    val = val + obj.getLeafCount(l);
+                    val = val + obj.getLeafCount(r);
+                    obj.s(p) = val;
+                end
             end            
         end
         

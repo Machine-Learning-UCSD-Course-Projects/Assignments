@@ -13,6 +13,6 @@ for i = 1 : 3
     vocab(i,:) = vocab(i,:) / norm(vocab(i));
 end
 t = cputime;
-[W1, U1, V1] = lbfgsWithoutKidsUpdate(W, U, V, 0.1, 0.1, [3], [1 0], [tree], vocab);
+[W1, U1, V1] = lbfgsWithoutKidsUpdate(W, U, V, 0.1, 0.1, [3], [1 0], {tree}, vocab);
 disp('Time:');
 t = cputime - t
