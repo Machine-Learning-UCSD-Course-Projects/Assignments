@@ -12,12 +12,14 @@
 %     end
 % end
 
-function [W1, U1, V1] = lbfgsWithoutKidsUpdate(W, U, V, alpha, lambda, pArray, t, treeArray)
+function [W1, U1, V1] = lbfgsWithoutKidsUpdate(W, U, V, alpha, lambda, pArray, t, treeArray, vocab)
     options.Method = 'lbfgs';
+    options.TolFun = 1e-3;
     
-    d = size(pArray(1), 1);
-    k = size(t , 1);
+    d = size(vocab(1, :), 2);
+    k = size(t, 2);
     vars = zeros(d * (2 * d + 1) + (2 * d) * (d + 1) + k * (d + 1), 1);
+    ct = 1;
     %W
     for it = 1 : d
         for jt = 1 : 2 * d + 1
@@ -40,7 +42,7 @@ function [W1, U1, V1] = lbfgsWithoutKidsUpdate(W, U, V, alpha, lambda, pArray, t
         end
     end
     
-    val = minFunc(@JForLbfgs, vars, options, alpha, lambda, pArray, t, treeArray);
+    val = minFunc(@JForLbfgs, vars, options, alpha, lambda, pArray, t, treeArray, vocab);
     
     %Reshpaing begins
     s = 1;
@@ -55,9 +57,9 @@ function [W1, U1, V1] = lbfgsWithoutKidsUpdate(W, U, V, alpha, lambda, pArray, t
     e = e + k * (d + 1);
     V1 = reshape(val(s : e), k, d + 1);
 end
-function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t, treeArray)
-    d = size(pArray(1), 1);
-    k = size(t , 1);
+function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t, treeArray, vocab)
+    d = size(vocab(1, :), 2);
+    k = size(t, 2);
     s = 1;
     e = d * (2 * d + 1);
     W = reshape(vars(s: e), d, 2 * d + 1);
@@ -72,7 +74,7 @@ function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t, treeArray)
     
     val = 0;
     for it = 1 : size(pArray, 1)
-        val = val + J(alpha, lambda, pArray(it), t, W, U, V, treeArray(it));
+        val = val + J(alpha, lambda, pArray(it), t, W, U, V, treeArray(it), vocab);
     end
     for pt = 1 : size(pArray, 1)
         p = pArray(pt);
@@ -87,19 +89,19 @@ function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t, treeArray)
         while(1)
             curP = array{ai};
             ai = ai + 1;
+            [c1, c2] = tree.getChildren(curP);
+            if c1 == 0
+                break;
+            end
             for it = 1 : d
                 for jt = 1: 2 * d + 1
-                    grad(ct) = djByDW(it, jt, curP, W, U, V, t, delta, alpha, tree);
+                    grad(ct) = djByDW(it, jt, curP, W, U, V, t, delta, alpha, lambda, tree, vocab);
                     ct = ct + 1;
                 end
             end
-            [c1, c2] = tree.getChildren(p);
-            if c1 == 0
-                break;
-            else
-                array{numel(array) + 1} = c1;
-                array{numel(array) + 1} = c2;
-            end
+            [c1, c2] = tree.getChildren(curP);
+            array{numel(array) + 1} = c1;
+            array{numel(array) + 1} = c2;
         end
 
         %calculate dJ/dU
@@ -109,19 +111,19 @@ function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t, treeArray)
         while(1)
             curP = array{ai};
             ai = ai + 1;
+            [c1, c2] = tree.getChildren(curP);
+            if c1 == 0
+                break;
+            end
             for it = 1 : 2 * d
                 for jt = 1: d + 1
-                    grad(ct) = djByDU(it, jt, curP, alpha, tree);
+                    grad(ct) = dJBydU(it, jt, curP, U, alpha, lambda, tree, vocab);
                     ct = ct + 1;
                 end
             end
             [c1, c2] = tree.getChildren(p);
-            if c1 == 0
-                break;
-            else
-                array{numel(array) + 1} = c1;
-                array{numel(array) + 1} = c2;
-            end
+            array{numel(array) + 1} = c1;
+            array{numel(array) + 1} = c2;
         end
 
         %Calculate dJ/dV
@@ -131,19 +133,19 @@ function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t, treeArray)
         while(1)
             curP = array{ai};
             ai = ai + 1;
+            [c1, c2] = tree.getChildren(curP);
+            if c1 == 0
+                break;
+            end
             for it = 1 : k
                 for jt = 1: d + 1
-                    grad(ct) = djByDV(it, jt, curP, alpha, V, t);
+                    grad(ct) = djByDV(it, jt, curP, alpha, lambda, V, t, vocab);
                     ct = ct + 1;
                 end
             end
             [c1, c2] = tree.getChildren(p);
-            if c1 == 0
-                break;
-            else
-                array{numel(array) + 1} = c1;
-                array{numel(array) + 1} = c2;
-            end
+            array{numel(array) + 1} = c1;
+            array{numel(array) + 1} = c2;
         end
     end %End pt
 end

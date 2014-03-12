@@ -43,8 +43,13 @@ classdef Tree < handle
         function parent = getParent(obj,p)
             %TODO:Add the case where p is root node : p will only occur in 2nd
             %column.
-            [i,j] = find(obj.tree == p);
-            parent = obj.tree(i(1),j(1)+1);
+            [i,j] = find(obj.tree(:,1) == p);
+            if size(i, 1) == 0
+                parent = 0;
+                return;
+            end
+            
+            parent = obj.tree(i(1), 2);
         end
         
     end
