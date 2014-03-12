@@ -1,4 +1,4 @@
-function val = djByDW(i, j, p, W, U, V, t, delta, alpha, lambda, tree, vocab)
+function [val, delta]= djByDW(i, j, p, W, U, V, t, delta, alpha, lambda, tree, vocab)
     [c1, c2] = tree.getChildren(p);
     xp = vocab(p, :);
     d = size(xp, 2);

@@ -11,19 +11,19 @@
 %         grad(2) = -sin(x(2));
 %     end
 % end
-function val = lbfgsKidsUpdate(sentences, alpha, lambda, t, W, U, V)
+function val = lbfgsKidsUpdate(sentences, t, W, V, vocab)
     d = size(W, 1);
     options.Method = 'lbfgs';
     VOCABCOUNT = size(vocab, 1);
     vars = zeros(VOCABCOUNT, d);
-    for it = 1 : size(sentences, 1)
-        for jt = 1 : size(sentences{it}, 1) % Find if sentences{it} is a cell array?
-            p = sentences(it, jt);
+    for it = 1 : size(sentences, 2)
+        for jt = 1 : size(sentences{1, it}, 1)
+            p = sentences{1, it}(jt);
             vars(p,:) = vocab(p,:);
         end
     end
-    vars = reshpape(vars, VOCABCOUNT * d, 1);
-    vars = minFunc(@E2ForLbfgs, vars, options, sentences, t, V);
+    vars = reshape(vars, VOCABCOUNT * d, 1);
+    vars = minFunc(@E2ForLbfgs, vars, options, sentences, t, W, V, vocab);
     vars = reshpape(vars, VOCABCOUNT, d);
     for it = 1 :  VOCABCOUNT
         vocab(p, :) = vars(p, :);
@@ -31,21 +31,21 @@ function val = lbfgsKidsUpdate(sentences, alpha, lambda, t, W, U, V)
     val = vocab;
 end
 
-function [val, grad] = E2ForLbfgs(vars, sentences, t, V)
+function [val, grad] = E2ForLbfgs(vars, sentences, t, W, V, vocab)
     d = size(W, 1);
     val = 0;
     VOCABCOUNT = size(vocab, 1);
-    for it = 1 : size(sentences, 1)
-        for jt = 1 : size(sentences{it}, 1) % Find if sentences{it} is a cell array?
-            p = sentences(it, jt);
+    for it = 1 : size(sentences, 2)
+        for jt = 1 : size(sentences{1, it}, 1) % Find if sentences{it} is a cell array?
+            p = sentences{1, it}(jt);
             xp = vars((p - 1) * d + 1 : p * d ); % 1 : d, d + 1 : 2d
-            val = val + E2(V, t, xp);
+            val = val + E2(t, V, xp);
         end
     end
     grad = zeros(VOCABCOUNT, d);
-    for it = 1 : size(sentences, 1)
-        for jt = 1 : size(sentences{it}, 1) % Find if sentences{it} is a cell array?
-            p = sentences(it, jt);
+    for it = 1 : size(sentences, 2)
+        for jt = 1 : size(sentences{1, it}, 1) % Find if sentences{it} is a cell array?
+            p = sentences{1, it}(jt);
             xp = vars((p - 1) * d + 1 : p * d ); % 1 : d, d + 1 : 2d
             for kt = 1 : d
                 grad(p, kt) = grad(p, kt) + dE2Bydx(kt, xp, V, t);
@@ -57,7 +57,7 @@ end
 
 function val = E2(t, V, xp)
     val = 0;
-    for i = 1:size(t)
-        val = val + t(i) * log(sm(V, xp, i));
+    for i = 1:size(t, 2)
+        val = val + t(i) * log(sm(V, xp', i));
     end
 end
