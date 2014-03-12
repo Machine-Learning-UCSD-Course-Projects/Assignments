@@ -26,7 +26,7 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
     for i=1:numel(positive_sentences)
         Truelabels(i,:)=[1 0];
     end
-    for i=numel(positive_sentences)+1:numel(negative_sentences)
+    for i=(numel(positive_sentences)+1):numel(positive_sentences)+numel(negative_sentences)
         Truelabels(i,:)=[0 1];
     end
     
