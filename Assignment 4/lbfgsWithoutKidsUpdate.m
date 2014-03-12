@@ -146,5 +146,5 @@ function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t, treeArray, voca
             array{numel(array) + 1} = c2;
         end
     end %End pt
-    disp('1');
+   % disp('1');
 end
