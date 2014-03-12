@@ -12,10 +12,27 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
     %Load positive sentences
     load('codeDataMoviesEMNLP/data/rt-polaritydata/rt-polarity_pos_binarized.mat','allSNum');
     positive_sentences = allSNum;
+    %Train
+    positive_sentences=positive_sentences(1:3200);
+    %Validation
+    %positive_sentences=positive_sentences(3201:4800);
+    %Test
+    %positive_sentences=positive_sentences(4800:5331);
     
     %Load negative sentences
     load('codeDataMoviesEMNLP/data/rt-polaritydata/rt-polarity_neg_binarized.mat','allSNum');
     negative_sentences = allSNum;
+    %Deleting sentence numbers 588,1219,4470
+    negative_sentences{1,588}=[];
+    negative_sentences{1,1219}=[];
+    negative_sentences{1,4470}=[];
+    
+    %Train
+    negative_sentences=negative_sentences(1:3200);
+    %Validation
+    %negative_sentences=negative_sentences(3201:4800);
+    %Test
+    %negative_sentences=negative_sentences(4800:5328);
     
     %In this dataset, there are 5331 negative 
     %and 5331 positive reviews
@@ -30,10 +47,6 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
         Truelabels(i,:)=[0 1];
     end
     
-    %Deleting sentence numbers 588,1219,4470
-    negative_sentences{1,588}=[];
-    negative_sentences{1,1219}=[];
-    negative_sentences{1,4470}=[];
         
     %In this dataset 
     %Initialize [W b]
