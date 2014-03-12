@@ -14,6 +14,20 @@ function val = djByDW(i, j, p, W, U, V, t, delta, alpha, lambda, tree, vocab)
     for jt = 1:size(t, 2)
         smCached(jt) = sm(V, xp, jt);
     end
+    
+    parent = tree.getParent(p);
+    if parent ~= 0 %not output
+        [p1, ~] = tree.getChildren(parent);
+        if p1 == p
+            s = 1;
+            e = d;
+        else
+            s = d + 1;
+            e = 2 * d;
+        end
+    end
+    d1 = alpha * ni * 2 * norm(x1' - z(1 : d));
+    d2 = alpha * nj * 2 * norm(x2' - z(d + 1 : 2 * d));
     for it = 1:d
         delI = 0;
         %Classifier Error
@@ -21,19 +35,10 @@ function val = djByDW(i, j, p, W, U, V, t, delta, alpha, lambda, tree, vocab)
             delI = delI + (1 - alpha) * (smCached(jt) - t(jt)) * V(jt, it);
         end
         %Reconstruction Error
-        delI = delI - alpha * ni * 2 * norm(x1' - z(1 : d)) * sum(U(1 : d, it));
-        delI = delI -  alpha * nj * 2 * norm(x2' - z(d + 1 : 2 * d)) * sum(U(d + 1 : 2 * d, it));
+        delI = delI - d1 * sum(U(1 : d, it));
+        delI = delI - d2 * sum(U(d + 1 : 2 * d, it));
         %Tree Error
-        parent = tree.getParent(p);
-        if parent ~= 0 %not output
-            [p1, ~] = tree.getChildren(parent);
-            if p1 == p
-                s = 1;
-                e = d;
-            else
-                s = d + 1;
-                e = 2 * d;
-            end
+        if(parent > 0)
             delI = delta(parent) * sum(W(s:e, it));
         end
         del = del + delI * hDash(W(it,:) * [x1, x2, 1]');
@@ -51,7 +56,7 @@ function val = djByDW(i, j, p, W, U, V, t, delta, alpha, lambda, tree, vocab)
 end
 
 function val = hDash(a)
-    val = 1 - tanh(a) ^ 2;
+    val = sech(a) ^ 2;
 end
 
 function val = normOfTheta(W)
