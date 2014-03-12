@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+The style file: abbrv.bst
+Database file #1: Report.bib
+Warning--entry type for "classNotes" isn't style-file defined
+--line 59 of file Report.bib
+Warning--entry type for "nguyen" isn't style-file defined
+--line 91 of file Report.bib
+Warning--entry type for "perplexity" isn't style-file defined
+--line 99 of file Report.bib
+You've used 11 entries,
+            2118 wiz_defined-function locations,
+            564 strings with 5293 characters,
+and the built_in function-call counts, 3205 in all, are:
+= -- 307
+> -- 147
+< -- 1
++ -- 60
+- -- 48
+* -- 206
+:= -- 548
+add.period$ -- 31
+call.type$ -- 11
+change.case$ -- 58
+chr.to.int$ -- 0
+cite$ -- 11
+duplicate$ -- 117
+empty$ -- 267
+format.name$ -- 48
+if$ -- 663
+int.to.chr$ -- 0
+int.to.str$ -- 11
+missing$ -- 7
+newline$ -- 55
+num.names$ -- 22
+pop$ -- 68
+preamble$ -- 1
+purify$ -- 46
+quote$ -- 0
+skip$ -- 89
+stack$ -- 0
+substring$ -- 161
+swap$ -- 19
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 44
+warning$ -- 0
+while$ -- 31
+width$ -- 13
+write$ -- 114
+(There were 3 warnings)

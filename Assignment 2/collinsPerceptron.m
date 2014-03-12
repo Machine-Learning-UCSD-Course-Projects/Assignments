@@ -1,4 +1,4 @@
-function w = collinsPerceptron(sentences, trueY)
+function w = collinsPerceptron(sentences, trueY, w)
     for l = 1:size(sentences, 1)
         if (size(sentences{l}, 2) + 2) ~= size(trueY{l}, 2)
             disp(l)
@@ -6,8 +6,8 @@ function w = collinsPerceptron(sentences, trueY)
         end
     end
     numFF = numFeatureFunctions();
-    w = zeros(numFF, 1);
-    epochs = 1;
+    %w = zeros(numFF, 1);
+    epochs = 3;
     lambda = 0.0005;
     for i = 1:epochs
         for l = 1:size(sentences, 1)
