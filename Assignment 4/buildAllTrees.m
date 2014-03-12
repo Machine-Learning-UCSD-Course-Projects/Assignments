@@ -1,7 +1,8 @@
-function [ T ] = buildAllTrees( X,W,U,sentence_sizes,N,d,positive_sentences,negative_sentences )
+function [ T,Roots,Vocab ] = buildAllTrees( X,W,U,sentence_sizes,N,d,positive_sentences,negative_sentences,Vocab )
 %BUILDALLTREES Summary of this function goes here
 %   Detailed explanation goes here
     T=cell(N,1);
+    Roots=zeros(N,1);
     wordcode_seed = 270000;
     %N=4; %Testing
     for i=1:N
@@ -28,7 +29,7 @@ function [ T ] = buildAllTrees( X,W,U,sentence_sizes,N,d,positive_sentences,nega
                 end
                 Xk = tan(W*vertcat(Xi,Xj,[1]));
                 xk=[xk Xk];
-                Z = U*Xk;
+                Z = U*[Xk;1];
                 Zi = Z(1:d);
                 Zj = Z(d+1:2*d);
                 e = dot(Xi-Zi,Xi-Zi) + dot(Xj-Zj,Xj-Zj);
@@ -49,6 +50,11 @@ function [ T ] = buildAllTrees( X,W,U,sentence_sizes,N,d,positive_sentences,nega
             %Generate a new wordcode for the parent node            
             [ parent_wordcode,wordcode_seed ] = generate_new_code(wordcode_seed);
             
+            %Store the new internal node in Vocab
+            if parent_wordcode >= 270000
+                Vocab(parent_wordcode,:)=xk(:,index);
+            end
+            
             %Insert these 2 elements-parent edges into Tree
             T{i,1}.insert(left_wordcode,parent_wordcode);
             T{i,1}.insert(right_wordcode,parent_wordcode);                                                
@@ -67,6 +73,7 @@ function [ T ] = buildAllTrees( X,W,U,sentence_sizes,N,d,positive_sentences,nega
             %iteration
             run_count = run_count+1;
         end
+        Roots(i)=parent_wordcode;
     end
 end
 

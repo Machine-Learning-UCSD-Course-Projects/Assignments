@@ -34,7 +34,8 @@ function val = djByDW(i, j, p, W, U, V, t, delta, alpha, lambda, tree, vocab)
                 s = d + 1;
                 e = 2 * d;
             end
-            delI = delta(parent) * sum(W(s:e, it));
+            
+            delI = delta(parent) * sum(W(it, s:e));
         end
         del = del + delI * hDash(W(it,:) * [x1, x2, 1]');
     end

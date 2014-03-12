@@ -1,5 +1,14 @@
-function [ X,W,U,d,N,sentence_sizes,positive_sentences,negative_sentences,Vocab ] = initialize_all()
+function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sentences,Vocab,alpha,lambda ] = initialize_all()    
+        
+    %Alpha - hyperparameter for LBFGS
+    alpha = 0.1;
     
+    %Lambda - hyperparameter for LBFGS
+    lambda = 0.1;
+    
+    %As per Elkan, set d to 20
+    d=20;
+
     %Load positive sentences
     load('codeDataMoviesEMNLP/data/rt-polaritydata/rt-polarity_pos_binarized.mat','allSNum');
     positive_sentences = allSNum;
@@ -8,24 +17,33 @@ function [ X,W,U,d,N,sentence_sizes,positive_sentences,negative_sentences,Vocab 
     load('codeDataMoviesEMNLP/data/rt-polaritydata/rt-polarity_neg_binarized.mat','allSNum');
     negative_sentences = allSNum;
     
+    %In this dataset, there are 5331 negative 
+    %and 5331 positive reviews
+    N=numel(positive_sentences)+numel(negative_sentences);
+
+    %Load true values
+    Truelabels=zeros(N,2);
+    for i=1:numel(positive_sentences)
+        Truelabels(i,:)=[1 0];
+    end
+    for i=numel(positive_sentences)+1:numel(negative_sentences)
+        Truelabels(i,:)=[0 1];
+    end
+    
     %Deleting sentence numbers 588,1219,4470
     negative_sentences{1,588}=[];
     negative_sentences{1,1219}=[];
     negative_sentences{1,4470}=[];
-    
-    %As per Elkan, set d to 20
-    d=20;
-    
-    %In this dataset, there are 5331 negative 
-    %and 5331 positive reviews
-    N=numel(positive_sentences)+numel(negative_sentences);
-    
+        
     %In this dataset 
     %Initialize [W b]
     W = rand(d,2*d+1);
    
     %Initialize [U c]
-    U = rand(2*d+1,d);
+    U = rand(2*d,d+1);
+    
+    %Needed for learning
+    V = randn(2, d + 1);
     
     %----------------------------------------------------------------------
     %Build a list of word code ---> dx1 vector mapping
