@@ -9,10 +9,6 @@ U = randn(2 * d, d + 1);
 V = randn(k, d + 1);
 vocab(3,:) = W * [vocab(1,:) vocab(2,:) 1]';
 
-global sumpi;
-
-sumpi = 0;
-
 for i = 1 : 3
     vocab(i,:) = vocab(i,:) / norm(vocab(i));
 end
