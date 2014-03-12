@@ -6,29 +6,8 @@ N=100;
 disp('All trees built');
 
 %Now running LBFGS
-[W1, U1, V1] = lbfgsWithoutKidsUpdate(W, U, V, alpha, lambda, Roots, Truelabels, T, Vocab);
+[W, U, V]  = lbfgsWithoutKidsUpdate(W, U, V, alpha, lambda, Roots, Truelabels, T, Vocab);
 
 %Finding out true labels after current epoch
-predictions=zeros(N,2);
-for i=1:N    
-    p_label1 = sm(V1,Roots(i),1);
-    p_label2 = sm(V1,Roots(i),2);
-    if p_label1>=0.5
-        p_label1=1;
-    else
-        p_label1=0;
-    end
-    
-    if p_label2>=0.5
-        p_label2=1;
-    else
-        p_label2=0;
-    end
-    predictions(i,:)=[p_label1 p_label2];
-end
-accuracy = sum(sum(predictions==Truelabels))/2;
-disp('Accuracy');
-disp(accuracy);
-
-
+calculate_accuracy(V,Roots,Vocab,N,Truelabels);
 
