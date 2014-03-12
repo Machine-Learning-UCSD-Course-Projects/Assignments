@@ -74,14 +74,14 @@ function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t, treeArray, voca
     
     val = 0;
     for it = 1 : size(pArray, 1)
-        val = val + J(alpha, lambda, pArray(it), t, W, U, V, treeArray(it), vocab);
+        val = val + J(alpha, lambda, pArray(it), t, W, U, V, treeArray{it, 1}, vocab);
     end
     for pt = 1 : size(pArray, 1)
         pt
         p = pArray(pt);
-        tree = treeArray(pt);
+        tree = treeArray{pt, 1};
         grad = zeros(e, 1);
-        delta = zeros(d - 1, 1);
+        delta = zeros(size(vocab, 1), 1);
         ct = 1;
         %calculate dJ/dW
         array = {};

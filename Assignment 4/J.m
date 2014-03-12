@@ -3,12 +3,13 @@ function val = J(alpha, lambda, root, t, W, U, V, tree, vocab)
 end
 
 function val = E1(p, U, tree, vocab)
-    if tree.getChildren(p)
+    [c1, ~] = tree.getChildren(p);
+    if c1 == 0
         val = 0;
         return;
     end
     [c1, c2] = tree.getChildren(p);
-    xp = [vocab(p, :), 1];
+    xp = [vocab(p, :), 1]';
     x1 = vocab(c1, :);
     x2 = vocab(c2, :);
     d = size(x1);
@@ -23,7 +24,7 @@ end
 function val = E2(t, V, p, tree, vocab)
     val = 0;
     xp = vocab(p, :);
-    for i = 1:size(t)
+    for i = 1:size(t, 2)
         val = val + t(i) * log(sm(V, xp, i));
     end
     if tree.getChildren(p) ~= 0

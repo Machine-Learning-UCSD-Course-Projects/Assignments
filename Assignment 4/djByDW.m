@@ -38,8 +38,23 @@ function val = djByDW(i, j, p, W, U, V, t, delta, alpha, lambda, tree, vocab)
         delI = delI - d1 * sum(U(1 : d, it));
         delI = delI - d2 * sum(U(d + 1 : 2 * d, it));
         %Tree Error
+<<<<<<< HEAD
+        parent = tree.getParent(p);
+        if parent ~= 0 %not output
+            [p1, ~] = tree.getChildren(parent);
+            if p1 == p
+                s = 1;
+                e = d;
+            else
+                s = d + 1;
+                e = 2 * d;
+            end
+            
+            delI = delta(parent) * sum(W(it, s:e));
+=======
         if(parent > 0)
             delI = delta(parent) * sum(W(s:e, it));
+>>>>>>> FETCH_HEAD
         end
         del = del + delI * hDash(W(it,:) * [x1, x2, 1]');
     end
