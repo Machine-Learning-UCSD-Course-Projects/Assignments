@@ -77,10 +77,11 @@ function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t, treeArray, voca
         val = val + J(alpha, lambda, pArray(it), t, W, U, V, treeArray{it, 1}, vocab);
     end
     for pt = 1 : 1%size(pArray, 1)
+        pt
         p = pArray(pt);
         tree = treeArray{pt, 1};
         grad = zeros(e, 1);
-        delta = zeros(size(vocab, 1), 1);
+        delta = sparse(size(vocab, 1), 1);
         %calculate dJ/dW
         array = {};
         array{numel(array) + 1} = p;
@@ -95,12 +96,14 @@ function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t, treeArray, voca
             end
             for it = 1 : d
                 for jt = 1: 2 * d + 1
-                    grad(gradIndex + (it - 1) * d + jt) = djByDW(it, jt, curP, W, U, V, t, delta, alpha, lambda, tree, vocab);
+                    [grad(gradIndex + (it - 1) * d + jt), delta] = djByDW(it, jt, curP, W, U, V, t, delta, alpha, lambda, tree, vocab);
                 end
             end
             [c1, c2] = tree.getChildren(curP);
-            array{numel(array) + 1} = c1;
-            array{numel(array) + 1} = c2;
+            if(c1 ~= 0)
+                array{numel(array) + 1} = c1;
+                array{numel(array) + 1} = c2;
+            end
         end
 
         %calculate dJ/dU
@@ -111,7 +114,7 @@ function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t, treeArray, voca
             curP = array{ai};
             ai = ai + 1;
             [c1, c2] = tree.getChildren(curP);
-            if c1 == 0
+            if c1 == 0 % Do not pass leaves for re-construction error
                 break;
             end
             for it = 1 : 2 * d
@@ -120,8 +123,10 @@ function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t, treeArray, voca
                 end
             end
             [c1, c2] = tree.getChildren(curP);
-            array{numel(array) + 1} = c1;
-            array{numel(array) + 1} = c2;
+            if(c1 ~= 0)
+                array{numel(array) + 1} = c1;
+                array{numel(array) + 1} = c2;
+            end
         end
         gradIndex = gradIndex + d * (2 * d + 1);
         
@@ -129,22 +134,23 @@ function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t, treeArray, voca
         array = {};
         array{numel(array) + 1} = p;
         ai = 1;
-        while(1)
+        while(ai <= numel(array))
             curP = array{ai};
             ai = ai + 1;
-            [c1, c2] = tree.getChildren(curP);
-            if c1 == 0
-                break;
-            end
+%             [c1, c2] = tree.getChildren(curP);
+%             if c1 == 0
+%                 break;
+%             end
             for it = 1 : k
                 for jt = 1: d + 1
                     grad(gradIndex + (it - 1) * k + jt) = djByDV(it, jt, curP, alpha, lambda, V, t, vocab);
                 end
             end
             [c1, c2] = tree.getChildren(curP);
-            array{numel(array) + 1} = c1;
-            array{numel(array) + 1} = c2;
+            if(c1 ~= 0)
+                array{numel(array) + 1} = c1;
+                array{numel(array) + 1} = c2;
+            end
         end
     end %End pt
-    disp('1');
 end
