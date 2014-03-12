@@ -1,5 +1,5 @@
-function val = J(alpha, lambda, root, t, W, U, V, tree, vocab)
-    val = alpha * E1(root, U, tree, vocab) + (1 - alpha) * E2(t, V, root, tree, vocab) + lambda * (normOfTheta(W, U, V)) / 2;
+function val = J(alpha, lambda, p, t, W, U, V, tree, vocab)
+    val = alpha * E1(p, U, tree, vocab) + (1 - alpha) * E2(t, V, p, tree, vocab) + lambda * (normOfTheta(W, U, V)) / 2;
 end
 
 function val = E1(p, U, tree, vocab)
