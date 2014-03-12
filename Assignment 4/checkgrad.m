@@ -45,7 +45,7 @@ function [ dx, dx1, dx2, delta ] = checkgrad(W, U, V, Roots, Truelabels, alpha, 
         end
     end
   
-  for k = 1:size(Nodes)
+    for k = 1:size(Nodes)
       p = Nodes(k);
       k
       for i = 1:size(W,1)
@@ -58,4 +58,4 @@ function [ dx, dx1, dx2, delta ] = checkgrad(W, U, V, Roots, Truelabels, alpha, 
               W(i,j) = temp;
           end;
       end;
-  end;
+    end;
