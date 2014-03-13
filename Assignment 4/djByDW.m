@@ -1,67 +1,63 @@
 function [val, delta]= djByDW(i, j, p, W, U, V, t, delta, alpha, lambda, tree, vocab)
     [c1, c2] = tree.getChildren(p);
     xp = vocab(p, :);
+    xp = xp / norm(xp);
     d = size(xp, 2);
-    del = 0;
     x1 = vocab(c1, :);
+    x1 = x1 / norm(x1);
     x2 = vocab(c2, :);
+    x2 = x2 / norm(x2);
     n1 = tree.getLeafCount(c1);
     n2 = tree.getLeafCount(c2);
-    ni = n1 / (n1 + n2);
-    nj = n2 / (n1 + n2);
+    ni = 1;%n1 / (n1 + n2);
+    nj = 1;%n2 / (n1 + n2);
     z = U * [xp 1]';
-    smCached = zeros(size(t, 2), 1);
-    for jt = 1:size(t, 2)
-        smCached(jt) = sm(V, xp, jt);
-    end
-    
-    parent = tree.getParent(p);
-    if parent ~= 0 %not output
-        [p1, ~] = tree.getChildren(parent);
-        if p1 == p
-            s = 1;
-            e = d;
-        else
-            s = d + 1;
-            e = 2 * d;
-        end
-    end
-    d1 = alpha * ni * 2 * norm(x1' - z(1 : d));
-    d2 = alpha * nj * 2 * norm(x2' - z(d + 1 : 2 * d));
-    for it = 1:d
+    z(1:d) = z(1:d) / norm(z(1:d));
+    z(d + 1 : 2 * d) = z(d + 1 : 2 * d) / norm(z(d + 1 : 2 * d));
+    %for it = 1:d
         delI = 0;
         %Classifier Error
         for jt = 1:size(t, 2)
-            delI = delI + (1 - alpha) * (smCached(jt) - t(jt)) * V(jt, it);
+            delI = delI + (1 - alpha) * (sm(V, xp, jt) - t(jt)) * V(jt, i);
         end
         %Reconstruction Error
-        delI = delI - d1 * sum(U(1 : d, it));
-        delI = delI - d2 * sum(U(d + 1 : 2 * d, it));
+        %if(i <= d)
+            delI = delI - alpha * 2 * ni * (x1(i) - z(i)) * sum(U(1 : d, i));
+        %else
+            delI = delI - alpha * 2 * nj * (x2(i) - z(i + d)) * sum(U(d + 1 : 2 * d, i));
+        %end
         %Tree Error
-        if(parent > 0)
-            delI = delta(parent) * sum(W(it, s:e));
+        parent = tree.getParent(p);
+        if parent ~= 0 %not output
+            [p1, ~] = tree.getChildren(parent);
+            if p1 == p
+                s = 1;
+                e = d;
+            else
+                s = d + 1;
+                e = 2 * d;
+            end
+            delI = delI + W(i, s : e) * delta(parent, :)';
+            %delI = delI + delta(parent) * sum(W(i, s:e));
         end
-        del = del + delI * hDash(W(it,:) * [x1, x2, 1]');
-    end
-    delta(p) = del;
-    if j/d <= 1
-        val = sum(delta(p,:)) * x1(i);
-    else if j / d <= 2
-            val = sum(delta(p,:)) * x2(i);
+    %end
+%     if j <= d
+%         delta(p, i) = delI * hDash(W(i, j) * x1(i));
+%     else
+%         delta(p, i) = delI * hDash(W(i, j) * x2(i));
+%     end
+    delta(p, i) = delI * hDash(W(i, :) * [x1 x2 1]');
+    if j <= d
+        val = delta(p, i) * x1(j) / 71;
+    else if j <= 2 * d
+            val = delta(p, i) * x2(j - d) / 71;
         else
-            val = sum(delta(p,:));
+            val = 0;
         end
     end
-    val = val + lambda * normOfTheta(W);
+    val = val + lambda * W(i, j);
 end
 
 function val = hDash(a)
     val = sech(a) ^ 2;
-end
-
-function val = normOfTheta(W)
-    val = 0;
-    for i = 1:size(W, 1)
-        val = val + norm(W(i,:));
-    end
 end

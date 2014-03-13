@@ -68,10 +68,10 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
         for j=1:numel(sentence)
             if sentence(j) <= size(Vocab,1)
                 if sum(Vocab(sentence(j),:))==0
-                    Vocab(sentence(j),:) = random_array(d)';
+                    Vocab(sentence(j),:) = randn(d, 1)';
                 end
             else
-                Vocab(sentence(j),:) = random_array(d)';
+                Vocab(sentence(j),:) = randn(d, 1)';
             end                                      
         end
     end
@@ -85,10 +85,10 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
                 %If the word code's corresponding vector has not yet been
                 %added to the Vocab
                 if sum(Vocab(sentence(j),:))==0
-                    Vocab(sentence(j),:) = random_array(d)';
+                    Vocab(sentence(j),:) = randn(d, 1)';
                 end
             else
-                Vocab(sentence(j),:) = random_array(d)';
+                Vocab(sentence(j),:) = randn(d, 1)';
             end                                      
         end
     end

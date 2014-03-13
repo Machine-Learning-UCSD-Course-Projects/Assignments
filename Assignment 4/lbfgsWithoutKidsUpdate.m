@@ -74,7 +74,7 @@ function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t, treeArray, voca
     
     val = 0;
     for it = 1 : size(pArray, 1)
-        val = val + J(alpha, lambda, pArray(it), t, W, U, V, treeArray{it, 1}, vocab);
+        val = val + J(alpha, lambda, pArray(it), t(it, :), W, U, V, treeArray{it, 1}, vocab);
     end
     for pt = 1 : 1%size(pArray, 1)
         pt
@@ -87,16 +87,15 @@ function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t, treeArray, voca
         array{numel(array) + 1} = p;
         ai = 1;
         gradIndex = 0;
-        while(1)
+        while(ai <= numel(array))
             curP = array{ai};
             ai = ai + 1;
-            [c1, c2] = tree.getChildren(curP);
-            if c1 == 0
-                break;
-            end
-            for it = 1 : d
-                for jt = 1: 2 * d + 1
-                    [grad(gradIndex + (it - 1) * d + jt), delta] = djByDW(it, jt, curP, W, U, V, t, delta, alpha, lambda, tree, vocab);
+            [c1, ~] = tree.getChildren(curP);
+            if c1 ~= 0 
+                for it = 1 : d
+                    for jt = 1: 2 * d + 1
+                        [grad(gradIndex + (it - 1) * d + jt), delta] = djByDW(it, jt, curP, W, U, V, t, delta, alpha, lambda, tree, vocab);
+                    end
                 end
             end
             [c1, c2] = tree.getChildren(curP);
@@ -110,16 +109,15 @@ function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t, treeArray, voca
         array = {};
         array{numel(array) + 1} = p;
         ai = 1;
-        while(1)
+        while(ai <= numel(array))
             curP = array{ai};
             ai = ai + 1;
             [c1, c2] = tree.getChildren(curP);
-            if c1 == 0 % Do not pass leaves for re-construction error
-                break;
-            end
-            for it = 1 : 2 * d
-                for jt = 1: d + 1
-                    grad(gradIndex + (it - 1) * 2 * d + jt) = dJBydU(it, jt, curP, U, alpha, lambda, tree, vocab);
+            if c1 ~= 0 % Do not pass leaves for re-construction error
+                for it = 1 : 2 * d
+                    for jt = 1: d + 1
+                        grad(gradIndex + (it - 1) * 2 * d + jt) = dJBydU(it, jt, curP, U, alpha, lambda, tree, vocab);
+                    end
                 end
             end
             [c1, c2] = tree.getChildren(curP);
