@@ -6,5 +6,5 @@ function val = sm(V, x, i)
 %         sumpi = sumpi + exp(V(j,:) * xp);
 %     end
 %     val = pi/sumpi;
-    val = 1 / (1 + exp(V(i,:) * xp));
+    val = 1 / (1 + exp(-V(i,:) * xp));
 end

@@ -48,11 +48,11 @@ function [val, delta]= djByDW(i, j, p, W, U, V, t, delta, alpha, lambda, tree, v
 %     end
     delta(p, i) = delI * hDash(W(i, :) * [x1 x2 1]');
     if j <= d
-        val = delta(p, i) * x1(j) / 71;
+        val = delta(p, i) * x1(j);
     else if j <= 2 * d
-            val = delta(p, i) * x2(j - d) / 71;
+            val = delta(p, i) * x2(j - d);
         else
-            val = 0;
+            val = 1;
         end
     end
     val = val + lambda * W(i, j);
