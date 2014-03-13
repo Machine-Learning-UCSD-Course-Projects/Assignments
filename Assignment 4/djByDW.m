@@ -18,18 +18,32 @@ function [val, delta]= djByDW(i, j, p, W, U, V, t, delta, alpha, lambda, tree, v
         delI = 0;
         %Classifier Error
         for jt = 1:size(t, 2)
-            delI = delI + (1 - alpha) * (sm(V, xp, jt) - t(jt)) * V(jt, i);
+            smt = sm(V, xp, jt);
+            delI = delI + (1 - alpha) * 0.5 * (smt - t(jt)) * V(jt, i);
         end
         %Reconstruction Error
         %if(i <= d)
-            delI = delI - alpha * 2 * ni * (U(1 : d, i))' * (x1' - z(1 : d));
+            delI = delI + alpha * 2 * ni * (U(1 : d, i))' * (x1' - z(1 : d));
         %else
-            delI = delI - alpha * 2 * nj * (U(d + 1 : 2 * d, i))' * (x2' - z(d + 1 : 2 * d));
+            delI = delI + alpha * 2 * nj * (U(d + 1 : 2 * d, i))' * (x2' - z(d + 1 : 2 * d));
         %end
         %Tree Error
         parent = tree.getParent(p);
         if parent ~= 0 %not output
-            [p1, ~] = tree.getChildren(parent);
+            [p1, p2] = tree.getChildren(parent);
+            xparent = vocab(parent, :);
+            xparent = xparent / norm(xparent);
+            z = U * [xparent 1]';
+            z(1:d) = z(1:d) / norm(z(1:d));
+            z(d + 1 : 2 * d) = z(d + 1 : 2 * d) / norm(z(d + 1 : 2 * d));
+            xp1 = vocab(p1, :);
+            xp1 = xp1 / norm(xp1);
+            xp2 = vocab(p2, :);
+            xp2 = xp2 / norm(xp2);
+            
+            delI = delI + alpha * 2 * ni * (x1(i) - z(i));
+            delI = delI + alpha * 2 * nj * (x2(i) - z(i + d));
+            
             if p1 == p
                 s = 1;
                 e = d;
@@ -55,7 +69,7 @@ function [val, delta]= djByDW(i, j, p, W, U, V, t, delta, alpha, lambda, tree, v
             val = delta(p, i);
         end
     end
-    val = val + lambda * W(i, j);
+    val = val + lambda * W(i, j) / 2;
 end
 
 function val = hDash(a)

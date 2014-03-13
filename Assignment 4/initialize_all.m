@@ -1,10 +1,10 @@
 function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sentences,Vocab,alpha,lambda ] = initialize_all()    
         
     %Alpha - hyperparameter for LBFGS
-    alpha = 0.1;
+    alpha = 0.2;
     
     %Lambda - hyperparameter for LBFGS
-    lambda = 0.1;
+    lambda = 0.0001;
     
     %As per Elkan, set d to 20
     d=20;
