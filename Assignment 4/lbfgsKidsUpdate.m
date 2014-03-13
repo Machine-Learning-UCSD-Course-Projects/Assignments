@@ -61,6 +61,10 @@ end
 function val = E2(t, V, xp)
     val = 0;
     for i = 1:size(t, 2)
-        val = val + t(i) * log(sm(V, xp', i));
+        if t(i) == 1
+            val = val + t(i) * log(sm(V, xp', i));
+        else
+            val = val + (1 - t(i)) * log(1 - sm(V, xp', i));
+        end
     end
 end

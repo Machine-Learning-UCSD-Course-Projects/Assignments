@@ -21,17 +21,22 @@ function [ T,Roots,Vocab ] = buildAllTrees( X,W,U,sentence_sizes,N,d,positive_se
                 %disp(k);
                 try
                     Xi = tempX{1,k};
+                    Xi = Xi / norm (Xi);
                     Xj = tempX{1,k+1};
+                    Xj = Xj / norm (Xj);
                 catch exception
                     disp('Oh shit');
                     disp(i)
                     exit
                 end
-                Xk = tan(W*vertcat(Xi,Xj,[1]));
+                Xk = tanh(W*vertcat(Xi,Xj,[1]));
+                Xk = Xk / norm (Xk);
                 xk=[xk Xk];
                 Z = U*[Xk;1];
                 Zi = Z(1:d);
                 Zj = Z(d+1:2*d);
+                Zi = Zi / norm (Zi);
+                Zj = Zj / norm (Zj);
                 e = dot(Xi-Zi,Xi-Zi) + dot(Xj-Zj,Xj-Zj);
                 error = [error e];
             end

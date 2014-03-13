@@ -8,14 +8,14 @@ function val = dJBydU(i, j, p, U, alpha, lambda, tree, vocab)
     ni = n1 / (n1 + n2);
     nj = n2 / (n1 + n2);
     z = U * xp;
-    d = size(xp, 2);
+    d = size(x1, 2);
     %should we use the norm or the difference?
-    if i <= size(x1)
-        val = -alpha * ni * 2 * norm(x1' - z(1 : d)) * xp(j);
+    if i <= d
+        val = -alpha * ni * 2 * (x1(i) - z(i)) * xp(j);
     else
-        val = -alpha * nj * 2 * norm(x2' - z(d + 1 : 2 * d)) * xp(j);
+        val = -alpha * nj * 2 * (x2(i - d) - z(i)) * xp(j);
     end
-    val = val + lambda * dTheta(U);
+    val = val + lambda * U(i, j);
 end
 function val = dTheta(U)
     val = 0;

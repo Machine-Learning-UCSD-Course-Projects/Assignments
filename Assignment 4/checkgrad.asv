@@ -1,0 +1,78 @@
+function [ dx, dx1, dx2, delta ] = checkgrad(W, U, V, Roots, Truelabels, alpha, lambda, T, vocab)
+  % Parameters to be set via varargin
+  e = 1e-6;
+  
+  %n = length(x);
+  %[obj,dx] = ogfun(x,ogparams{:});
+  
+  %d = e.*sign(2.*rand(n,1)-1);
+  d = e;%.*sign(2.*rand(n,1)-1);
+  
+  %derivatives = [];
+  
+  Nodes = T{1,1}.tree(:,2);
+  Nodes = unique(Nodes);
+  Nodes(1,:) = []; % Remove 0
+  
+  delta = zeros(size(vocab, 1), 1);
+  
+  dx = [];
+  dx1 = [];
+  dx2 = [];
+  tree = T{1, 1};
+  
+  dim = 20;
+  
+  p = Roots(1);
+  
+    array = {};
+    array{numel(array) + 1} = p;
+    ai = 1;
+    gradIndex = 0;
+    k = 1;
+    while(1)
+        curP = array{ai};
+        ai = ai + 1;
+        [c1, c2] = tree.getChildren(curP);
+        if c1 == 0
+            break;
+        end
+        for it = 1 : dim
+            for jt = 1: 2 * dim + 1
+                [ dx(k, it, jt), delta ] = djByDW(it, jt, curP, W, U, V, Truelabels(1,:), delta, alpha, lambda, T{1,1}, vocab);
+                %grad(gradIndex + (it - 1) * d + jt) = djByDW(it, jt, curP, W, U, V, t, delta, alpha, lambda, tree, vocab);
+            end
+        end
+        k = k + 1;
+        [c1, c2] = tree.getChildren(curP);
+        array{numel(array) + 1} = c1;
+        array{numel(array) + 1} = c2;
+    end
+
+    %disp(sum(delta));
+  
+  for k = 1:size(Nodes)
+      p = Nodes(k);
+      k
+      for i = 1:size(W,1)
+          %i
+          for j = 1:size(W,2)
+              temp = W(i, j);
+              %[ dx(k, i, j), delta ] = djByDW(i, j, p, W, U, V, Truelabels(1,:), delta, alpha, lambda, T{1,1}, vocab);
+              W(i,j) = temp + d;
+              dx1(k, i, j) = J(alpha, lambda, p, Truelabels(1,:), W, U, V, T{1,1}, vocab);
+              W(i,j) = temp - d;
+              dx2(k, i, j) = J(alpha, lambda, p, Truelabels(1,:), W, U, V, T{1,1}, vocab);
+              W(i,j) = temp;
+              %derivatives(end + 1, :) = [ i j dx dx1 dx2 ];
+          end;
+      end;
+  end;
+  
+  %[obj2,dx2] = ogfun(x+d,ogparams{:});
+  %[obj1,dx1] = ogfun(x-d,ogparams{:});
+  
+  %r = (obj2 - obj1)/(2.*(d'*dx));
+  
+  % if ratio is zero, e is set too small
+  %fprintf(1,'e=%.0e ratio=%.10e (should be extremely close to unity)\n',e,r);
