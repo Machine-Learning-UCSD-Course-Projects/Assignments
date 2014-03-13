@@ -11,8 +11,13 @@ for iterations = 1:ITER
     end
     %Now running LBFGS
     [W, U, V]  = lbfgsWithoutKidsUpdate(W, U, V, alpha, lambda, Roots, Truelabels, T, Vocab);
+<<<<<<< HEAD
+    Vocab = lbfgsKidsUpdate(positive_sentences, Truelabels, W, V, Vocab)%Replace positive_sentences by all sentences
+    X = buildX(Vocab,positive_sentences,negative_sentences,sentence_sizes );
+=======
 %     Vocab = lbfgsKidsUpdate(Truelabels, W, V, Vocab); %Replace positive_sentences by all sentences
 %     X = buildX(Vocab,positive_sentences,negative_sentences,sentence_sizes );
+>>>>>>> FETCH_HEAD
     
     %Finding out true labels after current epoch
     calculate_accuracy(V,Roots,Vocab,N,Truelabels);

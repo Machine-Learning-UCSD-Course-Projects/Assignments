@@ -14,6 +14,8 @@
 function val = lbfgsKidsUpdate(sentences, t, W, V, vocab)
     d = size(W, 1);
     options.Method = 'lbfgs';
+    options.progTol = 1e+1;
+    
     VOCABCOUNT = size(vocab, 1);
     vars = zeros(VOCABCOUNT, d);
     for it = 1 : size(sentences, 2)
@@ -23,6 +25,7 @@ function val = lbfgsKidsUpdate(sentences, t, W, V, vocab)
         end
     end
     vars = reshape(vars, VOCABCOUNT * d, 1);
+    
     vars = minFunc(@E2ForLbfgs, vars, options, sentences, t, W, V, vocab);
     vars = reshpape(vars, VOCABCOUNT, d);
     for it = 1 :  VOCABCOUNT
