@@ -35,6 +35,7 @@ function [ dx, dx2, delta ] = checkgrad(W, U, V, Truelabels, alpha, lambda, voca
                     dx(it, jt) = dx(it, jt) + v;
                     end
                 end
+                delta(curP, :);
                 k = k + 1;
 
                 [c1, c2] = tree.getChildren(curP);

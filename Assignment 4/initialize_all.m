@@ -56,7 +56,7 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
     U = rand(2*d,d+1);
     
     %Needed for learning
-    V = randn(2, d + 1);
+    V = rand(2, d + 1);
     
     %----------------------------------------------------------------------
     %Build a list of word code ---> dx1 vector mapping
@@ -68,10 +68,10 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
         for j=1:numel(sentence)
             if sentence(j) <= size(Vocab,1)
                 if sum(Vocab(sentence(j),:))==0
-                    Vocab(sentence(j),:) = randn(d, 1)';
+                    Vocab(sentence(j),:) = rand(d, 1)';
                 end
             else
-                Vocab(sentence(j),:) = randn(d, 1)';
+                Vocab(sentence(j),:) = rand(d, 1)';
             end                                      
         end
     end
@@ -85,10 +85,10 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
                 %If the word code's corresponding vector has not yet been
                 %added to the Vocab
                 if sum(Vocab(sentence(j),:))==0
-                    Vocab(sentence(j),:) = randn(d, 1)';
+                    Vocab(sentence(j),:) = rand(d, 1)';
                 end
             else
-                Vocab(sentence(j),:) = randn(d, 1)';
+                Vocab(sentence(j),:) = rand(d, 1)';
             end                                      
         end
     end

@@ -22,9 +22,9 @@ function [val, delta]= djByDW(i, j, p, W, U, V, t, delta, alpha, lambda, tree, v
         end
         %Reconstruction Error
         %if(i <= d)
-            delI = delI - alpha * 2 * ni * (x1(i) - z(i)) * sum(U(1 : d, i));
+            delI = delI - alpha * 2 * ni * (U(1 : d, i))' * (x1' - z(1 : d));
         %else
-            delI = delI - alpha * 2 * nj * (x2(i) - z(i + d)) * sum(U(d + 1 : 2 * d, i));
+            delI = delI - alpha * 2 * nj * (U(d + 1 : 2 * d, i))' * (x2' - z(d + 1 : 2 * d));
         %end
         %Tree Error
         parent = tree.getParent(p);
@@ -52,7 +52,7 @@ function [val, delta]= djByDW(i, j, p, W, U, V, t, delta, alpha, lambda, tree, v
     else if j <= 2 * d
             val = delta(p, i) * x2(j - d);
         else
-            val = 1;
+            val = delta(p, i);
         end
     end
     val = val + lambda * W(i, j);
