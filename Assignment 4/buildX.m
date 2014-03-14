@@ -1,4 +1,4 @@
-function X = buildX(Vocab,positive_sentences,negative_sentences,sentence_sizes )
+function X = buildX(N,Vocab,positive_sentences,negative_sentences,sentence_sizes )
 %BUILDX Summary of this function goes here
 
 %   Detailed explanation goes here
