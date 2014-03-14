@@ -14,7 +14,8 @@
 
 function [W1, U1, V1] = lbfgsWithoutKidsUpdate(W, U, V, alpha, lambda, pArray, t, treeArray, vocab)
     options.Method = 'lbfgs';
-    options.progTol = 1e-6;
+    options.progTol = 1e-10;
+    options.maxIter = 10;
     
     d = size(vocab(1, :), 2);
     k = size(t, 2);
