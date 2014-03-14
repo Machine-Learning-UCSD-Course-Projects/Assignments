@@ -1,26 +1,26 @@
-
-load('../data/vocab.mat','words')
+d = 20
+load('/home/gaurav/Git/MLAssignments/Assignments/Assignment 4/codeDataMoviesEMNLP/data/rt-polaritydata/vocab.mat','words')
 
 useTrees = 0;
 
 % randomly initialize We
-sizeWe = [50  268810];
+sizeWe = [d  268810];
 r  = 0.05;   % we'll choose weights uniformly from the interval [-r, r]
 We = rand(sizeWe) * 2 * r - r;
 
 
-file1 = '../data/rt-polaritydata/rt-polarity.pos';
+file1 = '/home/gaurav/Git/MLAssignments/Assignments/Assignment 4/codeDataMoviesEMNLP/data/rt-polaritydata/rt-polarity.pos';
 fid1 = fopen(file1);
 
-file2 = '../data/rt-polaritydata/rt-polarity.neg';
+file2 = '/home/gaurav/Git/MLAssignments/Assignments/Assignment 4/codeDataMoviesEMNLP/data/rt-polaritydata/rt-polarity.neg';
 fid2 = fopen(file2);
 
 % these files also contain parse trees which we do not help in our experiments
-load('../data/rt-polaritydata/rt-polarity_pos_binarized.mat','allSNum','allSStr');
+load('/home/gaurav/Git/MLAssignments/Assignments/Assignment 4/codeDataMoviesEMNLP/data/rt-polaritydata/rt-polarity_pos_binarized.mat','allSNum','allSStr');
 allSNum_pos = allSNum;
 allSStr_pos = allSStr;
 
-load('../data/rt-polaritydata/rt-polarity_neg_binarized.mat','allSNum','allSStr');
+load('/home/gaurav/Git/MLAssignments/Assignments/Assignment 4/codeDataMoviesEMNLP/data/rt-polaritydata/rt-polarity_neg_binarized.mat','allSNum','allSStr');
 allSNum = [allSNum_pos allSNum];
 allSStr = [allSStr_pos allSStr];
 clear allSNum_pos;
@@ -134,7 +134,7 @@ We2 = We(:, unq);
 
 % cv_obj = cvpartition(labels,'kfold',10);
 % save('../data/cv_obj','cv_obj');
-load('../data/cv_obj');
+load('/home/gaurav/Git/MLAssignments/Assignments/Assignment 4/codeDataMoviesEMNLP/data/rt-polaritydata/cv_obj');
 full_train_ind = cv_obj.training(params.CVNUM);
 full_train_nums = find(full_train_ind);
 test_ind = cv_obj.test(params.CVNUM);
