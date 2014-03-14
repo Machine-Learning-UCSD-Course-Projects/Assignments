@@ -18,7 +18,8 @@ for i=1:N
     end
     predictions(i,:)=[p_label1 p_label2];
 end
-accuracy = sum(sum(predictions==Truelabels(1:N,:)))/2;
+accuracy = sum(sum(predictions(:,:)==Truelabels(1:N,:)))/2;
+%accuracy = 0;
 disp('Accuracy');
 disp(accuracy);
 end

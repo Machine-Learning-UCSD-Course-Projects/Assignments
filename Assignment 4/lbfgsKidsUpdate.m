@@ -14,7 +14,7 @@
 function val = lbfgsKidsUpdate(sentences, t, W, V, vocab)
     d = size(W, 1);
     options.Method = 'lbfgs';
-    options.progTol = 1e+1;
+    options.progTol = 1e-3;
     
     VOCABCOUNT = size(vocab, 1);
     vars = zeros(VOCABCOUNT, d);
