@@ -141,7 +141,7 @@ function [val, grad] = JForLbfgs(vars, alpha, lambda, pArray, t, treeArray, voca
 %             end
             for it = 1 : k
                 for jt = 1: d + 1
-                    grad(gradIndex + (it - 1) * k + jt) = djByDV(it, jt, curP, alpha, lambda, V, t, vocab);
+                    grad(gradIndex + (it - 1) * k + jt) = djByDV(it, jt, curP, alpha, lambda, V, t, vocab, tree);
                 end
             end
             [c1, c2] = tree.getChildren(curP);
