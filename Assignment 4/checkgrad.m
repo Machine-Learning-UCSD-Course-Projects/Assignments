@@ -1,5 +1,5 @@
 function [ dx, dx2, delta ] = checkgrad(W, U, V, Truelabels, alpha, lambda, vocab, X, sentence_sizes, positive_sentences, negative_sentences)
-    e = 1e-4;
+    e = 1e-2;
 
     d = e;%.*sign(2.*rand(n,1)-1);
     dim = 20;
@@ -35,7 +35,6 @@ function [ dx, dx2, delta ] = checkgrad(W, U, V, Truelabels, alpha, lambda, voca
                     dx(it, jt) = dx(it, jt) + v;
                     end
                 end
-                delta(curP, :);
                 k = k + 1;
 
                 [c1, c2] = tree.getChildren(curP);

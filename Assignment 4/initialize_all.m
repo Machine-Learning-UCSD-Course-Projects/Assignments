@@ -47,16 +47,16 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
         Truelabels(i,:)=[0 1];
     end
     
-        
+    r = 36;
     %In this dataset 
     %Initialize [W b]
-    W = rand(d,2*d+1);
+    W = rand(d,2*d+1) * 2 * r - r;
    
     %Initialize [U c]
-    U = rand(2*d,d+1);
+    U = rand(2*d,d+1) * 2 * r - r;
     
     %Needed for learning
-    V = rand(2, d + 1);
+    V = rand(2, d + 1) * 2 * r - r;
     
     %----------------------------------------------------------------------
     %Build a list of word code ---> dx1 vector mapping
@@ -68,10 +68,10 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
         for j=1:numel(sentence)
             if sentence(j) <= size(Vocab,1)
                 if sum(Vocab(sentence(j),:))==0
-                    Vocab(sentence(j),:) = rand(d, 1)';
+                    Vocab(sentence(j),:) = 1e-3 * (rand(d, 1)'  * 2 * r - r);
                 end
             else
-                Vocab(sentence(j),:) = rand(d, 1)';
+                Vocab(sentence(j),:) = 1e-3 * (rand(d, 1)'  * 2 * r - r);
             end                                      
         end
     end
@@ -85,10 +85,10 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
                 %If the word code's corresponding vector has not yet been
                 %added to the Vocab
                 if sum(Vocab(sentence(j),:))==0
-                    Vocab(sentence(j),:) = rand(d, 1)';
+                    Vocab(sentence(j),:) = 1e-3 * (rand(d, 1)'  * 2 * r - r);
                 end
             else
-                Vocab(sentence(j),:) = rand(d, 1)';
+                Vocab(sentence(j),:) = 1e-3 * (rand(d, 1)'  * 2 * r - r);
             end                                      
         end
     end

@@ -1,12 +1,12 @@
 function [val, delta]= djByDW(i, j, p, W, U, V, t, delta, alpha, lambda, tree, vocab)
     [c1, c2] = tree.getChildren(p);
     xp = vocab(p, :);
-    xp = xp / norm(xp);
+    %xp = xp / norm(xp);
     d = size(xp, 2);
     x1 = vocab(c1, :);
-    x1 = x1 / norm(x1);
+    %x1 = x1 / norm(x1);
     x2 = vocab(c2, :);
-    x2 = x2 / norm(x2);
+    %x2 = x2 / norm(x2);
     n1 = tree.getLeafCount(c1);
     n2 = tree.getLeafCount(c2);
     ni = 1;%n1 / (n1 + n2);
@@ -18,14 +18,14 @@ function [val, delta]= djByDW(i, j, p, W, U, V, t, delta, alpha, lambda, tree, v
         delI = 0;
         %Classifier Error
         for jt = 1:size(t, 2)
-            smt = sm(V, xp, jt);
+            smt = sm(V, xp/norm(xp), jt);
             delI = delI + (1 - alpha) * 0.5 * (smt - t(jt)) * V(jt, i);
         end
         %Reconstruction Error
         %if(i <= d)
-            delI = delI + alpha * 2 * ni * (U(1 : d, i))' * (x1' - z(1 : d));
+            delI = delI - alpha * 2 * ni * (U(1 : d, i))' * (x1' - z(1 : d));
         %else
-            delI = delI + alpha * 2 * nj * (U(d + 1 : 2 * d, i))' * (x2' - z(d + 1 : 2 * d));
+            delI = delI - alpha * 2 * nj * (U(d + 1 : 2 * d, i))' * (x2' - z(d + 1 : 2 * d));
         %end
         %Tree Error
         parent = tree.getParent(p);
@@ -40,9 +40,11 @@ function [val, delta]= djByDW(i, j, p, W, U, V, t, delta, alpha, lambda, tree, v
             xp1 = xp1 / norm(xp1);
             xp2 = vocab(p2, :);
             xp2 = xp2 / norm(xp2);
-            
-            delI = delI + alpha * 2 * ni * (x1(i) - z(i));
-            delI = delI + alpha * 2 * nj * (x2(i) - z(i + d));
+            if i <= d
+                delI = delI + alpha * 2 * ni * (x1(i) - z(i));
+            else
+                delI = delI + alpha * 2 * nj * (x2(i) - z(i + d));
+            end
             
             if p1 == p
                 s = 1;
@@ -69,7 +71,7 @@ function [val, delta]= djByDW(i, j, p, W, U, V, t, delta, alpha, lambda, tree, v
             val = delta(p, i);
         end
     end
-    val = val + lambda * W(i, j) / 2;
+    val = val / size(tree.tree, 1) + lambda * W(i, j) / size(tree.tree, 1);
 end
 
 function val = hDash(a)
