@@ -4,7 +4,7 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
     alpha = 0.2;
     
     %Lambda - hyperparameter for LBFGS
-    lambda = 0.0001;
+    lambda = 0.000001;
     
     %As per Elkan, set d to 20
     d=20;
@@ -13,7 +13,7 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
     load('codeDataMoviesEMNLP/data/rt-polaritydata/rt-polarity_pos_binarized.mat','allSNum');
     positive_sentences = allSNum;
     %Train
-    positive_sentences=positive_sentences(1:3200);
+    positive_sentences=positive_sentences(1:50);
     %Validation
     %positive_sentences=positive_sentences(3201:4800);
     %Test
@@ -28,7 +28,7 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
     negative_sentences{1,4470}=[];
     
     %Train
-    negative_sentences=negative_sentences(1:3200);
+    negative_sentences=negative_sentences(1:50);
     %Validation
     %negative_sentences=negative_sentences(3201:4800);
     %Test
