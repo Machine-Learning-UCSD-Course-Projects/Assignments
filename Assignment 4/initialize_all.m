@@ -1,10 +1,10 @@
 function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sentences,Vocab,alpha,lambda ] = initialize_all()    
         
     %Alpha - hyperparameter for LBFGS
-    alpha = 0.1;
+    alpha = 0.2;
     
     %Lambda - hyperparameter for LBFGS
-    lambda = 0.1;
+    lambda = 0.000001;
     
     %As per Elkan, set d to 20
     d=20;
@@ -13,7 +13,7 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
     load('codeDataMoviesEMNLP/data/rt-polaritydata/rt-polarity_pos_binarized.mat','allSNum');
     positive_sentences = allSNum;
     %Train
-    positive_sentences=positive_sentences(1:3200);
+    positive_sentences=positive_sentences(1:50);
     %Validation
     %positive_sentences=positive_sentences(3201:4800);
     %Test
@@ -28,7 +28,7 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
     negative_sentences{1,4470}=[];
     
     %Train
-    negative_sentences=negative_sentences(1:3200);
+    negative_sentences=negative_sentences(1:50);
     %Validation
     %negative_sentences=negative_sentences(3201:4800);
     %Test
@@ -47,16 +47,16 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
         Truelabels(i,:)=[0 1];
     end
     
-        
+    r = 36;
     %In this dataset 
     %Initialize [W b]
-    W = rand(d,2*d+1);
+    W = rand(d,2*d+1) * 2 * r - r;
    
     %Initialize [U c]
-    U = rand(2*d,d+1);
+    U = rand(2*d,d+1) * 2 * r - r;
     
     %Needed for learning
-    V = randn(2, d + 1);
+    V = rand(2, d + 1) * 2 * r - r;
     
     %----------------------------------------------------------------------
     %Build a list of word code ---> dx1 vector mapping
@@ -68,10 +68,10 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
         for j=1:numel(sentence)
             if sentence(j) <= size(Vocab,1)
                 if sum(Vocab(sentence(j),:))==0
-                    Vocab(sentence(j),:) = random_array(d)';
+                    Vocab(sentence(j),:) = 1e-3 * (rand(d, 1)'  * 2 * r - r);
                 end
             else
-                Vocab(sentence(j),:) = random_array(d)';
+                Vocab(sentence(j),:) = 1e-3 * (rand(d, 1)'  * 2 * r - r);
             end                                      
         end
     end
@@ -85,10 +85,10 @@ function [ X,W,U,V,d,N,Truelabels,sentence_sizes,positive_sentences,negative_sen
                 %If the word code's corresponding vector has not yet been
                 %added to the Vocab
                 if sum(Vocab(sentence(j),:))==0
-                    Vocab(sentence(j),:) = random_array(d)';
+                    Vocab(sentence(j),:) = 1e-3 * (rand(d, 1)'  * 2 * r - r);
                 end
             else
-                Vocab(sentence(j),:) = random_array(d)';
+                Vocab(sentence(j),:) = 1e-3 * (rand(d, 1)'  * 2 * r - r);
             end                                      
         end
     end

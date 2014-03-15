@@ -13,10 +13,10 @@ addpath(genpath('tools/'))
 % Hyperparameters
 %%%%%%%%%%%%%%%%%%%%%%
 % set this to 1 to train the model and to 0 for just testing the RAE features (and directly training the classifier)
-params.trainModel = 0;
+params.trainModel = 1;
 
 % node and word size
-params.embedding_size = 50;
+params.embedding_size = 20;
 
 % Relative weighting of reconstruction error and categorization error
 params.alpha_cat = 0.2;
@@ -49,11 +49,11 @@ params.CVNUM = 1;
 preProFile = ['../data/rt-polaritydata/RTData_CV' num2str(params.CVNUM) '.mat'];
 
 % read in polarity dataset
-if ~exist(preProFile,'file')
+%if ~exist(preProFile,'file')
     read_rtPolarity
-else
-    load(preProFile, 'labels','train_ind','test_ind', 'cv_ind','We2','allSNum','test_nums');
-end
+% else
+%     load(preProFile, 'labels','train_ind','test_ind', 'cv_ind','We2','allSNum','test_nums');
+%end
 sent_freq = ones(length(allSNum),1);
 [~,dictionary_length] = size(We2);
 
@@ -85,13 +85,13 @@ theta = initializeParameters(params.embedding_size, params.embedding_size, cat_s
 %%%%%%%%%%%%%%%%%%%%%%
 % Parallelize if on cluster
 %%%%%%%%%%%%%%%%%%%%%%
-if isunix && matlabpool('size') == 0
-    numCores = feature('numCores');
-    if numCores==16
-        numCores=8;
-    end
-    matlabpool('open', numCores);
-end
+% if isunix && matlabpool('size') == 0
+%     numCores = feature('numCores');
+%     if numCores==16
+%         numCores=8;
+%     end
+%     matlabpool('open', numCores);
+% end
 
 
 %%%%%%%%%%%%%%%%%%%%%%
