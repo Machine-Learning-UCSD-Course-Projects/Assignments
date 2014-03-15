@@ -1,5 +1,5 @@
     options = [];
-    options.display = 'none';
+    %options.display = 'none';
     options.maxFunEvals = '100';
 
     w_init = ones(14045 * 2, 1);
