@@ -11,13 +11,13 @@ function [loglikelihood, gradient] = bowLogisticReg(w,allSNum,y, d)
             
             loglikelihood = loglikelihood -1*sum(y(i) * log(1./(1+exp(-V*X))));            
             
-            add = (y(i) - (1 ./ 1 + exp(-V(1, :) * X))) .* V(1, :)';
+            add = (y(i) - (1 ./ 1 + exp(-V(y(i) + 1, :) * X))) .* V(y(i) + 1, :)';
             gradient((x_start):(x_start + d - 1), 1) = gradient((x_start):(x_start + d - 1), 1) + add;
-            add = (1 - y(i) - (1 ./ 1 + exp(-V(2, :) * X))) .* V(2, :)';
+            add = (1 - y(i) - (1 ./ 1 + exp(-V(2 - y(i), :) * X))) .* V(2 - y(i), :)';
             gradient((x_start):(x_start + d - 1), 1) = gradient((x_start):(x_start + d - 1), 1) + add;
-            add = (y(i) - (1 ./ 1 + exp(-V(1, :) * X))) .* X;
+            add = (y(i) - (1 ./ 1 + exp(-V(y(i) + 1, :) * X))) .* X;
             gradient(1:d, 1) = gradient(1:d, 1) + add;
-            add = (1 - y(i) - (1 ./ 1 + exp(-V(2, :) * X))) .* X;
+            add = (1 - y(i) - (1 ./ 1 + exp(-V(2 - y(i), :) * X))) .* X;
             gradient((d + 1):(2 * d), 1) = gradient((d + 1):(2 * d), 1) + add;
         end;
     end;
