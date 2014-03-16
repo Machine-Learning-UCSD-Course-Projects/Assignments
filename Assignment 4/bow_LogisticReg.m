@@ -8,7 +8,7 @@ function [loglikelihood, gradient] = bowLogisticReg(w,allSNum,y, d)
             x_start = allSNum{i}(j);
             x_start = (x_start + 1) * d + 1;%?
             X = w(x_start:(x_start + d - 1));
-<<<<<<< HEAD
+% <<<<<<< HEAD
             loglikelihood = loglikelihood - sum(y(i) * log(1./(1+exp(-V*X)))) - sum((1 - y(i)) * (1 - log(1./(1+exp(-V*X)))));           
             for k = 1:d
                 gradient(x_start + k - 1, 1) = gradient(x_start + k - 1, 1) + (y(i) - (1 ./ 1 + exp(-V(1, :) * X))) * V(1, k) + (y(i) - (1 ./ 1 + exp(-V(1, :) * X))) * V(2, k);
