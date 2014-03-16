@@ -9,10 +9,11 @@ function [loglikelihood, gradient] = bowLogisticReg(w,allSNum,y, d)
             x_start = (x_start + 1) * d + 1;%?
             X = w(x_start:(x_start + d - 1));
 % <<<<<<< HEAD
-            loglikelihood = loglikelihood - sum(y(i) * log(1./(1+exp(-V*X)))) - sum((1 - y(i)) * (1 - log(1./(1+exp(-V*X)))));           
+            loglikelihood = loglikelihood - sum(y(i) * log(1./(1+exp(-V(2,:)*X)))) - sum((1 - y(i)) * (1 - log(1./(1+exp(-V(1,:)*X)))));           
+            %loglikelihood = loglikelihood - sum(y(i) * log(1./(1+exp(-V*X)))) - sum((1 - y(i)) * (1 - log(1./(1+exp(-V*X)))));           
             for k = 1:d
-                gradient(x_start + k - 1, 1) = gradient(x_start + k - 1, 1) + (y(i) - (1 ./ 1 + exp(-V(1, :) * X))) * V(1, k) + (y(i) - (1 ./ 1 + exp(-V(1, :) * X))) * V(2, k);
-                gradient(k, 1) = gradient(k, 1) + (y(i) - (1 ./ 1 + exp(-V(2, :) * X))) * X(k);
+                gradient(x_start + k - 1, 1) = gradient(x_start + k - 1, 1) + (y(i) - (1 ./ 1 + exp(-V(1, :) * X))) * V(1, k) + (y(i) - (1 ./ 1 + exp(-V(2, :) * X))) * V(2, k);
+                gradient(k, 1) = gradient(k, 1) + (y(i) - (1 ./ 1 + exp(-V(1, :) * X))) * X(k);
                 gradient(d + k, 1) = gradient(d + k, 1) + (y(i) - (1 ./ 1 + exp(-V(2, :) * X))) * X(k);
                 
 %                 add = (y(i) - (1 ./ 1 + exp(-V(1, :) * X))) * V(1, k);
@@ -37,5 +38,5 @@ function [loglikelihood, gradient] = bowLogisticReg(w,allSNum,y, d)
 %             add = (1 - y(i) - (1 ./ 1 + exp(-V(2 - y(i), :) * X))) .* X;
 %             gradient((d + 1):(2 * d), 1) = gradient((d + 1):(2 * d), 1) + add;
 % >>>>>>> 671e26331ca13b83087e1b966bc1fcf8f29ec8c5
-%         end;
+         end;
     end;
